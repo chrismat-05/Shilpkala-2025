@@ -38,10 +38,10 @@ const Registrations: React.FC = () => {
     30000
   );
 
+  const navigate = useNavigate();
+
   if (isLoading) return <div className="min-h-screen flex items-center justify-center bg-gradient-bg text-foreground">Loading...</div>;
   if (isError) return <div className="min-h-screen flex items-center justify-center bg-gradient-bg text-destructive">Failed to fetch registration data</div>;
-
-  const navigate = useNavigate();
 
   const stats = getRegistrationStats(counts);
   return (
