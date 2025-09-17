@@ -21,8 +21,13 @@ interface RegCounts {
 }
 
 const fetchCounts = async () => {
-  const res = await axios.get(REG_COUNT_API);
-  return res.data as RegCounts;
+  try {
+    const res = await axios.get(REG_COUNT_API);
+    return res.data as RegCounts;
+  } catch (error) {
+    // Optionally log the error or add custom error handling here
+    throw error;
+  }
 };
 
 const Registrations: React.FC = () => {
