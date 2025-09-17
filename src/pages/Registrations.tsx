@@ -25,7 +25,6 @@ const fetchCounts = async () => {
     const res = await axios.get(REG_COUNT_API);
     return res.data as RegCounts;
   } catch (error) {
-    // Optionally log the error or add custom error handling here
     throw error;
   }
 };
@@ -63,9 +62,16 @@ const Registrations: React.FC = () => {
           <h1 className="text-2xl font-bold tracking-tight text-foreground">Event Registrations</h1>
         </div>
 
-        {/* Stats Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {/* 1st Year - Sparkles (Freshers) */}
+          <div className="flex items-center gap-4 bg-card/80 border border-border rounded-lg shadow-card p-5">
+            <div className="bg-primary/10 rounded-full p-3">
+              <BarChart2 className="w-7 h-7 text-primary" />
+            </div>
+            <div>
+              <div className="text-lg font-bold text-foreground">{stats.total}</div>
+              <div className="text-xs text-muted-foreground font-medium">Total</div>
+            </div>
+          </div>
           <div className="flex items-center gap-4 bg-card/80 border border-border rounded-lg shadow-card p-5">
             <div className="bg-primary/10 rounded-full p-3">
               <Sparkles className="w-7 h-7 text-primary" />
@@ -75,7 +81,6 @@ const Registrations: React.FC = () => {
               <div className="text-xs text-muted-foreground font-medium">1st Year</div>
             </div>
           </div>
-          {/* 2nd Year - User2 (People/Community) */}
           <div className="flex items-center gap-4 bg-card/80 border border-border rounded-lg shadow-card p-5">
             <div className="bg-primary/10 rounded-full p-3">
               <User2 className="w-7 h-7 text-primary" />
@@ -85,7 +90,6 @@ const Registrations: React.FC = () => {
               <div className="text-xs text-muted-foreground font-medium">2nd Year</div>
             </div>
           </div>
-          {/* 3rd Year - GraduationCap */}
           <div className="flex items-center gap-4 bg-card/80 border border-border rounded-lg shadow-card p-5">
             <div className="bg-primary/10 rounded-full p-3">
               <GraduationCap className="w-7 h-7 text-primary" />
@@ -93,16 +97,6 @@ const Registrations: React.FC = () => {
             <div>
               <div className="text-lg font-bold text-foreground">{stats.thirdYear}</div>
               <div className="text-xs text-muted-foreground font-medium">3rd Year</div>
-            </div>
-          </div>
-          {/* Total - BarChart2 */}
-          <div className="flex items-center gap-4 bg-card/80 border border-border rounded-lg shadow-card p-5">
-            <div className="bg-primary/10 rounded-full p-3">
-              <BarChart2 className="w-7 h-7 text-primary" />
-            </div>
-            <div>
-              <div className="text-lg font-bold text-foreground">{stats.total}</div>
-              <div className="text-xs text-muted-foreground font-medium">Total</div>
             </div>
           </div>
         </div>
@@ -141,7 +135,6 @@ const Registrations: React.FC = () => {
           })}
         </div>
       </div>
-      {/* Auto-refresh indicator */}
       <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center">
           {isFetching ? (
             <div className="flex items-center gap-2 bg-card/80 border border-border rounded-lg px-4 py-2 text-xs text-muted-foreground shadow-md backdrop-blur animate-pulse">
