@@ -3,6 +3,7 @@ import eventsData from "@/data/events.json";
 import axios from "axios";
 import { useAutoRefresh } from "@/hooks/useAutoRefresh";
 import React from "react";
+import ShilpkalaLoader from "../components/ShilpkalaLoader";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, BarChart2, GraduationCap, Sparkles, User2 } from "lucide-react";
 import { getRegistrationStats } from "@/lib/utils";
@@ -44,7 +45,7 @@ const Registrations: React.FC = () => {
 
   const navigate = useNavigate();
 
-  if (isLoading) return <div className="min-h-screen flex items-center justify-center bg-gradient-bg text-foreground">Loading...</div>;
+  if (isLoading) return <ShilpkalaLoader />;
   if (isError) return <div className="min-h-screen flex items-center justify-center bg-gradient-bg text-destructive">Failed to fetch registration data</div>;
 
   const stats = getRegistrationStats(counts);
