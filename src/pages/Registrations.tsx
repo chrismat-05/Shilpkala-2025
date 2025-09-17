@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+
 import eventsData from "@/data/events.json";
 import axios from "axios";
+import { useAutoRefresh } from "@/hooks/useAutoRefresh";
+import React from "react";
 
 const REG_COUNT_API = import.meta.env.VITE_REG_COUNT;
 
@@ -15,31 +17,29 @@ interface RegCounts {
   [eventName: string]: RegCount;
 }
 
+const fetchCounts = async () => {
+  const res = await axios.get(REG_COUNT_API);
+  return res.data as RegCounts;
+};
+
 const Registrations: React.FC = () => {
-  const [counts, setCounts] = useState<RegCounts>({});
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [open, setOpen] = useState<{ [event: string]: boolean }>({});
+  const [open, setOpen] = React.useState<{ [event: string]: boolean }>({});
+  const [lastRefresh, setLastRefresh] = React.useState<Date>(new Date());
+  const { data: counts = {}, isLoading, isError, refetch, isFetching } = useAutoRefresh<RegCounts>(
+    ["reg-counts"],
+    async () => {
+      const data = await fetchCounts();
+      setLastRefresh(new Date());
+      return data;
+    },
+    30000
+  );
 
-  useEffect(() => {
-    setLoading(true);
-    axios
-      .get(REG_COUNT_API)
-      .then((res) => {
-        setCounts(res.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError("Failed to fetch registration data");
-        setLoading(false);
-      });
-  }, []);
-
-  if (loading) return <div className="min-h-screen flex items-center justify-center bg-gradient-bg text-foreground">Loading...</div>;
-  if (error) return <div className="min-h-screen flex items-center justify-center bg-gradient-bg text-destructive">{error}</div>;
+  if (isLoading) return <div className="min-h-screen flex items-center justify-center bg-gradient-bg text-foreground">Loading...</div>;
+  if (isError) return <div className="min-h-screen flex items-center justify-center bg-gradient-bg text-destructive">Failed to fetch registration data</div>;
 
   return (
-    <div className="min-h-screen py-12 px-6 bg-gradient-bg">
+    <div className="min-h-screen py-12 px-6 bg-gradient-bg relative">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-2xl font-bold tracking-tight mb-8 text-foreground">Event Registrations</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -74,6 +74,14 @@ const Registrations: React.FC = () => {
               </div>
             );
           })}
+        </div>
+      </div>
+      {/* Auto-refresh indicator */}
+      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center">
+        <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-card/90 border border-border shadow-card text-xs text-muted-foreground">
+          <svg className={`w-4 h-4 animate-spin ${isFetching ? '' : 'opacity-30'}`} viewBox="0 0 24 24" fill="none"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" /></svg>
+          <span>Auto-refreshing</span>
+          <span className="ml-2">{lastRefresh.toLocaleTimeString()}</span>
         </div>
       </div>
     </div>
