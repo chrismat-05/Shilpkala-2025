@@ -78,11 +78,20 @@ const Registrations: React.FC = () => {
       </div>
       {/* Auto-refresh indicator */}
       <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center">
-        <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-card/90 border border-border shadow-card text-xs text-muted-foreground">
-          <svg className={`w-4 h-4 animate-spin ${isFetching ? '' : 'opacity-30'}`} viewBox="0 0 24 24" fill="none"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" /></svg>
-          <span>Auto-refreshing</span>
-          <span className="ml-2">{lastRefresh.toLocaleTimeString()}</span>
-        </div>
+          {isFetching ? (
+            <div className="flex items-center gap-2 bg-card/80 border border-border rounded-lg px-4 py-2 text-xs text-muted-foreground shadow-md backdrop-blur animate-pulse">
+              <svg className="animate-spin h-4 w-4 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+              </svg>
+              <span>Refreshing...</span>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center bg-card/80 border border-border rounded-lg px-4 py-2 text-xs text-muted-foreground shadow-md backdrop-blur">
+              <span>Automatically refreshes every 30 sec.</span>
+              <span className="mt-1">Last refreshed at {lastRefresh.toLocaleTimeString()}</span>
+            </div>
+          )}
       </div>
     </div>
   );
