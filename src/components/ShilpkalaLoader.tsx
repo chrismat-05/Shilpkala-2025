@@ -1,8 +1,5 @@
 import React from "react";
 
-/**
- * Animated Shilpkala 2025 loader with outline effect matching the dark theme.
- */
 const ShilpkalaLoader: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-bg">
@@ -44,7 +41,6 @@ const ShilpkalaLoader: React.FC = () => {
           Shilpkala 2025
         </text>
       </svg>
-      <span className="text-muted-foreground text-sm tracking-widest animate-pulse">Loading...</span>
       <style>{`
         .animate-stroke {
           stroke-dasharray: 600;
