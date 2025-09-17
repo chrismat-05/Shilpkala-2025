@@ -50,6 +50,7 @@ const Index = () => {
               link={event.link}
               delay={0.1 * index}
               disabled={!event.isOpen}
+              description={event.desc}
             />
           ))}
         </motion.div>

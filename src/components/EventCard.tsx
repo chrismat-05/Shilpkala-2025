@@ -8,9 +8,10 @@ interface EventCardProps {
   link: string;
   delay?: number;
   disabled?: boolean;
+  description?: string;
 }
 
-const EventCard = ({ title, imageUrl, buttonText, link, delay = 0, disabled = false }: EventCardProps) => {
+const EventCard = ({ title, imageUrl, buttonText, link, delay = 0, disabled = false, description }: EventCardProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -35,6 +36,9 @@ const EventCard = ({ title, imageUrl, buttonText, link, delay = 0, disabled = fa
       )}
       <div className="p-4 sm:p-6 flex flex-col items-center">
         <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2 sm:mb-4">{title}</h3>
+        {description && (
+          <div className="text-sm text-muted-foreground mb-2 text-center w-full">{description}</div>
+        )}
         {disabled ? (
           <div className="w-full px-4 py-2 rounded bg-muted text-muted-foreground font-semibold cursor-not-allowed opacity-80 mt-2 text-center select-none">
             {buttonText}
