@@ -3,84 +3,92 @@
     "type": "brochure",
     "title": "Shilpkala 2025 Brochure",
     "link": "",
-  "image": "",
+    "image": "",
+    "isOpen": true
+  },
+  {
+    "type": "event",
+    "title": "Shilpkala Showcase",
+    "link": "https://forms.gle/4GyCon15eS8PoTPk9",
+    "desc": "A Gallery of Young Visionaries",
+    "image": "",
     "isOpen": true
   },
   {
     "type": "event",
     "title": "Chain Reaction",
     "link": "https://forms.gle/bEyBY7GqZ39Byeuo7",
-  "image": "",
+    "image": "",
     "isOpen": true
   },
   {
     "type": "event",
     "title": "Doodle Dash",
     "link": "https://forms.gle/b4bvR4HuPKAMuCWDA",
-  "image": "",
+    "image": "",
     "isOpen": true
   },
   {
     "type": "event",
     "title": "Echoes Of Pencil",
     "link": "https://forms.gle/kVGXhGTik7XCpaj7A",
-  "image": "",
+    "image": "",
     "isOpen": true
   },
   {
     "type": "event",
     "title": "Face Splash Attack",
     "link": "https://forms.gle/aonM9WUatWbzeDpF9",
-  "image": "",
+    "image": "",
     "isOpen": true
   },
   {
     "type": "event",
     "title": "Flame-Free Feast",
     "link": "https://forms.gle/cpgM9RbbdgnU8JmK6",
-  "image": "",
+    "image": "",
     "isOpen": true
   },
   {
     "type": "event",
     "title": "Henna Tales",
     "link": "https://forms.gle/f5cTW3t1HFzDy4xp8",
-  "image": "",
+    "image": "",
     "isOpen": true
   },
   {
     "type": "event",
     "title": "Mosaic of Moment",
     "link": "https://forms.gle/CVsKLnak3J1bdycx5",
-  "image": "",
+    "image": "",
     "isOpen": true
   },
   {
     "type": "event",
     "title": "Paper Palette",
     "link": "https://forms.gle/nrtcmvaU435pPFGP6",
-  "image": "",
+    "image": "",
     "isOpen": true
   },
   {
     "type": "event",
     "title": "The Scrapbook Project",
     "link": "https://forms.gle/iVCgyc1stJoSkPGY8",
-  "image": "",
+    "image": "",
     "isOpen": true
   },
   {
     "type": "event",
     "title": "Toon Town",
     "link": "https://forms.gle/r7z9nSp4DCB2M6PR8",
-  "image": "",
+    "image": "",
     "isOpen": true
   },
   {
     "type": "event",
     "title": "Veil & Vision",
     "link": "https://forms.gle/f9yoXe884KF6AkPV9",
-  "image": "",
+    "image": "",
     "isOpen": true
   }
 ]
