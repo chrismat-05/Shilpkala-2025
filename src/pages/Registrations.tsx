@@ -3,6 +3,8 @@ import eventsData from "@/data/events.json";
 import axios from "axios";
 import { useAutoRefresh } from "@/hooks/useAutoRefresh";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 
 const REG_COUNT_API = import.meta.env.VITE_REG_COUNT;
 
@@ -38,10 +40,21 @@ const Registrations: React.FC = () => {
   if (isLoading) return <div className="min-h-screen flex items-center justify-center bg-gradient-bg text-foreground">Loading...</div>;
   if (isError) return <div className="min-h-screen flex items-center justify-center bg-gradient-bg text-destructive">Failed to fetch registration data</div>;
 
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen py-12 px-6 bg-gradient-bg relative">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-2xl font-bold tracking-tight mb-8 text-foreground">Event Registrations</h1>
+        <div className="flex items-center gap-2 mb-8">
+          <button
+            onClick={() => navigate("/home")}
+            className="p-2 rounded-full hover:bg-card-hover focus:outline-none focus:ring-2 focus:ring-primary"
+            aria-label="Back to Home"
+          >
+            <ArrowLeft className="w-6 h-6 text-foreground" />
+          </button>
+          <h1 className="text-2xl font-bold tracking-tight text-foreground">Event Registrations</h1>
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {eventsData.filter(e => e.type === "event").map((event) => {
             const reg = counts[event.title] || { firstYear: 0, secondYear: 0, thirdYear: 0, total: 0 };
