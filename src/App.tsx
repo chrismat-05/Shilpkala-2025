@@ -4,6 +4,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
+import Registrations from "./pages/Registrations";
+import Home from "./pages/Home";
 import { useLocation } from "react-router-dom";
 import { Instagram } from "lucide-react";
 import NotFound from "./pages/NotFound";
@@ -58,6 +60,8 @@ const App = () => (
         <div className="min-h-screen bg-gradient-bg relative">
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/registrations" element={<Registrations />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />
