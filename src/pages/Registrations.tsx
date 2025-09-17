@@ -87,9 +87,8 @@ const Registrations: React.FC = () => {
               <span>Refreshing...</span>
             </div>
           ) : (
-            <div className="flex flex-col items-center bg-card/80 border border-border rounded-lg px-4 py-2 text-xs text-muted-foreground shadow-md backdrop-blur">
-              <span>Automatically refreshes every 30 sec.</span>
-              <span className="mt-1">Last refreshed at {lastRefresh.toLocaleTimeString()}</span>
+            <div className="flex items-center bg-card/80 border border-border rounded-lg px-4 py-2 text-xs text-muted-foreground shadow-md backdrop-blur">
+              <span>Automatically refreshes every 30 sec. &nbsp;|&nbsp; Last refreshed at {lastRefresh.toLocaleTimeString()}</span>
             </div>
           )}
       </div>
