@@ -4,7 +4,8 @@ import axios from "axios";
 import { useAutoRefresh } from "@/hooks/useAutoRefresh";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, BarChart2, GraduationCap, Sparkles, User2 } from "lucide-react";
+import { getRegistrationStats } from "@/lib/utils";
 
 const REG_COUNT_API = import.meta.env.VITE_REG_COUNT;
 
@@ -42,6 +43,7 @@ const Registrations: React.FC = () => {
 
   const navigate = useNavigate();
 
+  const stats = getRegistrationStats(counts);
   return (
     <div className="min-h-screen py-12 px-6 bg-gradient-bg relative">
       <div className="max-w-6xl mx-auto">
@@ -55,6 +57,51 @@ const Registrations: React.FC = () => {
           </button>
           <h1 className="text-2xl font-bold tracking-tight text-foreground">Event Registrations</h1>
         </div>
+
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {/* 1st Year - Sparkles (Freshers) */}
+          <div className="flex items-center gap-4 bg-card/80 border border-border rounded-lg shadow-card p-5">
+            <div className="bg-primary/10 rounded-full p-3">
+              <Sparkles className="w-7 h-7 text-primary" />
+            </div>
+            <div>
+              <div className="text-lg font-bold text-foreground">{stats.firstYear}</div>
+              <div className="text-xs text-muted-foreground font-medium">1st Year</div>
+            </div>
+          </div>
+          {/* 2nd Year - User2 (People/Community) */}
+          <div className="flex items-center gap-4 bg-card/80 border border-border rounded-lg shadow-card p-5">
+            <div className="bg-primary/10 rounded-full p-3">
+              <User2 className="w-7 h-7 text-primary" />
+            </div>
+            <div>
+              <div className="text-lg font-bold text-foreground">{stats.secondYear}</div>
+              <div className="text-xs text-muted-foreground font-medium">2nd Year</div>
+            </div>
+          </div>
+          {/* 3rd Year - GraduationCap */}
+          <div className="flex items-center gap-4 bg-card/80 border border-border rounded-lg shadow-card p-5">
+            <div className="bg-primary/10 rounded-full p-3">
+              <GraduationCap className="w-7 h-7 text-primary" />
+            </div>
+            <div>
+              <div className="text-lg font-bold text-foreground">{stats.thirdYear}</div>
+              <div className="text-xs text-muted-foreground font-medium">3rd Year</div>
+            </div>
+          </div>
+          {/* Total - BarChart2 */}
+          <div className="flex items-center gap-4 bg-card/80 border border-border rounded-lg shadow-card p-5">
+            <div className="bg-primary/10 rounded-full p-3">
+              <BarChart2 className="w-7 h-7 text-primary" />
+            </div>
+            <div>
+              <div className="text-lg font-bold text-foreground">{stats.total}</div>
+              <div className="text-xs text-muted-foreground font-medium">Total</div>
+            </div>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {eventsData.filter(e => e.type === "event").map((event) => {
             const reg = counts[event.title] || { firstYear: 0, secondYear: 0, thirdYear: 0, total: 0 };
