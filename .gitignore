@@ -57,3 +57,4 @@ coverage/
 .mypy_cache/
 .vscode-test/
 .env
+.vercel

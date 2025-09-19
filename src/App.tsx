@@ -19,10 +19,10 @@ const Footer = () => {
   if (isHome) {
     return (
       <footer className="fixed bottom-4 right-4 z-50">
-        {/*<div className="bg-card/80 border border-border rounded-lg px-4 py-2 text-xs text-muted-foreground shadow-md backdrop-blur flex items-center gap-2">
+        <div className="bg-card/80 border border-border rounded-lg px-4 py-2 text-xs text-muted-foreground shadow-md backdrop-blur flex items-center gap-2">
           Follow us
           <a
-            href="https://instagram.com/shilpkala"
+            href="https://www.instagram.com/kristujayanti_fineartsclub/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
@@ -30,7 +30,7 @@ const Footer = () => {
           >
             <Instagram className="inline h-5 w-5 align-text-bottom" />
           </a>
-        </div>*/}
+        </div>
       </footer>
     );
   }
