@@ -111,35 +111,33 @@ app.post("/api/sendTicket", async (req, res) => {
     }
 
     const mailSubject = "OD Ticket | Shilpkala Showcase | Shilpkala 2025";
-    const mailBody = `
-Dear ${name},
-
-Greetings from the Fine Arts Club of Kristu Jayanti College!
-
-We are delighted to confirm your registration for the exhibition:
-
-Shilpkala Showcase – A Gallery of Young Visionaries
-conducted by the Fine Arts Club
-(Part of Shilpkala 2025)
-
-Here are your details:
-- Name: ${name}
-- Roll Number: ${roll}
-- Slot: ${slot}
-
-Your OD ticket is attached to this mail as a PDF.
-
-This ticket will serve as your attendance/OD proof for visiting the exhibition.
-The PDF should be ready when you visit so the team can scan it at the venue.
-
-For updates and highlights, follow the Fine Arts Club on Instagram:
-https://www.instagram.com/kristujayanti_fineartsclub/
-
-We look forward to your presence at the Shilpkala Showcase!
-
-Warm regards,  
-Shilpkala 2025 Team
-    `.trim();
+    const mailBodyHtml = `
+<div style="font-family: 'Segoe UI', Arial, sans-serif; font-size: 15px; color: #222;">
+  <p>Dear ${name},</p>
+  <p>Greetings!</p>
+  <p>We are delighted to confirm your registration for the exhibition:</p>
+  <p>
+    <b>Shilpkala Showcase - A Gallery of Young Visionaries conducted by the Fine Arts Club</b> at <b>Shilpkala 2025</b>.<br>
+  </p>
+  <p>
+    <b>Here are your details:</b><br>
+    Name: <b>${name}</b><br>
+    Roll Number: <b>${roll}</b><br>
+    Slot: <b>${slot}</b>
+  </p>
+  <p>Your ticket is attached to this mail as a PDF.</p>
+  <p>
+    This ticket will serve as your attendance proof for visiting the exhibition.<br>
+    The PDF should be ready when you visit so the team can scan it at the venue.
+  </p>
+  <p>
+    For updates and highlights, follow the Fine Arts Club on Instagram:<br>
+    <a href="https://www.instagram.com/kristujayanti_fineartsclub/">https://www.instagram.com/kristujayanti_fineartsclub/</a>
+  </p>
+  <p>We look forward to your presence at the Shilpkala Showcase!</p>
+  <p>Warm regards,<br>Shilpkala 2025 Team</p>
+</div>
+`;
 
     try {
       await transporter.sendMail({
@@ -147,6 +145,7 @@ Shilpkala 2025 Team
         to: email,
         subject: mailSubject,
         text: mailBody,
+        html: mailBodyHtml,
         attachments: [
           {
             filename: `Shilpkala2025_Ticket_${roll}.pdf`,
