@@ -139,6 +139,34 @@ app.post("/api/sendTicket", async (req, res) => {
 </div>
 `;
 
+    const mailBody = `
+Dear ${name},
+
+Greetings!
+
+We are delighted to confirm your registration for the exhibition:
+
+Shilpkala Showcase – A Gallery of Young Visionaries conducted by the Fine Arts Club at Shilpkala 2025
+
+Here are your details:
+- Name: ${name}
+- Roll Number: ${roll}
+- Slot: ${slot}
+
+Your OD ticket is attached to this mail as a PDF.
+
+This ticket will serve as your attendance proof for visiting the exhibition.
+The PDF should be ready when you visit so the team can scan it at the venue.
+
+For updates and highlights, follow the Fine Arts Club on Instagram:
+https://www.instagram.com/kristujayanti_fineartsclub/
+
+We look forward to your presence at the Shilpkala Showcase!
+
+Warm regards,  
+Shilpkala 2025 Team
+`.trim();
+
     try {
       await transporter.sendMail({
         from: `"Shilpkala 2025" <${GMAIL_USER}>`,
