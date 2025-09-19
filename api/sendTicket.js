@@ -25,6 +25,13 @@ app.post("/api/sendTicket", async (req, res) => {
       return res.status(400).json({ error: "Missing required fields." });
     }
 
+    let slotDate = slot, slotTime = "";
+    const slotMatch = slot.match(/^(.+?\d{1,2}(?:st|nd|rd|th)?\s+September)\s+(.+)$/i);
+    if (slotMatch) {
+      slotDate = slotMatch[1];
+      slotTime = slotMatch[2];
+    }
+
     let qrDataUrl;
     let qrImageBytes;
     let templateBytes;
@@ -77,10 +84,17 @@ app.post("/api/sendTicket", async (req, res) => {
         font: customFont,
         color: rgb(1, 1, 1),
       });
-      page.drawText(slot, {
+      page.drawText(slotDate, {
         x: 401,
-        y: 30,
-        size: 10,
+        y: 35,
+        size: 7,
+        font: customFont,
+        color: rgb(1, 1, 1),
+      });
+      page.drawText(slotTime, {
+        x: 401,
+        y: 27,
+        size: 7,
         font: customFont,
         color: rgb(1, 1, 1),
       });
@@ -191,9 +205,4 @@ Shilpkala 2025 Team
     console.error(`[${new Date().toISOString()}] [UnknownError]`, err);
     return res.status(500).json({ error: "Internal Server Error" });
   }
-});
-
-const PORT = 3001;
-app.listen(PORT, () => {
-  console.log(`Express API running at http://localhost:${PORT}/api/sendTicket`);
 });
