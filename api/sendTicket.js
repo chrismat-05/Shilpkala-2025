@@ -21,67 +21,87 @@ app.post("/api/sendTicket", async (req, res) => {
   try {
     const { name, roll, email, slot } = req.body;
     if (!name || !roll || !email || !slot) {
+      console.error(`[${new Date().toISOString()}] [ValidationError] Missing required fields:`, req.body);
       return res.status(400).json({ error: "Missing required fields." });
     }
 
-    const qrDataUrl = await QRCode.toDataURL(roll, {
-      margin: 1,
-      width: 160,
-      color: {
-        dark: "#000000",
-        light: "#00000000"
-      }
-    });
-    const qrImageBytes = Buffer.from(qrDataUrl.split(",")[1], "base64");
+    let qrDataUrl, qrImageBytes, templateBytes, fontBytes, pdfDoc, customFont, qrImage, pdfBytes;
+    try {
+      qrDataUrl = await QRCode.toDataURL(roll, {
+        margin: 1,
+        width: 160,
+        color: {
+          dark: "#000000",
+          light: "#00000000"
+        }
+      });
+      qrImageBytes = Buffer.from(qrDataUrl.split(",")[1], "base64");
+    } catch (err) {
+      console.error(`[${new Date().toISOString()}] [QRCodeError] Failed to generate QR:`, err);
+      return res.status(500).json({ error: "Failed to generate QR code." });
+    }
 
-    const templatePath = path.join(process.cwd(), "src", "templates", "ticket.pdf");
-    const templateBytes = fs.readFileSync(templatePath);
-    const pdfDoc = await PDFDocument.load(templateBytes);
-    pdfDoc.registerFontkit(fontkit);
+    try {
+      const templatePath = path.join(process.cwd(), "src", "templates", "ticket.pdf");
+      templateBytes = fs.readFileSync(templatePath);
+      pdfDoc = await PDFDocument.load(templateBytes);
+      pdfDoc.registerFontkit(fontkit);
 
-    const fontBytes = fs.readFileSync(path.join(process.cwd(), "src", "assets", "fonts", "Michroma-Regular.ttf"));
-    const customFont = await pdfDoc.embedFont(fontBytes);
+      fontBytes = fs.readFileSync(path.join(process.cwd(), "src", "assets", "fonts", "Michroma-Regular.ttf"));
+      customFont = await pdfDoc.embedFont(fontBytes);
+    } catch (err) {
+      console.error(`[${new Date().toISOString()}] [FileError] Failed to load template or font:`, err);
+      return res.status(500).json({ error: "Failed to load ticket template or font." });
+    }
 
-    const page = pdfDoc.getPages()[0];
+    try {
+      const page = pdfDoc.getPages()[0];
+      page.drawText(name, {
+        x: 79,
+        y: 30,
+        size: 10,
+        font: customFont,
+        color: rgb(1, 1, 1),
+      });
+      page.drawText(roll, {
+        x: 262,
+        y: 30,
+        size: 10,
+        font: customFont,
+        color: rgb(1, 1, 1),
+      });
+      page.drawText(slot, {
+        x: 401,
+        y: 30,
+        size: 10,
+        font: customFont,
+        color: rgb(1, 1, 1),
+      });
 
-    page.drawText(name, {
-      x: 79,
-      y: 30,
-      size: 10,
-      font: customFont,
-      color: rgb(1, 1, 1),
-    });
-    page.drawText(roll, {
-      x: 262,
-      y: 30,
-      size: 10,
-      font: customFont,
-      color: rgb(1, 1, 1),
-    });
-    page.drawText(slot, {
-      x: 401,
-      y: 30,
-      size: 10,
-      font: customFont,
-      color: rgb(1, 1, 1),
-    });
+      qrImage = await pdfDoc.embedPng(qrImageBytes);
+      page.drawImage(qrImage, {
+        x: 463,
+        y: 49,
+        width: 125,
+        height: 125,
+      });
 
-    const qrImage = await pdfDoc.embedPng(qrImageBytes);
-    page.drawImage(qrImage, {
-      x: 463,
-      y: 49,
-      width: 125,
-      height: 125,
-    });
+      pdfBytes = await pdfDoc.save();
+    } catch (err) {
+      console.error(`[${new Date().toISOString()}] [PDFError] Failed to generate PDF:`, err);
+      return res.status(500).json({ error: "Failed to generate ticket PDF." });
+    }
 
-    const pdfBytes = await pdfDoc.save();
-
-    fs.writeFileSync("test-ticket.pdf", pdfBytes);
-
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: { user: GMAIL_USER, pass: GMAIL_PASS },
-    });
+    let transporter;
+    try {
+      transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: { user: GMAIL_USER, pass: GMAIL_PASS },
+      });
+    } catch (err) {
+      console.error(`[${new Date().toISOString()}] [MailTransportError] Failed to create mail transporter:`, err);
+      return res.status(500).json({ error: "Failed to initialize mail service." });
+    }
 
     const mailSubject = "OD Ticket | Shilpkala Showcase | Shilpkala 2025";
     const mailBody = `
@@ -114,22 +134,27 @@ Warm regards,
 Shilpkala 2025 Team
     `.trim();
 
-    await transporter.sendMail({
-      from: `"Shilpkala 2025" <${GMAIL_USER}>`,
-      to: email,
-      subject: mailSubject,
-      text: mailBody,
-      attachments: [
-        {
-          filename: `Shilpkala2025_Ticket_${roll}.pdf`,
-          content: pdfBytes,
-        },
-      ],
-    });
+    try {
+      await transporter.sendMail({
+        from: `"Shilpkala 2025" <${GMAIL_USER}>`,
+        to: email,
+        subject: mailSubject,
+        text: mailBody,
+        attachments: [
+          {
+            filename: `Shilpkala2025_Ticket_${roll}.pdf`,
+            content: pdfBytes,
+          },
+        ],
+      });
+    } catch (err) {
+      console.error(`[${new Date().toISOString()}] [MailSendError] Failed to send mail to ${email}:`, err);
+      return res.status(500).json({ error: "Failed to send ticket email." });
+    }
 
     return res.status(200).json({ success: true, message: "Ticket sent successfully!" });
   } catch (err) {
-    console.error("Ticket API error:", err);
+    console.error(`[${new Date().toISOString()}] [UnknownError]`, err);
     return res.status(500).json({ error: "Internal Server Error" });
   }
 });
