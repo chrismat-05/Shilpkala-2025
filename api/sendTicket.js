@@ -25,7 +25,14 @@ app.post("/api/sendTicket", async (req, res) => {
       return res.status(400).json({ error: "Missing required fields." });
     }
 
-    let qrDataUrl, qrImageBytes, templateBytes, fontBytes, pdfDoc, customFont, qrImage, pdfBytes;
+    let qrDataUrl;
+    let qrImageBytes;
+    let templateBytes;
+    let fontBytes;
+    let pdfDoc;
+    let customFont;
+    let qrImage;
+    let pdfBytes;
     try {
       qrDataUrl = await QRCode.toDataURL(roll, {
         margin: 1,
