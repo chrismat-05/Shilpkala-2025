@@ -1,8 +1,6 @@
 import 'dotenv/config';
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
-import express from "express";
-import bodyParser from "body-parser";
 import path from "path";
 import fs from "fs";
 import { PDFDocument, rgb } from "pdf-lib";
@@ -14,10 +12,11 @@ const fontkit = require('fontkit');
 const GMAIL_USER = process.env.GMAIL_USER;
 const GMAIL_PASS = process.env.GMAIL_PASS;
 
-const app = express();
-app.use(bodyParser.json());
-
-app.post("/api/sendTicket", async (req, res) => {
+export default async function handler(req, res) {
+  if (req.method !== "POST") {
+    res.status(405).json({ error: "Method not allowed" });
+    return;
+  }
   try {
     const { name, roll, email, slot } = req.body;
     if (!name || !roll || !email || !slot) {
@@ -32,14 +31,7 @@ app.post("/api/sendTicket", async (req, res) => {
       slotTime = slotMatch[2];
     }
 
-    let qrDataUrl;
-    let qrImageBytes;
-    let templateBytes;
-    let fontBytes;
-    let pdfDoc;
-    let customFont;
-    let qrImage;
-    let pdfBytes;
+    let qrDataUrl, qrImageBytes, templateBytes, fontBytes, pdfDoc, customFont, qrImage, pdfBytes;
     try {
       qrDataUrl = await QRCode.toDataURL(roll, {
         margin: 1,
@@ -205,4 +197,4 @@ Shilpkala 2025 Team
     console.error(`[${new Date().toISOString()}] [UnknownError]`, err);
     return res.status(500).json({ error: "Internal Server Error" });
   }
-});
+}
