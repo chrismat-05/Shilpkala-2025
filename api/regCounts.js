@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import axios from 'axios';
 
-const SOURCE_URL = process.env.VITE_REG_COUNT || process.env.REG_COUNT_URL;
+const SOURCE_URL = process.env.VITE_REG_COUNT;
 const CACHE_TTL = 25 * 1000;
 
 let cache = {
