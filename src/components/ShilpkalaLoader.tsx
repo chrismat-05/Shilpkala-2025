@@ -1,6 +1,15 @@
 import React from "react";
 
-const ShilpkalaLoader: React.FC = () => {
+type ShilpkalaLoaderProps = {
+  loops?: number;
+  loopMs?: number;
+};
+
+const ShilpkalaLoader: React.FC<ShilpkalaLoaderProps> = ({ loops, loopMs = 1500 }) => {
+  const loopCountRef = React.useRef<number>(loops && loops > 0 ? loops : Math.floor(Math.random() * 4) + 1);
+
+  const iter = loopCountRef.current;
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-bg">
       <svg
@@ -24,6 +33,11 @@ const ShilpkalaLoader: React.FC = () => {
           strokeWidth="2.5"
           fill="none"
           className="animate-stroke"
+          style={{
+            animationDuration: `${loopMs}ms`,
+            animationIterationCount: iter,
+            animationTimingFunction: "cubic-bezier(0.4,0,0.2,1)",
+          }}
         >
           Shilpkala 2025
         </text>
@@ -45,7 +59,8 @@ const ShilpkalaLoader: React.FC = () => {
         .animate-stroke {
           stroke-dasharray: 600;
           stroke-dashoffset: 600;
-          animation: outline-draw 1.5s cubic-bezier(0.4,0,0.2,1) infinite;
+          animation-name: outline-draw;
+          animation-fill-mode: forwards;
         }
         @keyframes outline-draw {
           to {

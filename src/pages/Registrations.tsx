@@ -1,4 +1,3 @@
-
 import eventsData from "@/data/events.json";
 import axios from "axios";
 import { useAutoRefresh } from "@/hooks/useAutoRefresh";
@@ -8,32 +7,24 @@ import { useNavigate } from "react-router-dom";
 import { ArrowLeft, BarChart2, GraduationCap, Sparkles, User2 } from "lucide-react";
 import { getRegistrationStats } from "@/lib/utils";
 
-const REG_COUNT_API = import.meta.env.VITE_REG_COUNT;
-
-interface RegCount {
+type CountsMap = Record<string, {
   firstYear: number;
   secondYear: number;
   thirdYear: number;
   total: number;
-}
+}>;
 
-interface RegCounts {
-  [eventName: string]: RegCount;
-}
-
-const fetchCounts = async () => {
-  try {
-    const res = await axios.get(REG_COUNT_API);
-    return res.data as RegCounts;
-  } catch (error) {
-    throw error;
-  }
+const fetchCounts = async (): Promise<CountsMap> => {
+  const res = await axios.get('/api/regCounts');
+  const payload = res.data?.data;
+  if (!payload) return {} as CountsMap;
+  return payload as CountsMap;
 };
 
 const Registrations: React.FC = () => {
   const [open, setOpen] = React.useState<{ [event: string]: boolean }>({});
   const [lastRefresh, setLastRefresh] = React.useState<Date>(new Date());
-  const { data: counts = {}, isLoading, isError, refetch, isFetching } = useAutoRefresh<RegCounts>(
+  const { data: counts = {} as CountsMap, isLoading, isError, refetch, isFetching } = useAutoRefresh<CountsMap>(
     ["reg-counts"],
     async () => {
       const data = await fetchCounts();
@@ -48,7 +39,7 @@ const Registrations: React.FC = () => {
   if (isLoading) return <ShilpkalaLoader />;
   if (isError) return <div className="min-h-screen flex items-center justify-center bg-gradient-bg text-destructive">Failed to fetch registration data</div>;
 
-  const stats = getRegistrationStats(counts);
+  const stats = getRegistrationStats(counts as Record<string, { firstYear: number; secondYear: number; thirdYear: number; total: number }>);
   return (
     <div className="min-h-screen py-12 px-6 bg-gradient-bg relative">
       <div className="max-w-6xl mx-auto">

@@ -1,21 +1,24 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, UseQueryResult, UseQueryOptions } from '@tanstack/react-query';
 import { useEffect } from 'react';
 
 export function useAutoRefresh<T>(
   queryKey: string[],
   queryFn: () => Promise<T>,
   refetchInterval = 30000
-) {
-  const query = useQuery({
+): UseQueryResult<T, Error> {
+  const options: UseQueryOptions<T, Error, T, string[]> = {
     queryKey,
     queryFn,
     refetchInterval,
     refetchIntervalInBackground: true,
     staleTime: 0,
-  });
+    keepPreviousData: true,
+    cacheTime: 5 * 60 * 1000,
+  };
+
+  const query = useQuery<T, Error, T, string[]>(options);
 
   useEffect(() => {
-    // Start auto-refresh on mount
     const interval = setInterval(() => {
       query.refetch();
     }, refetchInterval);
