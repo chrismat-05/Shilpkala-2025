@@ -1,4 +1,3 @@
-
 import eventsData from "@/data/events.json";
 import axios from "axios";
 import { useAutoRefresh } from "@/hooks/useAutoRefresh";
@@ -8,7 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { ArrowLeft, BarChart2, GraduationCap, Sparkles, User2 } from "lucide-react";
 import { getRegistrationStats } from "@/lib/utils";
 
-const REG_COUNT_API = import.meta.env.VITE_REG_COUNT;
+// replace direct Google URL with local proxy endpoint
+const REG_COUNT_API = "/api/regCounts";
 
 interface RegCount {
   firstYear: number;
@@ -24,7 +24,7 @@ interface RegCounts {
 const fetchCounts = async () => {
   try {
     const res = await axios.get(REG_COUNT_API);
-    return res.data as RegCounts;
+    return res.data?.data ?? {};
   } catch (error) {
     throw error;
   }
