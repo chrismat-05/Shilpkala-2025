@@ -7,33 +7,24 @@ import { useNavigate } from "react-router-dom";
 import { ArrowLeft, BarChart2, GraduationCap, Sparkles, User2 } from "lucide-react";
 import { getRegistrationStats } from "@/lib/utils";
 
-// replace direct Google URL with local proxy endpoint
-const REG_COUNT_API = "/api/regCounts";
-
-interface RegCount {
+type CountsMap = Record<string, {
   firstYear: number;
   secondYear: number;
   thirdYear: number;
   total: number;
-}
+}>;
 
-interface RegCounts {
-  [eventName: string]: RegCount;
-}
-
-const fetchCounts = async () => {
-  try {
-    const res = await axios.get(REG_COUNT_API);
-    return res.data?.data ?? {};
-  } catch (error) {
-    throw error;
-  }
+const fetchCounts = async (): Promise<CountsMap> => {
+  const res = await axios.get('/api/regCounts');
+  const payload = res.data?.data;
+  if (!payload) return {} as CountsMap;
+  return payload as CountsMap;
 };
 
 const Registrations: React.FC = () => {
   const [open, setOpen] = React.useState<{ [event: string]: boolean }>({});
   const [lastRefresh, setLastRefresh] = React.useState<Date>(new Date());
-  const { data: counts = {}, isLoading, isError, refetch, isFetching } = useAutoRefresh<RegCounts>(
+  const { data: counts = {}, isLoading, isError, refetch, isFetching } = useAutoRefresh<CountsMap>(
     ["reg-counts"],
     async () => {
       const data = await fetchCounts();
