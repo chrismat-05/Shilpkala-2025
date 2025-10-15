@@ -24,7 +24,7 @@ const fetchCounts = async (): Promise<CountsMap> => {
 const Registrations: React.FC = () => {
   const [open, setOpen] = React.useState<{ [event: string]: boolean }>({});
   const [lastRefresh, setLastRefresh] = React.useState<Date>(new Date());
-  const { data: counts = {}, isLoading, isError, refetch, isFetching } = useAutoRefresh<CountsMap>(
+  const { data: counts = {} as CountsMap, isLoading, isError, refetch, isFetching } = useAutoRefresh<CountsMap>(
     ["reg-counts"],
     async () => {
       const data = await fetchCounts();
@@ -39,7 +39,7 @@ const Registrations: React.FC = () => {
   if (isLoading) return <ShilpkalaLoader />;
   if (isError) return <div className="min-h-screen flex items-center justify-center bg-gradient-bg text-destructive">Failed to fetch registration data</div>;
 
-  const stats = getRegistrationStats(counts);
+  const stats = getRegistrationStats(counts as Record<string, { firstYear: number; secondYear: number; thirdYear: number; total: number }>);
   return (
     <div className="min-h-screen py-12 px-6 bg-gradient-bg relative">
       <div className="max-w-6xl mx-auto">
