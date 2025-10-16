@@ -1,9 +1,9 @@
-
 import { motion } from 'framer-motion';
 import EventCard from '@/components/EventCard';
 import React from 'react';
 
 import eventsData from '@/data/events.json';
+import { resolveImage } from "@/lib/images";
 
 const Index = () => {
   const brochure = eventsData.find((e) => e.type === 'brochure');
@@ -26,7 +26,7 @@ const Index = () => {
             <div className="max-w-md mx-auto">
               <EventCard
                 title={brochure.title}
-                imageUrl={brochure.image || ''}
+                imageUrl={resolveImage(brochure.image)}
                 buttonText="View Brochure"
                 link={brochure.link}
                 disabled={!brochure.isOpen}
@@ -45,7 +45,7 @@ const Index = () => {
             <EventCard
               key={event.title}
               title={event.title}
-              imageUrl={event.image || ''}
+              imageUrl={resolveImage(event.image)}
               buttonText={event.isOpen ? 'Register Now' : 'Registration closed'}
               link={event.link}
               delay={0.1 * index}

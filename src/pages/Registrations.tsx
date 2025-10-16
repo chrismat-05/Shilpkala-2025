@@ -1,5 +1,5 @@
-
 import eventsData from "@/data/events.json";
+import { resolveImage } from "@/lib/images";
 import axios from "axios";
 import { useAutoRefresh } from "@/hooks/useAutoRefresh";
 import React from "react";
@@ -109,7 +109,7 @@ const Registrations: React.FC = () => {
               <div key={event.title} className="bg-card/80 border border-border rounded-lg shadow-card overflow-hidden flex flex-col">
                 {event.image && (
                   <div className="aspect-video w-full overflow-hidden">
-                    <img src={event.image} alt={event.title} className="w-full h-full object-cover" />
+                    <img src={resolveImage(event.image)} alt={event.title} className="w-full h-full object-cover" />
                   </div>
                 )}
                 <div className="flex items-center justify-between px-4 py-3">
