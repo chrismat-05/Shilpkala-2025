@@ -1,4 +1,3 @@
-import festlogo from "@/assets/media/festlogo.png";
 import showcase from "@/assets/media/showcase.png";
 import chain from "@/assets/media/chain.png";
 import doodle from "@/assets/media/doodle.png";
@@ -13,7 +12,7 @@ import toon from "@/assets/media/toon.png";
 import veil from "@/assets/media/veil.png";
 
 const images: Record<string, string> = {
-  "festlogo.png": festlogo,
+  "festlogo.png": "/festlogo.png",
   "showcase.png": showcase,
   "chain.png": chain,
   "doodle.png": doodle,
