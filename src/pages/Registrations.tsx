@@ -52,6 +52,11 @@ const Registrations: React.FC = () => {
   return (
     <div className="min-h-screen py-12 px-6 bg-gradient-bg relative">
       <div className="max-w-6xl mx-auto">
+        {/* top-right brand using PirataOne (only on this page) */}
+        <div className="absolute top-6 right-6 z-40">
+          <span className="font-pirata text-sm text-foreground/80">Shilpkala 2025</span>
+        </div>
+
         <div className="flex items-center gap-2 mb-8">
           <button
             onClick={() => navigate("/home")}
@@ -113,7 +118,7 @@ const Registrations: React.FC = () => {
                   </div>
                 )}
                 <div className="flex items-center justify-between px-4 py-3">
-                  <span className="font-semibold text-foreground">{event.title}</span>
+                  <span className="font-pirata font-semibold text-foreground">{event.title}</span>
                   <button
                     className="flex items-center gap-1 text-primary hover:text-primary-hover font-semibold focus:outline-none"
                     onClick={() => setOpen((o) => ({ ...o, [event.title]: !o[event.title] }))}

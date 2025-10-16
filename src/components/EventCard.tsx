@@ -35,7 +35,8 @@ const EventCard = ({ title, imageUrl, buttonText, link, delay = 0, disabled = fa
         </div>
       )}
       <div className="p-4 sm:p-6 flex flex-col items-center">
-        <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2 sm:mb-4">{title}</h3>
+        {/* apply PirataOne to the event title */}
+        <h3 className="text-base sm:text-lg font-pirata font-semibold text-foreground mb-2 sm:mb-4">{title}</h3>
         {description && (
           <div className="text-sm text-muted-foreground mb-2 text-center w-full">{description}</div>
         )}

@@ -98,6 +98,25 @@ All colors MUST be HSL.
   }
 }
 
+/* add PirataOne font-face and helper class (improves spacing) */
+@font-face {
+  font-family: "PirataOne";
+  src: url("./assets/fonts/PirataOne-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* utility class to apply the PirataOne face with increased letter-spacing */
+.font-pirata {
+  font-family: "PirataOne", serif;
+  /* increase spacing to avoid crowded glyphs */
+  letter-spacing: 0.08em;
+  /* small font-smoothing hint */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+  
 @layer base {
   * {
     @apply border-border;
