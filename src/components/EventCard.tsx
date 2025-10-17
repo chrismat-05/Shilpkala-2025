@@ -45,7 +45,6 @@ const EventCard: React.FC<EventCardProps> = ({
       )}
 
       <div className="p-4 sm:p-6 flex flex-col items-center">
-        {/* Event title - use PirataOne and color #9f694a */}
         <h3 className="text-base sm:text-lg font-pirata font-semibold text-[#9f694a] mb-2 sm:mb-4">
           {title}
         </h3>
