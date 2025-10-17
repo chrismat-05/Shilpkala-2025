@@ -40,7 +40,7 @@ const BrochureCard: React.FC<Props> = ({ title, imageUrl, link, buttonText = "Vi
               href={link}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block px-5 py-2 rounded bg-primary text-primary-foreground font-semibold shadow hover:bg-primary/90 transition font-titl"
+              className="inline-block px-5 py-2 rounded bg-primary font-semibold shadow hover:bg-primary/90 transition font-titl text-[#9f694a]/90"
             >
               {buttonText}
             </a>
