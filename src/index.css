@@ -101,13 +101,19 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-  
+
 @layer base {
   * {
     @apply border-border;
   }
 
   body {
-    @apply bg-background text-foreground;
+    background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('/bg.png'), var(--gradient-bg);
+    background-size: cover, cover, cover;
+    background-position: center center, center center, center center;
+    background-repeat: no-repeat, no-repeat, no-repeat;
+    background-attachment: fixed, fixed, fixed;
+    color: hsl(var(--foreground));
+    @apply text-foreground;
   }
 }

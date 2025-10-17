@@ -57,16 +57,16 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <div className="min-h-screen bg-gradient-bg relative">
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/registrations" element={<Registrations />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <Footer />
-        </div>
-      </BrowserRouter>
+        <div className="min-h-screen relative">
+           <Routes>
+             <Route path="/" element={<Index />} />
+             <Route path="/home" element={<Home />} />
+             <Route path="/registrations" element={<Registrations />} />
+             <Route path="*" element={<NotFound />} />
+           </Routes>
+           <Footer />
+         </div>
+       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
 );
