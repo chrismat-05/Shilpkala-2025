@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import EventCard from "@/components/EventCard";
 import BrochureCard from "@/components/BrochureCard";
+import EventCarousel from "@/components/EventCarousel";
 import React from "react";
 
 import eventsData from "@/data/events.json";
@@ -63,133 +64,28 @@ const Index = () => {
         )}
 
         {/* Solo events group */}
-        <motion.section
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="mb-8"
-        >
-          <div
-            className="rounded-lg overflow-hidden shadow-card p-6"
-            style={{
-              backgroundImage: `url('${bgCoverUrl}')`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          >
-            <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-2xl font-pirata font-semibold text-left text-[#9f694a]">
-                Solo Events
-              </h2>
-              <div className="text-sm text-muted-foreground">
-                {soloEvents.length} events
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {soloEvents.map((event, index) => (
-                <EventCard
-                  key={`${event.title}-solo`}
-                  title={event.title}
-                  imageUrl={resolveImage(event.image)}
-                  buttonText={
-                    event.isOpen ? "Register Now" : "Registration closed"
-                  }
-                  link={event.link}
-                  delay={0.05 * index}
-                  disabled={!event.isOpen}
-                  description={event.desc}
-                />
-              ))}
-            </div>
-          </div>
-        </motion.section>
+        <div className="mb-8">
+          <h2 className="text-2xl font-pirata text-[#ebebe1] mb-4">
+            Solo Events
+          </h2>
+          <EventCarousel events={soloEvents} autoplayMs={4000} />
+        </div>
 
         {/* Duo events group */}
-        <motion.section
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15 }}
-          className="mb-8"
-        >
-          <div
-            className="rounded-lg overflow-hidden shadow-card p-6"
-            style={{
-              backgroundImage: `url('${bgCoverUrl}')`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          >
-            <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-2xl font-pirata font-semibold text-left text-[#9f694a]">
-                Duo Events
-              </h2>
-              <div className="text-sm text-muted-foreground">
-                {duoEvents.length} events
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {duoEvents.map((event, index) => (
-                <EventCard
-                  key={`${event.title}-duo`}
-                  title={event.title}
-                  imageUrl={resolveImage(event.image)}
-                  buttonText={
-                    event.isOpen ? "Register Now" : "Registration closed"
-                  }
-                  link={event.link}
-                  delay={0.05 * index}
-                  disabled={!event.isOpen}
-                  description={event.desc}
-                />
-              ))}
-            </div>
-          </div>
-        </motion.section>
+        <div className="mb-8">
+          <h2 className="text-2xl font-pirata text-[#ebebe1] mb-4">
+            Duo Events
+          </h2>
+          <EventCarousel events={duoEvents} autoplayMs={4200} />
+        </div>
 
         {/* Trio events group */}
-        <motion.section
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="mb-8"
-        >
-          <div
-            className="rounded-lg overflow-hidden shadow-card p-6"
-            style={{
-              backgroundImage: `url('${bgCoverUrl}')`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          >
-            <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-2xl font-pirata font-semibold text-left text-[#9f694a]">
-                Trio Events
-              </h2>
-              <div className="text-sm text-muted-foreground">
-                {trioEvents.length} events
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {trioEvents.map((event, index) => (
-                <EventCard
-                  key={`${event.title}-trio`}
-                  title={event.title}
-                  imageUrl={resolveImage(event.image)}
-                  buttonText={
-                    event.isOpen ? "Register Now" : "Registration closed"
-                  }
-                  link={event.link}
-                  delay={0.05 * index}
-                  disabled={!event.isOpen}
-                  description={event.desc}
-                />
-              ))}
-            </div>
-          </div>
-        </motion.section>
+        <div className="mb-8">
+          <h2 className="text-2xl font-pirata text-[#ebebe1] mb-4">
+            Trio Events
+          </h2>
+          <EventCarousel events={trioEvents} autoplayMs={4400} />
+        </div>
       </div>
     </div>
   );
