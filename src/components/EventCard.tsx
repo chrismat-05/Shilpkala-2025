@@ -60,7 +60,7 @@ const EventCard: React.FC<EventCardProps> = ({
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full px-4 py-2 rounded bg-primary text-primary-foreground font-semibold shadow hover:bg-primary/90 transition mt-2 text-center block font-titl"
+            className="w-full px-4 py-2 rounded bg-primary font-semibold shadow hover:bg-primary/90 transition mt-2 text-center block font-titl text-[#9f694a]/90"
             tabIndex={0}
           >
             {buttonText}

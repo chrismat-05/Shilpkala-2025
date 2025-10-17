@@ -2,87 +2,63 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    --background: 0 0% 0%;
-    --foreground: 0 0% 95%;
+:root{
+  --background: 0 0% 0%;
+  --foreground: 0 0% 95%;
+  --card: 0 0% 8%;
+  --card-foreground: 0 0% 95%;
+  --card-hover: 0 0% 12%;
+  --popover: 0 0% 8%;
+  --popover-foreground: 0 0% 95%;
+  --primary: 0 0% 100%;
+  --primary-foreground: 0 0% 0%;
+  --primary-hover: 0 0% 90%;
+  --secondary: 0 0% 15%;
+  --secondary-foreground: 0 0% 95%;
+  --muted: 0 0% 20%;
+  --muted-foreground: 0 0% 70%;
+  --accent: 0 0% 25%;
+  --accent-foreground: 0 0% 95%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 0 0% 20%;
+  --input: 0 0% 15%;
+  --ring: 0 0% 100%;
+  --shadow-card: 0px 4px 12px rgba(255,255,255,0.05);
+  --shadow-card-hover: 0px 8px 24px rgba(255,255,255,0.08);
+  --gradient-bg: linear-gradient(135deg,hsl(0,0%,0%) 0%, hsl(0,0%,3%) 100%);
+  --gradient-card: linear-gradient(135deg,hsl(0,0%,8%) 0%, hsl(0,0%,12%) 100%);
+  --radius: 0.75rem;
+  --transition-smooth: all 0.3s cubic-bezier(0.4,0,0.2,1);
+  --transition-fast: all 0.15s ease-out;
+}
 
-    --card: 0 0% 8%;
-    --card-foreground: 0 0% 95%;
-    --card-hover: 0 0% 12%;
-
-    --popover: 0 0% 8%;
-    --popover-foreground: 0 0% 95%;
-
-    --primary: 0 0% 100%;
-    --primary-foreground: 0 0% 0%;
-    --primary-hover: 0 0% 90%;
-
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 0 0% 95%;
-
-    --muted: 0 0% 20%;
-    --muted-foreground: 0 0% 70%;
-
-    --accent: 0 0% 25%;
-    --accent-foreground: 0 0% 95%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 0 0% 20%;
-    --input: 0 0% 15%;
-    --ring: 0 0% 100%;
-
-    --shadow-card: 0px 4px 12px rgba(255, 255, 255, 0.05);
-    --shadow-card-hover: 0px 8px 24px rgba(255, 255, 255, 0.08);
-
-    --gradient-bg: linear-gradient(135deg, hsl(0, 0%, 0%) 0%, hsl(0, 0%, 3%) 100%);
-    --gradient-card: linear-gradient(135deg, hsl(0, 0%, 8%) 0%, hsl(0, 0%, 12%) 100%);
-
-    --radius: 0.75rem;
-
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-fast: all 0.15s ease-out;
-  }
-
-  .dark {
-    --background: 0 0% 0%;
-    --foreground: 0 0% 95%;
-
-    --card: 0 0% 8%;
-    --card-foreground: 0 0% 95%;
-    --card-hover: 0 0% 12%;
-
-    --popover: 0 0% 8%;
-    --popover-foreground: 0 0% 95%;
-
-    --primary: 0 0% 100%;
-    --primary-foreground: 0 0% 0%;
-    --primary-hover: 0 0% 90%;
-
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 0 0% 95%;
-
-    --muted: 0 0% 20%;
-    --muted-foreground: 0 0% 70%;
-
-    --accent: 0 0% 25%;
-    --accent-foreground: 0 0% 95%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 95%;
-
-    --border: 0 0% 20%;
-    --input: 0 0% 15%;
-    --ring: 0 0% 100%;
-
-    --shadow-card: 0px 4px 12px rgba(255, 255, 255, 0.05);
-    --shadow-card-hover: 0px 8px 24px rgba(255, 255, 255, 0.08);
-
-    --gradient-bg: linear-gradient(135deg, hsl(0, 0%, 0%) 0%, hsl(0, 0%, 3%) 100%);
-    --gradient-card: linear-gradient(135deg, hsl(0, 0%, 8%) 0%, hsl(0, 0%, 12%) 100%);
-  }
+.dark{
+  --background: 0 0% 0%;
+  --foreground: 0 0% 95%;
+  --card: 0 0% 8%;
+  --card-foreground: 0 0% 95%;
+  --card-hover: 0 0% 12%;
+  --popover: 0 0% 8%;
+  --popover-foreground: 0 0% 95%;
+  --primary: 0 0% 100%;
+  --primary-foreground: 0 0% 0%;
+  --primary-hover: 0 0% 90%;
+  --secondary: 0 0% 15%;
+  --secondary-foreground: 0 0% 95%;
+  --muted: 0 0% 20%;
+  --muted-foreground: 0 0% 70%;
+  --accent: 0 0% 25%;
+  --accent-foreground: 0 0% 95%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 95%;
+  --border: 0 0% 20%;
+  --input: 0 0% 15%;
+  --ring: 0 0% 100%;
+  --shadow-card: 0px 4px 12px rgba(255,255,255,0.05);
+  --shadow-card-hover: 0px 8px 24px rgba(255,255,255,0.08);
+  --gradient-bg: linear-gradient(135deg,hsl(0,0%,0%) 0%, hsl(0,0%,3%) 100%);
+  --gradient-card: linear-gradient(135deg,hsl(0,0%,8%) 0%, hsl(0,0%,12%) 100%);
 }
 
 @font-face {
@@ -92,15 +68,20 @@
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
-  font-family: "TitlNeon";
-  src: url("./assets/fonts/TitlNeon-Regular.ttf") format("truetype");
+  font-family: "Michroma";
+  src: url("./assets/fonts/Michroma-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
-
+@font-face {
+  font-family: "TiltNeon";
+  src: url("./assets/fonts/TiltNeon-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 @font-face {
   font-family: "FreckleFace";
   src: url("./assets/fonts/FreckleFace-Regular.ttf") format("truetype");
@@ -108,41 +89,51 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: "Poppins";
+  src: url("./assets/fonts/Poppins-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
-@layer base {
-  html, body, #root, body * {
-    font-family: "TitlNeon", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  }
+.font-pirata{font-family:"PirataOne",serif;letter-spacing:0.12em;font-size:1.06em;line-height:1.08;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+.font-michroma{font-family:"Michroma",monospace}
+.font-tilt{font-family:"TiltNeon",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+.font-freckle{font-family:"FreckleFace",serif;letter-spacing:0.06em;font-size:1.06em;line-height:1.05;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 
-  body {
-    background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('/bg.png'), var(--gradient-bg);
-    background-size: cover, cover, cover;
-    background-position: center center, center center, center center;
-    background-repeat: no-repeat, no-repeat, no-repeat;
-    background-attachment: fixed, fixed, fixed;
+@layer base{
+  html,body,#root,body *{font-family:"TiltNeon",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+  body{
+    background-image: linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)), url('/bg.png'), var(--gradient-bg);
+    background-size: cover,cover,cover;
+    background-position: center center,center center,center center;
+    background-repeat: no-repeat,no-repeat,no-repeat;
+    background-attachment: fixed,fixed,fixed;
     color: hsl(var(--foreground));
     @apply text-foreground;
   }
-}
 
-.font-pirata {
-  font-family: "PirataOne", serif;
-  letter-spacing: 0.12em;
-  font-size: 1.06em;
-  line-height: 1.08;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  button,
+  input[type="button"],
+  input[type="submit"],
+  a[role="button"],
+  a[class*="px-"][class*="py-"],
+  button[class] {
+    font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+    text-transform: none;
+    font-size: 1.05rem;
+    line-height: 1.1;
+  }
 
-.font-freckle {
-  font-family: "FreckleFace", serif;
-  letter-spacing: 0.06em;
-  font-size: 1.06em;
-  line-height: 1.05;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.font-titl {
-  font-family: "TitlNeon", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  p,
+  li,
+  blockquote,
+  .prose p,
+  .lead,
+  .text-base,
+  .text-sm {
+    font-family: "TiltNeon", "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.45;
+  }
 }
