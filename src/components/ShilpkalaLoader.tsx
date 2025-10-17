@@ -2,7 +2,7 @@ import React from "react";
 
 const ShilpkalaLoader: React.FC = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-bg">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-black/30 backdrop-blur-sm">
       <svg
         width="420"
         height="100"
