@@ -50,7 +50,7 @@ const Registrations: React.FC = () => {
 
   const stats = getRegistrationStats(counts);
   return (
-    <div className="min-h-screen py-12 px-6 bg-gradient-bg relative">
+    <div className="min-h-screen py-12 px-6 relative">
       <div className="max-w-6xl mx-auto">
 
         <div className="flex items-center gap-2 mb-8">
