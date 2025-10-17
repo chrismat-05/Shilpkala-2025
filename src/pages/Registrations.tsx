@@ -114,7 +114,7 @@ const Registrations: React.FC = () => {
                   </div>
                 )}
                 <div className="flex items-center justify-between px-4 py-3">
-                  <span className="font-pirata font-semibold text-foreground">{event.title}</span>
+                  <span className="font-freckle font-semibold text-foreground">{event.title}</span>
                   <button
                     className="flex items-center gap-1 text-primary hover:text-primary-hover font-semibold focus:outline-none"
                     onClick={() => setOpen((o) => ({ ...o, [event.title]: !o[event.title] }))}

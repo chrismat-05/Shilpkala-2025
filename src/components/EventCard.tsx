@@ -45,14 +45,14 @@ const EventCard: React.FC<EventCardProps> = ({
       )}
 
       <div className="p-4 sm:p-6 flex flex-col items-center">
-        <h3 className="text-base sm:text-lg font-pirata font-semibold text-[#9f694a] mb-2 sm:mb-4">
+        <h3 className="text-base sm:text-lg font-freckle font-semibold text-[#9f694a] mb-2 sm:mb-4">
           {title}
         </h3>
 
-        {description && <div className="text-sm text-muted-foreground mb-2 text-center w-full">{description}</div>}
+        {description && <div className="text-sm text-muted-foreground mb-2 text-center w-full font-titl">{description}</div>}
 
         {disabled ? (
-          <div className="w-full px-4 py-2 rounded bg-muted text-muted-foreground font-semibold cursor-not-allowed opacity-80 mt-2 text-center select-none">
+          <div className="w-full px-4 py-2 rounded bg-muted text-muted-foreground font-semibold cursor-not-allowed opacity-80 mt-2 text-center select-none font-titl">
             {buttonText}
           </div>
         ) : (
@@ -60,7 +60,7 @@ const EventCard: React.FC<EventCardProps> = ({
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full px-4 py-2 rounded bg-primary text-primary-foreground font-semibold shadow hover:bg-primary/90 transition mt-2 text-center block"
+            className="w-full px-4 py-2 rounded bg-primary text-primary-foreground font-semibold shadow hover:bg-primary/90 transition mt-2 text-center block font-titl"
             tabIndex={0}
           >
             {buttonText}

@@ -25,14 +25,14 @@ const BrochureCard: React.FC<Props> = ({ title, imageUrl, link, buttonText = "Vi
       )}
 
       <div className="p-6 md:w-1/2 flex flex-col justify-center gap-4">
-        <h2 className="text-2xl md:text-3xl font-pirata font-semibold text-[#9f694a] leading-tight">
+        <h2 className="text-2xl md:text-3xl font-freckle font-semibold text-[#9f694a] leading-tight">
           {title}
         </h2>
-        {description && <p className="text-sm text-muted-foreground">{description}</p>}
+        {description && <p className="text-sm text-muted-foreground font-titl">{description}</p>}
 
         <div className="mt-2">
           {disabled ? (
-            <div className="inline-block px-5 py-2 rounded bg-muted text-muted-foreground font-semibold select-none">
+            <div className="inline-block px-5 py-2 rounded bg-muted text-muted-foreground font-semibold select-none font-titl">
               {buttonText}
             </div>
           ) : (
@@ -40,7 +40,7 @@ const BrochureCard: React.FC<Props> = ({ title, imageUrl, link, buttonText = "Vi
               href={link}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block px-5 py-2 rounded bg-primary text-primary-foreground font-semibold shadow hover:bg-primary/90 transition"
+              className="inline-block px-5 py-2 rounded bg-primary text-primary-foreground font-semibold shadow hover:bg-primary/90 transition font-titl"
             >
               {buttonText}
             </a>

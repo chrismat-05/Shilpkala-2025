@@ -93,11 +93,40 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "TitlNeon";
+  src: url("./assets/fonts/TitlNeon-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "FreckleFace";
+  src: url("./assets/fonts/FreckleFace-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 .font-pirata {
   font-family: "PirataOne", serif;
   letter-spacing: 0.12em;
   font-size: 1.4em;
   line-height: 1.08;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-titl {
+  font-family: "TitlNeon", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.font-freckle {
+  font-family: "FreckleFace", serif;
+  letter-spacing: 0.06em;
+  font-size: 1.06em;
+  line-height: 1.05;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -115,5 +144,6 @@
     background-attachment: fixed, fixed, fixed;
     color: hsl(var(--foreground));
     @apply text-foreground;
+    font-family: "TitlNeon", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   }
 }
