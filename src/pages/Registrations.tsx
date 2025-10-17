@@ -42,7 +42,7 @@ const Registrations: React.FC = () => {
 
   const stats = getRegistrationStats(counts as Record<string, { firstYear: number; secondYear: number; thirdYear: number; total: number }>);
   return (
-    <div className="min-h-screen py-12 px-6 bg-gradient-bg relative">
+    <div className="min-h-screen py-12 px-6 relative">
       <div className="max-w-6xl mx-auto">
 
         <div className="flex items-center gap-2 mb-8">
@@ -106,7 +106,7 @@ const Registrations: React.FC = () => {
                   </div>
                 )}
                 <div className="flex items-center justify-between px-4 py-3">
-                  <span className="font-pirata font-semibold text-foreground">{event.title}</span>
+                  <span className="font-freckle font-semibold text-foreground">{event.title}</span>
                   <button
                     className="flex items-center gap-1 text-primary hover:text-primary-hover font-semibold focus:outline-none"
                     onClick={() => setOpen((o) => ({ ...o, [event.title]: !o[event.title] }))}

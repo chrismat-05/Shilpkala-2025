@@ -3,15 +3,16 @@
     "type": "brochure",
     "title": "Shilpkala 2025 Brochure",
     "link": "https://drive.google.com/file/d/11BuaqXvVHYRAF6MkzZk7Q7K3E1K-jHHz/view?usp=sharing",
-    "image": "../assets/media/festlogo.png",
+    "image": "festlogo.png",
+    "desc": "SHILPKALA is a vibrant celebration of creativity, talent, and artistic passion. This event invites students from diverse disciplines to showcase their skills, explore various art forms, and engage in a shared journey of artistic expression! SHILPKALA 2025 features an exciting array of events across Visual & Fine Arts and Craft & Decorative Arts categories.",
     "isOpen": true
   },
   {
     "type": "event",
     "title": "Shilpkala Showcase",
     "link": "https://forms.gle/4GyCon15eS8PoTPk9",
-    "desc": "A Gallery of Young Visionaries",
     "image": "../assets/media/showcase.png",
+    "participants":"solo",
     "isOpen": true
   },
   {
@@ -19,6 +20,7 @@
     "title": "Chain Reaction",
     "link": "https://forms.gle/bEyBY7GqZ39Byeuo7",
     "image": "../assets/media/chain.png",
+    "participants":"trio",
     "isOpen": true
   },
   {
@@ -26,6 +28,7 @@
     "title": "Doodle Dash",
     "link": "https://forms.gle/b4bvR4HuPKAMuCWDA",
     "image": "../assets/media/doodle.png",
+    "participants":"solo",
     "isOpen": true
   },
   {
@@ -33,6 +36,7 @@
     "title": "Echoes Of Pencil",
     "link": "https://forms.gle/kVGXhGTik7XCpaj7A",
     "image": "../assets/media/echoes.png",
+    "participants":"solo",
     "isOpen": true
   },
   {
@@ -40,6 +44,8 @@
     "title": "Face Splash Attack",
     "link": "https://forms.gle/aonM9WUatWbzeDpF9",
     "image": "../assets/media/facesplash.png",
+    "participants":"solo, duo",
+
     "isOpen": true
   },
   {
@@ -47,6 +53,7 @@
     "title": "Flame-Free Feast",
     "link": "https://forms.gle/cpgM9RbbdgnU8JmK6",
     "image": "../assets/media/flames.png",
+    "participants":"solo, duo",
     "isOpen": true
   },
   {
@@ -54,6 +61,7 @@
     "title": "Henna Tales",
     "link": "https://forms.gle/f5cTW3t1HFzDy4xp8",
     "image": "../assets/media/henna.png",
+    "participants":"duo",
     "isOpen": true
   },
   {
@@ -61,6 +69,7 @@
     "title": "Mosaic of Moment",
     "link": "https://forms.gle/CVsKLnak3J1bdycx5",
     "image": "../assets/media/mosaic.png",
+    "participants":"solo",
     "isOpen": true
   },
   {
@@ -68,6 +77,7 @@
     "title": "Paper Palette",
     "link": "https://forms.gle/nrtcmvaU435pPFGP6",
     "image": "../assets/media/paper.png",
+    "participants":"solo",
     "isOpen": true
   },
   {
@@ -75,6 +85,7 @@
     "title": "The Scrapbook Project",
     "link": "https://forms.gle/iVCgyc1stJoSkPGY8",
     "image": "../assets/media/scrapbook.png",
+    "participants":"solo",
     "isOpen": true
   },
   {
@@ -82,6 +93,7 @@
     "title": "Toon Town",
     "link": "https://forms.gle/r7z9nSp4DCB2M6PR8",
     "image": "../assets/media/toon.png",
+    "participants":"solo",
     "isOpen": true
   },
   {
@@ -89,6 +101,7 @@
     "title": "Veil & Vision",
     "link": "https://forms.gle/f9yoXe884KF6AkPV9",
     "image": "../assets/media/veil.png",
+    "participants":"solo, duo",
     "isOpen": true
   }
 ]

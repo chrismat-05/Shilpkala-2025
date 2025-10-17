@@ -16,6 +16,7 @@ const queryClient = new QueryClient();
 const Footer = () => {
   const location = useLocation();
   const isHome = location.pathname === "/";
+
   if (isHome) {
     return (
       <footer className="fixed bottom-4 right-4 z-50">
@@ -34,6 +35,7 @@ const Footer = () => {
       </footer>
     );
   }
+
   return (
     <footer className="fixed bottom-4 right-4 z-50">
       <div className="bg-card/80 border border-border rounded-lg px-4 py-2 text-xs text-muted-foreground shadow-md backdrop-blur">
@@ -71,9 +73,9 @@ const RouterContent = () => {
 
     const loops = isIndex ? 1 : Math.floor(Math.random() * 4) + 1;
     indexShownRef.current = indexShownRef.current || isIndex;
-
     setLoaderLoops(loops);
     setRouteLoading(true);
+
     const perLoopMs = 1500;
     const timeout = setTimeout(() => {
       setRouteLoading(false);
@@ -81,9 +83,11 @@ const RouterContent = () => {
         try {
           sessionStorage.setItem(shownKey, "1");
         } catch {
+          // ignore errors
         }
       }
     }, loops * perLoopMs + 300);
+
     return () => clearTimeout(timeout);
   }, [location.pathname]);
 
