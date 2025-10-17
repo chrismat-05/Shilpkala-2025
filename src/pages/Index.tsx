@@ -26,7 +26,7 @@ const Index = () => {
   const bgCoverUrl = resolveImage("bgcover.png");
 
   return (
-    <div className="min-h-screen py-12 px-6">
+    <div className="min-h-screen py-12 px-6 bg-transparent">
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center gap-2 mb-6">
           <h1 className="font-pirata text-2xl font-bold tracking-tight flex-1">

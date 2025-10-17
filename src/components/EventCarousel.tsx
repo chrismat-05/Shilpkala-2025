@@ -14,16 +14,20 @@ type EventItem = {
 
 type Props = {
   events: EventItem[];
-  autoplayMs?: number; // ms between slides
+  autoplayMs?: number;
   className?: string;
 };
 
 const EventCarousel: React.FC<Props> = ({ events, autoplayMs = 3500, className }) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ align: "center", loop: true });
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    align: "center",
+    loop: true,
+    inViewThreshold: 0.6,
+  });
   const [selected, setSelected] = React.useState(0);
   const timerRef = React.useRef<number | null>(null);
 
-  // keep selected in sync
+  // sync selected index
   React.useEffect(() => {
     if (!emblaApi) return;
     const onSelect = () => setSelected(emblaApi.selectedScrollSnap());
@@ -32,89 +36,72 @@ const EventCarousel: React.FC<Props> = ({ events, autoplayMs = 3500, className }
     return () => emblaApi.off("select", onSelect);
   }, [emblaApi]);
 
-  // autoplay with pause on hover/focus/visibility
+  // autoplay: start after emblaApi is ready
   React.useEffect(() => {
     if (!emblaApi) return;
 
     const start = () => {
-      stop();
-      timerRef.current = window.setInterval(() => {
-        if (emblaApi) emblaApi.scrollNext();
-      }, autoplayMs);
+      if (timerRef.current) clearInterval(timerRef.current);
+      timerRef.current = window.setInterval(() => emblaApi.scrollNext(), autoplayMs);
     };
+
     const stop = () => {
       if (timerRef.current) {
-        window.clearInterval(timerRef.current);
+        clearInterval(timerRef.current);
         timerRef.current = null;
       }
     };
 
-    const onVisibility = () => {
-      if (document.hidden) stop();
-      else start();
-    };
-
     start();
-    document.addEventListener("visibilitychange", onVisibility);
+    const onVis = () => (document.hidden ? stop() : start());
+    document.addEventListener("visibilitychange", onVis);
 
     return () => {
       stop();
-      document.removeEventListener("visibilitychange", onVisibility);
+      document.removeEventListener("visibilitychange", onVis);
     };
   }, [emblaApi, autoplayMs]);
 
-  const scrollPrev = React.useCallback(() => {
+  const handlePrev = () => {
     if (!emblaApi) return;
     emblaApi.scrollPrev();
-  }, [emblaApi]);
-
-  const scrollNext = React.useCallback(() => {
+  };
+  const handleNext = () => {
     if (!emblaApi) return;
     emblaApi.scrollNext();
-  }, [emblaApi]);
+  };
 
   if (!events || events.length === 0) return null;
 
   return (
     <section className={`relative ${className ?? ""}`}>
       <div className="flex items-center justify-between mb-3">
-        <div /> {/* placeholder for optional heading area */}
+        <div />
         <div className="flex gap-2">
           <button
-            onClick={() => {
-              scrollPrev();
-              // restart autoplay timer when user interacts
-              if (timerRef.current) {
-                window.clearInterval(timerRef.current);
-                timerRef.current = window.setInterval(() => emblaApi?.scrollNext(), autoplayMs);
-              }
-            }}
+            onClick={handlePrev}
             aria-label="Previous"
-            className="p-2 rounded-md bg-black/30 hover:bg-black/40 text-white"
+            className="p-2 rounded-md bg-black/30 hover:bg-black/40 text-white transition"
           >
             <ChevronLeft className="w-4 h-4" />
           </button>
           <button
-            onClick={() => {
-              scrollNext();
-              if (timerRef.current) {
-                window.clearInterval(timerRef.current);
-                timerRef.current = window.setInterval(() => emblaApi?.scrollNext(), autoplayMs);
-              }
-            }}
+            onClick={handleNext}
             aria-label="Next"
-            className="p-2 rounded-md bg-black/30 hover:bg-black/40 text-white"
+            className="p-2 rounded-md bg-black/30 hover:bg-black/40 text-white transition"
           >
             <ChevronRight className="w-4 h-4" />
           </button>
         </div>
       </div>
 
+      {/* embla viewport MUST have the ref */}
       <div
+        ref={emblaRef}
         className="overflow-hidden"
         onMouseEnter={() => {
           if (timerRef.current) {
-            window.clearInterval(timerRef.current);
+            clearInterval(timerRef.current);
             timerRef.current = null;
           }
         }}
@@ -123,19 +110,9 @@ const EventCarousel: React.FC<Props> = ({ events, autoplayMs = 3500, className }
             timerRef.current = window.setInterval(() => emblaApi.scrollNext(), autoplayMs);
           }
         }}
-        onFocus={() => {
-          if (timerRef.current) {
-            window.clearInterval(timerRef.current);
-            timerRef.current = null;
-          }
-        }}
-        onBlur={() => {
-          if (emblaApi && !timerRef.current) {
-            timerRef.current = window.setInterval(() => emblaApi.scrollNext(), autoplayMs);
-          }
-        }}
       >
-        <div ref={emblaRef} className="flex touch-pan-x -ml-4 pl-4">
+        {/* embla container */}
+        <div className="flex touch-pan-x -ml-4 pl-4">
           {events.map((ev, idx) => {
             const isSelected = idx === selected;
             return (
@@ -162,18 +139,6 @@ const EventCarousel: React.FC<Props> = ({ events, autoplayMs = 3500, className }
             );
           })}
         </div>
-      </div>
-
-      {/* simple dots for orientation (optional) */}
-      <div className="flex items-center justify-center gap-2 mt-4">
-        {events.map((_, i) => (
-          <button
-            key={i}
-            aria-label={`Go to slide ${i + 1}`}
-            onClick={() => emblaApi && emblaApi.scrollTo(i)}
-            className={`w-2 h-2 rounded-full ${i === selected ? "bg-primary" : "bg-white/30"}`}
-          />
-        ))}
       </div>
     </section>
   );

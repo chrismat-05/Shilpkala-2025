@@ -103,15 +103,24 @@
 .font-freckle{font-family:"FreckleFace",serif;letter-spacing:0.06em;font-size:1.06em;line-height:1.05;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 
 @layer base{
-  html,body,#root,body *{font-family:"TiltNeon",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+  html,body,#root,body *{font-family:"Tilt Neon",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+  html, body { height: 100%; }
+
+  /* move bg to a fixed ::before layer so it always shows */
   body{
-    background-image: linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)), url('/bg.png'), var(--gradient-bg);
-    background-size: cover,cover,cover;
-    background-position: center center,center center,center center;
-    background-repeat: no-repeat,no-repeat,no-repeat;
-    background-attachment: fixed,fixed,fixed;
+    background-color: #000;
     color: hsl(var(--foreground));
-    @apply text-foreground;
+  }
+  body::before{
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+      url("/bg.png") center/cover no-repeat;
+    will-change: transform;
+    pointer-events: none;
   }
 
   button,
@@ -126,14 +135,8 @@
     line-height: 1.1;
   }
 
-  p,
-  li,
-  blockquote,
-  .prose p,
-  .lead,
-  .text-base,
-  .text-sm {
-    font-family: "TiltNeon", "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  p, li, blockquote, .prose p, .lead, .text-base, .text-sm {
+    font-family: "TiltNeon","Poppins",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
     line-height: 1.45;
   }
 }

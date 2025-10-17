@@ -28,7 +28,7 @@ const BrochureCard: React.FC<Props> = ({ title, imageUrl, link, buttonText = "Vi
         <h2 className="text-2xl md:text-3xl font-freckle font-semibold text-[#9f694a] leading-tight">
           {title}
         </h2>
-        {description && <p className="text-sm font-tilt text-[#9f694a]/80">{description}</p>}
+        {description && <p className="text-sm text-[#9f694a]/80" style={{ fontFamily: "Poppins, system-ui, -apple-system" }}>{description}</p>}
 
         <div className="mt-2">
           {disabled ? (
