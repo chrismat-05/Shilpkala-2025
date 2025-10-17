@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import EventCard from '@/components/EventCard';
+import BrochureCard from "@/components/BrochureCard";
 import React from 'react';
 
 import eventsData from '@/data/events.json';
@@ -22,16 +23,19 @@ const Index = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="mb-8"
+            className="mb-8 w-full"
           >
-            <div className="max-w-md mx-auto">
-              <EventCard
-                title={brochure.title}
-                imageUrl={resolveImage(brochure.image)}
-                buttonText="View Brochure"
-                link={brochure.link}
-                disabled={!brochure.isOpen}
-              />
+            <div className="w-full px-6">
+              <div className="w-full mx-auto lg:mx-0 lg:max-w-none">
+                <BrochureCard
+                  title={brochure.title}
+                  imageUrl={resolveImage(brochure.image)}
+                  description={brochure.desc}
+                  buttonText="View Brochure"
+                  link={brochure.link}
+                  disabled={!brochure.isOpen}
+                />
+              </div>
             </div>
           </motion.div>
         )}
