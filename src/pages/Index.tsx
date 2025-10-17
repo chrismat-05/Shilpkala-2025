@@ -79,7 +79,9 @@ const Index = () => {
             }}
           >
             <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-lg font-semibold font-pirata">Solo Events</h2>
+              <h2 className="text-2xl font-pirata font-semibold text-left text-[#9f694a]">
+                Solo Events
+              </h2>
               <div className="text-sm text-muted-foreground">
                 {soloEvents.length} events
               </div>
@@ -120,7 +122,9 @@ const Index = () => {
             }}
           >
             <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-lg font-semibold font-pirata">Duo Events</h2>
+              <h2 className="text-2xl font-pirata font-semibold text-left text-[#9f694a]">
+                Duo Events
+              </h2>
               <div className="text-sm text-muted-foreground">
                 {duoEvents.length} events
               </div>
@@ -161,7 +165,9 @@ const Index = () => {
             }}
           >
             <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-lg font-semibold font-pirata">Trio Events</h2>
+              <h2 className="text-2xl font-pirata font-semibold text-left text-[#9f694a]">
+                Trio Events
+              </h2>
               <div className="text-sm text-muted-foreground">
                 {trioEvents.length} events
               </div>

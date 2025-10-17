@@ -12,7 +12,7 @@ type Props = {
 const BrochureCard: React.FC<Props> = ({ title, imageUrl, link, buttonText = "View", description, disabled }) => {
   return (
     <div
-      className={`bg-card/80 border border-border rounded-lg overflow-hidden shadow-card transition-all duration-300 flex flex-col md:flex-row items-stretch ${
+      className={`bg-[#ebebe1] border border-border rounded-lg overflow-hidden shadow-card transition-all duration-300 flex flex-col md:flex-row items-stretch ${
         disabled ? "opacity-60 grayscale" : "hover:shadow-card-hover"
       }`}
       role="region"
@@ -25,7 +25,9 @@ const BrochureCard: React.FC<Props> = ({ title, imageUrl, link, buttonText = "Vi
       )}
 
       <div className="p-6 md:w-1/2 flex flex-col justify-center gap-4">
-        <h2 className="text-xl md:text-2xl font-pirata font-semibold leading-tight">{title}</h2>
+        <h2 className="text-2xl md:text-3xl font-pirata font-semibold text-[#9f694a] leading-tight">
+          {title}
+        </h2>
         {description && <p className="text-sm text-muted-foreground">{description}</p>}
 
         <div className="mt-2">
