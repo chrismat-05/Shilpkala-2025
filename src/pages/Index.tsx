@@ -22,7 +22,7 @@ const Index = () => {
   const duoEvents = events.filter((e) => participantsIncludes(e, "duo"));
   const trioEvents = events.filter((e) => participantsIncludes(e, "trio"));
 
-  const bgCoverUrl = resolveImage("bgcover.png"); // expects bgcover.png in public or images map
+  const bgCoverUrl = resolveImage("bgcover.png");
 
   return (
     <div className="min-h-screen py-12 px-6">
