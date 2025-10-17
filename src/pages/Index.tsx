@@ -33,7 +33,6 @@ const Index = () => {
           </h1>
         </div>
 
-        {/* Brochure card inside a bgcover card */}
         {brochure && (
           <motion.section
             initial={{ opacity: 0, y: 8 }}
@@ -44,7 +43,7 @@ const Index = () => {
             <div
               className="rounded-lg overflow-hidden shadow-lg"
               style={{
-                backgroundImage: `linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('${bgCoverUrl}')`,
+                backgroundImage: ` url('${bgCoverUrl}')`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
