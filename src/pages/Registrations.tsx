@@ -1,4 +1,5 @@
 import eventsData from "@/data/events.json";
+import { resolveImage } from "@/lib/images";
 import axios from "axios";
 import { useAutoRefresh } from "@/hooks/useAutoRefresh";
 import React from "react";
@@ -43,6 +44,7 @@ const Registrations: React.FC = () => {
   return (
     <div className="min-h-screen py-12 px-6 bg-gradient-bg relative">
       <div className="max-w-6xl mx-auto">
+
         <div className="flex items-center gap-2 mb-8">
           <button
             onClick={() => navigate("/home")}
@@ -100,11 +102,11 @@ const Registrations: React.FC = () => {
               <div key={event.title} className="bg-card/80 border border-border rounded-lg shadow-card overflow-hidden flex flex-col">
                 {event.image && (
                   <div className="aspect-video w-full overflow-hidden">
-                    <img src={event.image} alt={event.title} className="w-full h-full object-cover" />
+                    <img src={resolveImage(event.image)} alt={event.title} className="w-full h-full object-cover" />
                   </div>
                 )}
                 <div className="flex items-center justify-between px-4 py-3">
-                  <span className="font-semibold text-foreground">{event.title}</span>
+                  <span className="font-pirata font-semibold text-foreground">{event.title}</span>
                   <button
                     className="flex items-center gap-1 text-primary hover:text-primary-hover font-semibold focus:outline-none"
                     onClick={() => setOpen((o) => ({ ...o, [event.title]: !o[event.title] }))}
