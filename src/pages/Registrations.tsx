@@ -52,10 +52,6 @@ const Registrations: React.FC = () => {
   return (
     <div className="min-h-screen py-12 px-6 bg-gradient-bg relative">
       <div className="max-w-6xl mx-auto">
-        {/* top-right brand using PirataOne (only on this page) */}
-        <div className="absolute top-6 right-6 z-40">
-          <span className="font-pirata text-sm text-foreground/80">Shilpkala 2025</span>
-        </div>
 
         <div className="flex items-center gap-2 mb-8">
           <button
