@@ -29,7 +29,7 @@ const Index = () => {
     <div className="min-h-screen py-12 px-6 bg-transparent">
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center gap-2 mb-6">
-          <h1 className="font-pirata text-2xl font-bold tracking-tight flex-1">
+          <h1 className="font-pirata text-5xl md:text-5xl font-bold tracking-tight flex-1 leading-none">
             Shilpkala 2025
           </h1>
         </div>
