@@ -27,7 +27,6 @@ const EventCarousel: React.FC<Props> = ({ events, autoplayMs = 3500, className }
   const [selected, setSelected] = React.useState(0);
   const timerRef = React.useRef<number | null>(null);
 
-  // sync selected index
   React.useEffect(() => {
     if (!emblaApi) return;
     const onSelect = () => setSelected(emblaApi.selectedScrollSnap());
@@ -36,69 +35,56 @@ const EventCarousel: React.FC<Props> = ({ events, autoplayMs = 3500, className }
     return () => emblaApi.off("select", onSelect);
   }, [emblaApi]);
 
-  // autoplay: start after emblaApi is ready
   React.useEffect(() => {
     if (!emblaApi) return;
-
     const start = () => {
       if (timerRef.current) clearInterval(timerRef.current);
       timerRef.current = window.setInterval(() => emblaApi.scrollNext(), autoplayMs);
     };
-
     const stop = () => {
       if (timerRef.current) {
         clearInterval(timerRef.current);
         timerRef.current = null;
       }
     };
-
     start();
     const onVis = () => (document.hidden ? stop() : start());
     document.addEventListener("visibilitychange", onVis);
-
     return () => {
       stop();
       document.removeEventListener("visibilitychange", onVis);
     };
   }, [emblaApi, autoplayMs]);
 
-  const handlePrev = () => {
-    if (!emblaApi) return;
-    emblaApi.scrollPrev();
-  };
-  const handleNext = () => {
-    if (!emblaApi) return;
-    emblaApi.scrollNext();
-  };
+  const handlePrev = () => emblaApi?.scrollPrev();
+  const handleNext = () => emblaApi?.scrollNext();
 
   if (!events || events.length === 0) return null;
 
   return (
     <section className={`relative ${className ?? ""}`}>
-      <div className="flex items-center justify-between mb-3">
-        <div />
-        <div className="flex gap-2">
-          <button
-            onClick={handlePrev}
-            aria-label="Previous"
-            className="p-2 rounded-md bg-black/30 hover:bg-black/40 text-white transition"
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </button>
-          <button
-            onClick={handleNext}
-            aria-label="Next"
-            className="p-2 rounded-md bg-black/30 hover:bg-black/40 text-white transition"
-          >
-            <ChevronRight className="w-4 h-4" />
-          </button>
-        </div>
+      {/* overlayed arrow controls (no extra vertical space) */}
+      <div className="absolute top-2 right-3 z-10 flex gap-2">
+        <button
+          onClick={handlePrev}
+          aria-label="Previous"
+          className="p-2 rounded-md bg-black/30 hover:bg-black/40 text-white transition"
+        >
+          <ChevronLeft className="w-4 h-4" />
+        </button>
+        <button
+          onClick={handleNext}
+          aria-label="Next"
+          className="p-2 rounded-md bg-black/30 hover:bg-black/40 text-white transition"
+        >
+          <ChevronRight className="w-4 h-4" />
+        </button>
       </div>
 
-      {/* embla viewport MUST have the ref */}
+      {/* embla viewport */}
       <div
         ref={emblaRef}
-        className="overflow-hidden"
+        className="overflow-hidden pt-2 pb-3"
         onMouseEnter={() => {
           if (timerRef.current) {
             clearInterval(timerRef.current);
@@ -124,17 +110,16 @@ const EventCarousel: React.FC<Props> = ({ events, autoplayMs = 3500, className }
                 style={{ minWidth: "42%", maxWidth: "48%" }}
                 aria-hidden={!isSelected}
               >
-                <div className="h-[560px]">
-                  <EventCard
-                    title={ev.title}
-                    imageUrl={ev.image ? resolveImage(ev.image) : undefined}
-                    buttonText={ev.isOpen ? "Register Now" : "Registration closed"}
-                    link={ev.link}
-                    delay={0}
-                    disabled={!ev.isOpen}
-                    description={ev.desc}
-                  />
-                </div>
+                {/* let the card define its own height; no fixed h-[] to avoid extra space */}
+                <EventCard
+                  title={ev.title}
+                  imageUrl={ev.image ? resolveImage(ev.image) : undefined}
+                  buttonText={ev.isOpen ? "Register Now" : "Registration closed"}
+                  link={ev.link}
+                  delay={0}
+                  disabled={!ev.isOpen}
+                  description={ev.desc}
+                />
               </div>
             );
           })}

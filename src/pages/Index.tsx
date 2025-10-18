@@ -49,7 +49,7 @@ const Index = () => {
                 backgroundPosition: "center",
               }}
             >
-              <div className="p-8 md:p-12">
+              <div className="p-4 md:p-6">
                 <BrochureCard
                   title={brochure.title}
                   imageUrl={resolveImage(brochure.image)}
@@ -64,27 +64,69 @@ const Index = () => {
         )}
 
         {/* Solo events group */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-pirata text-[#ebebe1] mb-4">
-            Solo Events
-          </h2>
-          <EventCarousel events={soloEvents} autoplayMs={4000} />
+        <div
+          className="mb-8 rounded-lg overflow-hidden shadow-card"
+          style={{
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.12), rgba(0,0,0,0.12)), url('${bgCoverUrl}')`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <div className="p-3 md:p-4">
+            <h2 className="font-pirata text-[#9f694a]/80 text-4xl md:text-5xl mb-3">
+              Solo Events
+            </h2>
+            <EventCarousel events={soloEvents} autoplayMs={4000} />
+          </div>
         </div>
 
         {/* Duo events group */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-pirata text-[#ebebe1] mb-4">
-            Duo Events
-          </h2>
-          <EventCarousel events={duoEvents} autoplayMs={4200} />
+        <div
+          className="mb-8 rounded-lg overflow-hidden shadow-card"
+          style={{
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.12), rgba(0,0,0,0.12)), url('${bgCoverUrl}')`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <div className="p-3 md:p-4">
+            <h2 className="font-pirata text-[#9f694a]/80 text-4xl md:text-5xl mb-3">
+              Duo Events
+            </h2>
+            <EventCarousel events={duoEvents} autoplayMs={4200} />
+          </div>
         </div>
 
         {/* Trio events group */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-pirata text-[#ebebe1] mb-4">
-            Trio Events
-          </h2>
-          <EventCarousel events={trioEvents} autoplayMs={4400} />
+        <div
+          className="mb-8 rounded-lg overflow-hidden shadow-card"
+          style={{
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.12), rgba(0,0,0,0.12)), url('${bgCoverUrl}')`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <div className="p-4 md:p-6">
+            <h2 className="font-pirata text-[#9f694a]/80 text-4xl md:text-5xl mb-3">
+              Trio Events
+            </h2>
+            {trioEvents.length === 1 ? (
+              <div className="flex justify-center">
+                <div className="w-full sm:w-3/4 md:w-2/3 lg:w-1/2">
+                  <EventCard
+                    title={trioEvents[0].title}
+                    imageUrl={resolveImage(trioEvents[0].image)}
+                    description={trioEvents[0].desc}
+                    buttonText={trioEvents[0].isOpen ? "Register Now" : "Registration closed"}
+                    link={trioEvents[0].link}
+                    disabled={!trioEvents[0].isOpen}
+                  />
+                </div>
+              </div>
+            ) : (
+              <EventCarousel events={trioEvents} autoplayMs={4400} />
+            )}
+          </div>
         </div>
       </div>
     </div>
