@@ -111,6 +111,23 @@ npm run chromatic
 2. **E2E Tests**: Test complete user flows and API integrations
 3. **Visual Tests**: Catch UI regressions across all component states
 
+## Coverage Summary
+
+### Components Tested
+- ✅ EventCard - Disabled state, links, badges, image rendering
+- ✅ EventCarousel - Navigation, auto-advance, arrow controls
+- ✅ useAutoRefresh - Interval refetch, error handling
+
+### E2E Scenarios Tested
+- ✅ Index carousels cycle through all slides
+- ✅ Registrations reflects API changes within 30s
+- ✅ API 5xx falls back to last cache
+- ✅ Loading states and error recovery
+
+### Visual Regression Coverage
+- ✅ EventCard states (enabled, disabled, with/without images)
+- ✅ EventCarousel configurations (single, multiple, various speeds)
+
 ## Troubleshooting
 
 ### Playwright Browser Installation

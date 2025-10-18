@@ -5,6 +5,9 @@ dist-ssr/
 build/
 .next/
 out/
+storybook-static/
+playwright-report/
+test-results/
 
 # Logs
 logs/
