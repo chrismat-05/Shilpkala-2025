@@ -67,13 +67,13 @@ const Index = () => {
         <div
           className="mb-8 rounded-lg overflow-hidden shadow-card"
           style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.12), rgba(0,0,0,0.12)), url('${bgCoverUrl}')`,
+            backgroundImage: `url('${bgCoverUrl}')`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         >
           <div className="p-3 md:p-4">
-            <h2 className="font-pirata text-[#9f694a]/80 text-4xl md:text-5xl mb-3">
+            <h2 className="font-pirata text-[#9f694a]/80 text-5xl md:text-6xl mb-3">
               Solo Events
             </h2>
             <EventCarousel events={soloEvents} autoplayMs={4000} />
@@ -84,13 +84,13 @@ const Index = () => {
         <div
           className="mb-8 rounded-lg overflow-hidden shadow-card"
           style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.12), rgba(0,0,0,0.12)), url('${bgCoverUrl}')`,
+            backgroundImage: `url('${bgCoverUrl}')`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         >
           <div className="p-3 md:p-4">
-            <h2 className="font-pirata text-[#9f694a]/80 text-4xl md:text-5xl mb-3">
+            <h2 className="font-pirata text-[#9f694a]/80 text-5xl md:text-6xl mb-3">
               Duo Events
             </h2>
             <EventCarousel events={duoEvents} autoplayMs={4200} />
@@ -101,13 +101,13 @@ const Index = () => {
         <div
           className="mb-8 rounded-lg overflow-hidden shadow-card"
           style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.12), rgba(0,0,0,0.12)), url('${bgCoverUrl}')`,
+            backgroundImage: `url('${bgCoverUrl}')`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         >
           <div className="p-4 md:p-6">
-            <h2 className="font-pirata text-[#9f694a]/80 text-4xl md:text-5xl mb-3">
+            <h2 className="font-pirata text-[#9f694a]/80 text-5xl md:text-6xl mb-3">
               Trio Events
             </h2>
             {trioEvents.length === 1 ? (
