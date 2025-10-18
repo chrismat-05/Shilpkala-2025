@@ -20,13 +20,18 @@ const EventCard: React.FC<EventCardProps> = ({
   disabled = false,
   description,
 }) => {
+  const hoverVariants = {
+    enabled: { scale: 1.03, y: -5 },
+    disabled: {},
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      whileHover={disabled ? {} : { scale: 1.03, y: -5 }}
+      whileHover={hoverVariants[disabled ? "disabled" : "enabled"]}
       transition={{ duration: 0.3, delay }}
-      className={`bg-[#ebebe1] border border-border rounded-lg overflow-hidden shadow-card group ${disabled ? "opacity-60 grayscale" : ""}`}
+      className={`bg-[#ebebe1] border border-border rounded-lg overflow-hidden shadow-card group ${disabled ? "opacity-60 grayscale" : "hover:shadow-card-hover"}`}
       style={{ position: "relative" }}
     >
       {disabled && (

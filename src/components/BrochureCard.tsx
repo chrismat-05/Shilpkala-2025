@@ -18,7 +18,7 @@ const BrochureCard: React.FC<Props> = ({ title, imageUrl, link, buttonText = "Vi
       whileHover={{ scale: disabled ? 1 : 1.02 }}
       transition={{ duration: 0.3 }}
       className={`bg-[#ebebe1] border border-border rounded-lg overflow-hidden shadow-card flex flex-col md:flex-row items-stretch ${
-        disabled ? "opacity-60 grayscale" : ""
+        disabled ? "opacity-60 grayscale" : "hover:shadow-card-hover"
       }`}
       role="region"
       aria-label={title}

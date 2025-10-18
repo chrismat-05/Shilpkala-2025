@@ -4,7 +4,7 @@ import axios from "axios";
 import { useAutoRefresh } from "@/hooks/useAutoRefresh";
 import React from "react";
 import { useIsFetching } from "@tanstack/react-query";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import ShilpkalaLoader from "@/components/ShilpkalaLoader";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, BarChart2, GraduationCap, Sparkles, User2 } from "lucide-react";
@@ -176,7 +176,7 @@ const Registrations: React.FC = () => {
           animate="visible"
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
         >
-          {eventsData.filter(e => e.type === "event").map((event, index) => {
+          {eventsData.filter(e => e.type === "event").map((event) => {
             const reg = counts[event.title] || { firstYear: 0, secondYear: 0, thirdYear: 0, total: 0 };
             return (
               <motion.div
@@ -219,18 +219,20 @@ const Registrations: React.FC = () => {
                   </motion.button>
                 </div>
                 {open[event.title] && (
-                  <motion.div
-                    id={`dropdown-${event.title}`}
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="px-4 pb-4 text-sm"
-                  >
-                    <div className="flex justify-between py-1"><span>First Year</span><span>{reg.firstYear}</span></div>
-                    <div className="flex justify-between py-1"><span>Second Year</span><span>{reg.secondYear}</span></div>
-                    <div className="flex justify-between py-1"><span>Third Year</span><span>{reg.thirdYear}</span></div>
-                  </motion.div>
+                  <AnimatePresence>
+                    <motion.div
+                      id={`dropdown-${event.title}`}
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="px-4 pb-4 text-sm"
+                    >
+                      <div className="flex justify-between py-1"><span>First Year</span><span>{reg.firstYear}</span></div>
+                      <div className="flex justify-between py-1"><span>Second Year</span><span>{reg.secondYear}</span></div>
+                      <div className="flex justify-between py-1"><span>Third Year</span><span>{reg.thirdYear}</span></div>
+                    </motion.div>
+                  </AnimatePresence>
                 )}
               </motion.div>
             );
