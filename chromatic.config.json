@@ -1,0 +1,6 @@
+{
+  "projectId": "PROJECT_ID_PLACEHOLDER",
+  "buildScriptName": "build-storybook",
+  "exitZeroOnChanges": true,
+  "exitOnceUploaded": true
+}
