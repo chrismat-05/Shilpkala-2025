@@ -262,7 +262,7 @@ node server.js
 
 **Note**: 
 - You'll need to build the frontend first with `npm run build` before running the custom server.
-- This is for **local development only**. For production, deploy to Vercel where serverless functions have built-in rate limiting, DDoS protection, and scalability.
+- This is for **local development only**. For production, deploy to Vercel where the platform provides built-in rate limiting, DDoS protection, and scalability for your serverless functions.
 
 #### Endpoint Documentation
 
