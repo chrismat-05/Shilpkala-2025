@@ -11,7 +11,6 @@ A modern, responsive web application for **Shilpkala 2025** - the annual cultura
 ## ✨ Features
 
 - **🎭 Event Showcase**: Interactive carousel displaying festival events with detailed information
-- **📝 Online Registration**: Streamlined registration system with slot-based booking
 - **🎫 Automated Ticket Generation**: PDF tickets with embedded QR codes for secure validation
 - **📧 Email Integration**: Automated ticket delivery via email using Nodemailer
 - **📊 Real-time Analytics**: Live registration count tracking with auto-refresh functionality
@@ -65,10 +64,6 @@ git clone https://github.com/chrismat-05/Shilpkala-2025.git
 cd Shilpkala-2025
 npm install
 
-# Configure environment
-cp .env.example .env
-# Edit .env with your credentials
-
 # Start development
 npm run dev
 ```
@@ -90,18 +85,16 @@ This will install all required packages defined in `package.json`, including pro
 
 ### 3. Environment Configuration
 
-Copy the example environment file and configure your variables:
+Configure your variables:
 
 ```bash
-cp .env.example .env
+.env
 ```
 
-Edit the `.env` file with your actual values. The file contains detailed comments explaining each variable.
 
 **Key Variables**:
 - `GMAIL_USER` & `GMAIL_PASS`: Gmail SMTP credentials for ticket delivery
 - `VITE_REG_COUNT` & `REG_COUNT_URL`: Registration statistics data source
-- `REGCOUNT_TIMEOUT_MS` & `REGCOUNT_RETRIES`: API request configuration (optional)
 
 **Important Security Notes**:
 - Never commit `.env` files to version control
@@ -253,12 +246,6 @@ app.listen(PORT, () => {
 });
 ```
 
-Or use the provided template:
-
-```bash
-cp server.example.js server.js
-node server.js
-```
 
 **Note**: 
 - You'll need to build the frontend first with `npm run build` before running the custom server.
@@ -346,31 +333,6 @@ Expires: 0
 CDN-Cache-Control: no-store
 Vercel-CDN-Cache-Control: no-store
 ```
-
-### Component Architecture
-
-The application follows a modular component architecture:
-
-1. **UI Primitives** (`src/components/ui/`): Unstyled, accessible components from Radix UI
-2. **Feature Components**: Business-logic components (EventCard, EventCarousel, etc.)
-3. **Pages**: Route-level components that compose feature components
-4. **Hooks**: Reusable stateful logic (auto-refresh, toast notifications)
-5. **Utilities**: Helper functions and shared logic
-
-### Styling Guidelines
-
-- **Tailwind CSS**: Utility-first approach for rapid development
-- **CSS Variables**: Define theme colors and spacing in `index.css`
-- **Component Variants**: Use `class-variance-authority` for component variations
-- **Responsive Design**: Mobile-first breakpoints (sm, md, lg, xl, 2xl)
-- **Dark Mode**: Theme support via `next-themes` (configured for light mode default)
-
-### State Management
-
-- **Server State**: TanStack Query for API data caching and synchronization
-- **Local State**: React hooks (useState, useReducer)
-- **Form State**: React Hook Form for performance-optimized form handling
-- **URL State**: React Router for navigation and URL parameters
 
 ## 🎨 Customization
 
@@ -484,17 +446,8 @@ This project is proprietary software created for Shilpkala 2025. All rights rese
 ## 👏 Credits
 
 - **Developer**: [Chris Mathew Aje (CMA)](https://thecma.xyz)
-- **Organization**: Kristu Jayanti College Fine Arts Club
+- **For**: Kristu Jayanti College Fine Arts Club
 - **Event**: Shilpkala 2025
 - **Instagram**: [@kristujayanti_fineartsclub](https://www.instagram.com/kristujayanti_fineartsclub/)
-
-## 📞 Support
-
-For issues, questions, or contributions, please:
-- Open an issue on GitHub
-- Contact the development team through the Fine Arts Club
-- Follow us on Instagram for updates
-
----
 
 **Built with ❤️ for Shilpkala 2025**
