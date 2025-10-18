@@ -96,9 +96,9 @@ const EventCard: React.FC<EventCardProps> = ({
             rel="noopener noreferrer"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            whileHover={{ scale: 1.05, y: -2, transition: { type: "spring", stiffness: 400, damping: 10 } }}
+            whileTap={{ scale: 0.95, transition: { type: "spring", stiffness: 400, damping: 10 } }}
+            transition={{ duration: 0.3, delay: delay + 0.3 }}
             className="w-full px-4 py-2 rounded bg-primary font-semibold shadow hover:bg-primary/90 mt-2 text-center block font-tilt text-[#9f694a]/90"
             tabIndex={0}
           >
