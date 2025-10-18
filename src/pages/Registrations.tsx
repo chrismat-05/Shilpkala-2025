@@ -4,7 +4,7 @@ import axios from "axios";
 import { useAutoRefresh } from "@/hooks/useAutoRefresh";
 import React from "react";
 import { useIsFetching } from "@tanstack/react-query";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
 import ShilpkalaLoader from "@/components/ShilpkalaLoader";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, BarChart2, GraduationCap, Sparkles, User2 } from "lucide-react";
@@ -23,6 +23,8 @@ const fetchCounts = async (): Promise<CountsMap> => {
   if (!payload) return {} as CountsMap;
   return payload as CountsMap;
 };
+
+const EASE: [number, number, number, number] = [0.4, 0, 0.2, 1];
 
 const Registrations: React.FC = () => {
   const [open, setOpen] = React.useState<{ [event: string]: boolean }>({});
@@ -44,27 +46,22 @@ const Registrations: React.FC = () => {
 
   const stats = getRegistrationStats(counts as Record<string, { firstYear: number; secondYear: number; thirdYear: number; total: number }>);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
+  const containerVariants: Variants = {
+     hidden: { opacity: 0 },
+     visible: {
+       opacity: 1,
+       transition: { staggerChildren: 0.1 },
+     },
+   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.4,
-        ease: "easeOut",
-      },
-    },
-  };
+  const itemVariants: Variants = {
+     hidden: { opacity: 0, y: 20 },
+     visible: {
+       opacity: 1,
+       y: 0,
+       transition: { duration: 0.4, ease: EASE },
+     },
+   };
 
   return (
     <motion.div
@@ -239,30 +236,31 @@ const Registrations: React.FC = () => {
           })}
         </motion.div>
       </div>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.5 }}
-        className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center"
-      >
-          {isFetching ? (
-            <motion.div
-              animate={{ opacity: [0.5, 1, 0.5] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="flex items-center gap-2 bg-card/80 border border-border rounded-lg px-4 py-2 text-xs text-muted-foreground shadow-md backdrop-blur"
-            >
-              <svg className="animate-spin h-4 w-4 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
-              </svg>
-              <span>Refreshing...</span>
-            </motion.div>
-          ) : (
-            <div className="flex items-center bg-card/80 border border-border rounded-lg px-4 py-2 text-xs text-muted-foreground shadow-md backdrop-blur">
-              <span>Automatically refreshes every 30 sec. &nbsp;|&nbsp; Last refreshed at {lastRefresh.toLocaleTimeString()}</span>
-            </div>
-          )}
-      </motion.div>
+      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+        >
+           {isFetching ? (
+             <motion.div
+               animate={{ opacity: [0.5, 1, 0.5] }}
+               transition={{ duration: 1.5, repeat: Infinity }}
+               className="flex items-center gap-2 bg-card/80 border border-border rounded-lg px-4 py-2 text-xs text-muted-foreground shadow-md backdrop-blur"
+             >
+               <svg className="animate-spin h-4 w-4 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+               </svg>
+               <span>Refreshing...</span>
+             </motion.div>
+           ) : (
+             <div className="flex items-center bg-card/80 border border-border rounded-lg px-4 py-2 text-xs text-muted-foreground shadow-md backdrop-blur">
+               <span>Automatically refreshes every 30 sec. &nbsp;|&nbsp; Last refreshed at {lastRefresh.toLocaleTimeString()}</span>
+             </div>
+           )}
+        </motion.div>
+      </div>
     </motion.div>
   );
 };

@@ -8,6 +8,8 @@ import ShilpkalaLoader from "@/components/ShilpkalaLoader";
 import eventsData from "@/data/events.json";
 import { resolveImage } from "@/lib/images";
 
+const EASE: [number, number, number, number] = [0.4, 0, 0.2, 1]; // easeOut
+
 const participantsIncludes = (evt: any, kind: string) => {
   if (!evt?.participants) return false;
   return evt.participants
@@ -52,7 +54,7 @@ const Index = () => {
       y: 0,
       transition: {
         duration: 0.5,
-        ease: "easeOut",
+        ease: EASE,
       },
     },
   };
@@ -62,7 +64,7 @@ const Index = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.3, ease: EASE }}
       className="min-h-screen py-12 px-6 bg-transparent"
     >
       {showIntro && <ShilpkalaLoader loops={INTRO_LOOPS} loopMs={INTRO_LOOP_MS} overlay="dark" />}
