@@ -109,6 +109,7 @@ describe('EventCarousel', () => {
   });
 
   it('returns null when events is undefined', () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { container } = render(<EventCarousel events={undefined as any} />);
     expect(container.firstChild).toBeNull();
   });
