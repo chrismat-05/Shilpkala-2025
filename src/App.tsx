@@ -10,6 +10,7 @@ import Registrations from "./pages/Registrations";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import { Instagram } from "lucide-react";
+import { SpeedInsights } from "@vercel/speed-insights/react"; // React entrypoint for non-Next apps
 
 const queryClient = new QueryClient();
 
@@ -98,6 +99,7 @@ export default function App() {
       <TooltipProvider>
         <Toaster />
         <Sonner />
+        <SpeedInsights />
         <BrowserRouter>
           <div className="min-h-screen bg-transparent">
             <RouterContent />
