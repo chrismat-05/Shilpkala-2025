@@ -1,8 +1,10 @@
 import eventsData from "@/data/events.json";
+import { resolveImage } from "@/lib/images";
 import axios from "axios";
 import { useAutoRefresh } from "@/hooks/useAutoRefresh";
 import React from "react";
-import ShilpkalaLoader from "../components/ShilpkalaLoader";
+import { useIsFetching } from "@tanstack/react-query";
+import ShilpkalaLoader from "@/components/ShilpkalaLoader";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, BarChart2, GraduationCap, Sparkles, User2 } from "lucide-react";
 import { getRegistrationStats } from "@/lib/utils";
@@ -36,13 +38,14 @@ const Registrations: React.FC = () => {
 
   const navigate = useNavigate();
 
-  if (isLoading) return <ShilpkalaLoader />;
+  if (isLoading) return <ShilpkalaLoader overlay="dim" />;
   if (isError) return <div className="min-h-screen flex items-center justify-center bg-gradient-bg text-destructive">Failed to fetch registration data</div>;
 
   const stats = getRegistrationStats(counts as Record<string, { firstYear: number; secondYear: number; thirdYear: number; total: number }>);
   return (
-    <div className="min-h-screen py-12 px-6 bg-gradient-bg relative">
+    <div className="min-h-screen py-12 px-6 relative">
       <div className="max-w-6xl mx-auto">
+
         <div className="flex items-center gap-2 mb-8">
           <button
             onClick={() => navigate("/home")}
@@ -100,11 +103,11 @@ const Registrations: React.FC = () => {
               <div key={event.title} className="bg-card/80 border border-border rounded-lg shadow-card overflow-hidden flex flex-col">
                 {event.image && (
                   <div className="aspect-video w-full overflow-hidden">
-                    <img src={event.image} alt={event.title} className="w-full h-full object-cover" />
+                    <img src={resolveImage(event.image)} alt={event.title} className="w-full h-full object-cover" />
                   </div>
                 )}
                 <div className="flex items-center justify-between px-4 py-3">
-                  <span className="font-semibold text-foreground">{event.title}</span>
+                  <span className="font-freckle font-semibold text-foreground">{event.title}</span>
                   <button
                     className="flex items-center gap-1 text-primary hover:text-primary-hover font-semibold focus:outline-none"
                     onClick={() => setOpen((o) => ({ ...o, [event.title]: !o[event.title] }))}

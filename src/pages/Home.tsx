@@ -4,9 +4,9 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-bg px-4">
-      <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-12 tracking-tight text-center drop-shadow-lg">
-        Shilpkala 2025 Dashboard
+    <div className="min-h-screen bg-transparent flex flex-col items-center justify-center px-4">
+      <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-12 tracking-tight text-center drop-shadow-lg font-pirata">
+        Shilpkala 2025 Admin Dashboard
       </h1>
       <div className="flex flex-col sm:flex-row gap-6 w-full max-w-xs sm:max-w-md justify-center">
         <button

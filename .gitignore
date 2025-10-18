@@ -58,3 +58,4 @@ coverage/
 .vscode-test/
 .env
 .vercel
+.vite/

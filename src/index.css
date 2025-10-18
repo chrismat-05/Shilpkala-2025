@@ -2,108 +2,162 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
-@layer base {
-  :root {
-  /* Black Background Theme for Shilpkala 2025 */
-    --background: 0 0% 0%;
-    --foreground: 0 0% 95%;
-
-    --card: 0 0% 8%;
-    --card-foreground: 0 0% 95%;
-    --card-hover: 0 0% 12%;
-
-    --popover: 0 0% 8%;
-    --popover-foreground: 0 0% 95%;
-
-    /* Primary - White on Black */
-    --primary: 0 0% 100%;
-    --primary-foreground: 0 0% 0%;
-    --primary-hover: 0 0% 90%;
-
-    /* Secondary - Dark Gray */
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 0 0% 95%;
-
-    /* Muted - Medium Gray */
-    --muted: 0 0% 20%;
-    --muted-foreground: 0 0% 70%;
-
-    /* Accent - Light Gray */
-    --accent: 0 0% 25%;
-    --accent-foreground: 0 0% 95%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 0 0% 20%;
-    --input: 0 0% 15%;
-    --ring: 0 0% 100%;
-
-    /* Shadows for dark theme */
-    --shadow-card: 0px 4px 12px rgba(255, 255, 255, 0.05);
-    --shadow-card-hover: 0px 8px 24px rgba(255, 255, 255, 0.08);
-
-    /* Gradients for dark theme */
-    --gradient-bg: linear-gradient(135deg, hsl(0, 0%, 0%) 0%, hsl(0, 0%, 3%) 100%);
-    --gradient-card: linear-gradient(135deg, hsl(0, 0%, 8%) 0%, hsl(0, 0%, 12%) 100%);
-
-    --radius: 0.75rem;
-
-    /* Animation Timings */
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-fast: all 0.15s ease-out;
-  }
-
-  .dark {
-    /* Keep same values for dark mode since we're already dark */
-    --background: 0 0% 0%;
-    --foreground: 0 0% 95%;
-
-    --card: 0 0% 8%;
-    --card-foreground: 0 0% 95%;
-    --card-hover: 0 0% 12%;
-
-    --popover: 0 0% 8%;
-    --popover-foreground: 0 0% 95%;
-
-    --primary: 0 0% 100%;
-    --primary-foreground: 0 0% 0%;
-    --primary-hover: 0 0% 90%;
-
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 0 0% 95%;
-
-    --muted: 0 0% 20%;
-    --muted-foreground: 0 0% 70%;
-
-    --accent: 0 0% 25%;
-    --accent-foreground: 0 0% 95%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 95%;
-
-    --border: 0 0% 20%;
-    --input: 0 0% 15%;
-    --ring: 0 0% 100%;
-
-    --shadow-card: 0px 4px 12px rgba(255, 255, 255, 0.05);
-    --shadow-card-hover: 0px 8px 24px rgba(255, 255, 255, 0.08);
-
-    --gradient-bg: linear-gradient(135deg, hsl(0, 0%, 0%) 0%, hsl(0, 0%, 3%) 100%);
-    --gradient-card: linear-gradient(135deg, hsl(0, 0%, 8%) 0%, hsl(0, 0%, 12%) 100%);
-  }
+:root{
+  --background: 0 0% 0%;
+  --foreground: 0 0% 95%;
+  --card: 0 0% 8%;
+  --card-foreground: 0 0% 95%;
+  --card-hover: 0 0% 12%;
+  --popover: 0 0% 8%;
+  --popover-foreground: 0 0% 95%;
+  --primary: 0 0% 100%;
+  --primary-foreground: 0 0% 0%;
+  --primary-hover: 0 0% 90%;
+  --secondary: 0 0% 15%;
+  --secondary-foreground: 0 0% 95%;
+  --muted: 0 0% 20%;
+  --muted-foreground: 0 0% 70%;
+  --accent: 0 0% 25%;
+  --accent-foreground: 0 0% 95%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 0 0% 20%;
+  --input: 0 0% 15%;
+  --ring: 0 0% 100%;
+  --shadow-card: 0px 4px 12px rgba(255,255,255,0.05);
+  --shadow-card-hover: 0px 8px 24px rgba(255,255,255,0.08);
+  --gradient-bg: linear-gradient(135deg,hsl(0,0%,0%) 0%, hsl(0,0%,3%) 100%);
+  --gradient-card: linear-gradient(135deg,hsl(0,0%,8%) 0%, hsl(0,0%,12%) 100%);
+  --radius: 0.75rem;
+  --transition-smooth: all 0.3s cubic-bezier(0.4,0,0.2,1);
+  --transition-fast: all 0.15s ease-out;
 }
 
-@layer base {
-  * {
-    @apply border-border;
+.dark{
+  --background: 0 0% 0%;
+  --foreground: 0 0% 95%;
+  --card: 0 0% 8%;
+  --card-foreground: 0 0% 95%;
+  --card-hover: 0 0% 12%;
+  --popover: 0 0% 8%;
+  --popover-foreground: 0 0% 95%;
+  --primary: 0 0% 100%;
+  --primary-foreground: 0 0% 0%;
+  --primary-hover: 0 0% 90%;
+  --secondary: 0 0% 15%;
+  --secondary-foreground: 0 0% 95%;
+  --muted: 0 0% 20%;
+  --muted-foreground: 0 0% 70%;
+  --accent: 0 0% 25%;
+  --accent-foreground: 0 0% 95%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 95%;
+  --border: 0 0% 20%;
+  --input: 0 0% 15%;
+  --ring: 0 0% 100%;
+  --shadow-card: 0px 4px 12px rgba(255,255,255,0.05);
+  --shadow-card-hover: 0px 8px 24px rgba(255,255,255,0.08);
+  --gradient-bg: linear-gradient(135deg,hsl(0,0%,0%) 0%, hsl(0,0%,3%) 100%);
+  --gradient-card: linear-gradient(135deg,hsl(0,0%,8%) 0%, hsl(0,0%,12%) 100%);
+}
+
+@font-face {
+  font-family: "PirataOne";
+  src: url("./assets/fonts/PirataOne-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Michroma";
+  src: url("./assets/fonts/Michroma-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "TiltNeon";
+  src: url("./assets/fonts/TiltNeon-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "FreckleFace";
+  src: url("./assets/fonts/FreckleFace-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("./assets/fonts/Poppins-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-pirata{font-family:"PirataOne",serif;letter-spacing:0.12em;font-size:1.06em;line-height:1.08;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+.font-michroma{font-family:"Michroma",monospace}
+.font-tilt{font-family:"TiltNeon",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+.font-freckle{font-family:"FreckleFace",serif;letter-spacing:0.06em;font-size:1.06em;line-height:1.05;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+@layer base{
+  html,body,#root,body *{font-family:"Tilt Neon",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+  html, body { height: 100%; }
+
+  body{
+    background-color: #000;
+    color: hsl(var(--foreground));
+    position: relative; /* create stacking context above bg layer */
+  }
+  #root{
+    position: relative;
+    z-index: 1; /* ensure app sits above #page-bg */
   }
 
-  body {
-    @apply bg-background text-foreground;
+  button,
+  input[type="button"],
+  input[type="submit"],
+  a[role="button"],
+  a[class*="px-"][class*="py-"],
+  button[class] {
+    font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+    text-transform: none;
+    font-size: 1.05rem;
+    line-height: 1.1;
+  }
+
+  p, li, blockquote, .prose p, .lead, .text-base, .text-sm {
+    font-family: "TiltNeon","Poppins",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    line-height: 1.45;
+  }
+
+  .heading-cutout { color: #9f694a; }
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .heading-cutout {
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url("/bg.png");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
   }
 }
+/* fixed page background layer */
+#page-bg{
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+    url("/bg.png") center/cover no-repeat;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ensure only the top app shell is transparent so bg shows through */
+#root > div.bg-background { background-color: transparent !important; }
+#root > div { background-color: transparent; }
