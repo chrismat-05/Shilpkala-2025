@@ -57,6 +57,22 @@ Before you begin, ensure you have the following installed:
 
 ## 🚀 Getting Started
 
+### Quick Start
+
+```bash
+# Clone and setup
+git clone https://github.com/chrismat-05/Shilpkala-2025.git
+cd Shilpkala-2025
+npm install
+
+# Configure environment
+cp .env.example .env
+# Edit .env with your credentials
+
+# Start development
+npm run dev
+```
+
 ### 1. Clone the Repository
 
 ```bash
@@ -74,25 +90,22 @@ This will install all required packages defined in `package.json`, including pro
 
 ### 3. Environment Configuration
 
-Create a `.env` file in the root directory with the following variables:
+Copy the example environment file and configure your variables:
 
-```env
-# Gmail SMTP Configuration (Required for ticket email functionality)
-GMAIL_USER=your-email@gmail.com
-GMAIL_PASS=your-app-specific-password
-
-# Registration Count Data Source
-VITE_REG_COUNT=https://your-data-source-url.com/api/counts
-REG_COUNT_URL=https://your-data-source-url.com/api/counts
-
-# API Configuration (Optional)
-REGCOUNT_TIMEOUT_MS=30000
-REGCOUNT_RETRIES=2
+```bash
+cp .env.example .env
 ```
+
+Edit the `.env` file with your actual values. The file contains detailed comments explaining each variable.
+
+**Key Variables**:
+- `GMAIL_USER` & `GMAIL_PASS`: Gmail SMTP credentials for ticket delivery
+- `VITE_REG_COUNT` & `REG_COUNT_URL`: Registration statistics data source
+- `REGCOUNT_TIMEOUT_MS` & `REGCOUNT_RETRIES`: API request configuration (optional)
 
 **Important Security Notes**:
 - Never commit `.env` files to version control
-- Use Gmail App Passwords instead of regular passwords
+- Use Gmail App Passwords instead of regular passwords ([Generate here](https://myaccount.google.com/apppasswords))
 - For production, set environment variables through Vercel's dashboard
 
 ### 4. Development Server
