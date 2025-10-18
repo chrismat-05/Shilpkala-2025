@@ -18,10 +18,11 @@ type CountsMap = Record<string, {
 }>;
 
 const fetchCounts = async (): Promise<CountsMap> => {
-  const res = await axios.get('/api/regcounts');
-  const payload = res.data?.data;
-  if (!payload) return {} as CountsMap;
-  return payload as CountsMap;
+  const baseUrl = import.meta.env.VITE_REG_COUNT as string;
+  if (!baseUrl) return {} as CountsMap;
+  const url = `${baseUrl}${baseUrl.includes("?") ? "&" : "?"}t=${Date.now()}`;
+  const res = await axios.get(url, { headers: { Accept: "application/json" } });
+  return (res.data ?? {}) as CountsMap;
 };
 
 const EASE: [number, number, number, number] = [0.4, 0, 0.2, 1];
@@ -41,7 +42,7 @@ const Registrations: React.FC = () => {
 
   const navigate = useNavigate();
 
-  if (isLoading) return <ShilpkalaLoader overlay="dim" />;
+  if (isLoading) return <ShilpkalaLoader loops="infinite" overlay="dim" />;
   if (isError) return <div className="min-h-screen flex items-center justify-center bg-gradient-bg text-destructive">Failed to fetch registration data</div>;
 
   const stats = getRegistrationStats(counts as Record<string, { firstYear: number; secondYear: number; thirdYear: number; total: number }>);

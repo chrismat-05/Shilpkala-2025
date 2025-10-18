@@ -157,7 +157,7 @@ const Index = () => {
             </h2>
             {trioEvents.length === 1 ? (
               <div className="flex justify-center">
-                <div className="w-full sm:w-3/4 md:w-2/3 lg:w-1/2">
+                <div className="w-[92%] sm:w-[76%] md:w-[48%] lg:w-[44%] px-4 scale-105 transition-transform duration-700 ease-in-out">
                   <EventCard
                     title={trioEvents[0].title}
                     imageUrl={resolveImage(trioEvents[0].image)}
