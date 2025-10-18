@@ -1,4 +1,3 @@
-// Calculate registration stats from RegCounts
 export function getRegistrationStats(counts: { [event: string]: { firstYear: number; secondYear: number; thirdYear: number; total: number } }) {
   let total = 0, firstYear = 0, secondYear = 0, thirdYear = 0;
   Object.values(counts).forEach(reg => {

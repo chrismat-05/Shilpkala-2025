@@ -63,7 +63,6 @@ const EventCarousel: React.FC<Props> = ({ events, autoplayMs = 3500, className }
 
   return (
     <section className={`relative ${className ?? ""}`}>
-      {/* overlayed arrow controls (no extra vertical space) */}
       <div className="absolute top-2 right-3 z-10 flex gap-2">
         <button
           onClick={handlePrev}
@@ -81,7 +80,6 @@ const EventCarousel: React.FC<Props> = ({ events, autoplayMs = 3500, className }
         </button>
       </div>
 
-      {/* embla viewport */}
       <div
         ref={emblaRef}
         className="overflow-hidden pt-2 pb-3"
@@ -97,7 +95,6 @@ const EventCarousel: React.FC<Props> = ({ events, autoplayMs = 3500, className }
           }
         }}
       >
-        {/* embla container */}
         <div className="flex touch-pan-x -ml-4 pl-4">
           {events.map((ev, idx) => {
             const isSelected = idx === selected;
@@ -107,14 +104,12 @@ const EventCarousel: React.FC<Props> = ({ events, autoplayMs = 3500, className }
                 className={`flex-none px-4 transition-transform duration-700 ease-in-out ${
                   isSelected ? "scale-105" : "scale-95 opacity-80"
                 } ${
-                  // Wider on small screens for the highlighted slide
                   isSelected
                     ? "w-[80%] sm:w-[60%] md:w-[30%] lg:w-[30%]"
                     : "w-[50%] sm:w-[40%] md:w-[30%] lg:w-[30%]"
                 }`}
                 aria-hidden={!isSelected}
               >
-                {/* let the card define its own height; no fixed h-[] to avoid extra space */}
                 <EventCard
                   title={ev.title}
                   imageUrl={ev.image ? resolveImage(ev.image) : undefined}

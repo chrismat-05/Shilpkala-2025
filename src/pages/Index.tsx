@@ -76,7 +76,6 @@ const Index = () => {
           </motion.section>
         )}
 
-        {/* Solo events group */}
         <div
           className="mb-8 rounded-lg overflow-hidden shadow-card"
           style={{
@@ -93,7 +92,6 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Duo events group */}
         <div
           className="mb-8 rounded-lg overflow-hidden shadow-card"
           style={{
@@ -110,7 +108,6 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Trio events group */}
         <div
           className="mb-8 rounded-lg overflow-hidden shadow-card"
           style={{

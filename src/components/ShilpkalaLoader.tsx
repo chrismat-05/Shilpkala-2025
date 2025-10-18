@@ -22,7 +22,6 @@ const ShilpkalaLoader: React.FC<ShilpkalaLoaderProps> = ({ loops, loopMs = 1500,
     let cancelled = false;
     async function ensureFont() {
       try {
-        // wait for PirataOne (Regular) to be available
         if ((document as any).fonts?.load) {
           await (document as any).fonts.load("400 48px PirataOne");
         }
