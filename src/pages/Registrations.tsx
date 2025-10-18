@@ -17,7 +17,7 @@ type CountsMap = Record<string, {
 }>;
 
 const fetchCounts = async (): Promise<CountsMap> => {
-  const res = await axios.get('/api/regCounts');
+  const res = await axios.get('/api/regcounts');
   const payload = res.data?.data;
   if (!payload) return {} as CountsMap;
   return payload as CountsMap;
