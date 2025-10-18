@@ -1,6 +1,7 @@
 import React from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
 import EventCard from "@/components/EventCard";
 import { resolveImage } from "@/lib/images";
 
@@ -64,20 +65,24 @@ const EventCarousel: React.FC<Props> = ({ events, autoplayMs = 3500, className }
   return (
     <section className={`relative ${className ?? ""}`}>
       <div className="absolute top-2 right-3 z-10 flex gap-2">
-        <button
+        <motion.button
           onClick={handlePrev}
           aria-label="Previous"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
           className="p-2 rounded-md bg-black/30 hover:bg-black/40 text-white transition"
         >
           <ChevronLeft className="w-4 h-4" />
-        </button>
-        <button
+        </motion.button>
+        <motion.button
           onClick={handleNext}
           aria-label="Next"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
           className="p-2 rounded-md bg-black/30 hover:bg-black/40 text-white transition"
         >
           <ChevronRight className="w-4 h-4" />
-        </button>
+        </motion.button>
       </div>
 
       <div
@@ -99,11 +104,17 @@ const EventCarousel: React.FC<Props> = ({ events, autoplayMs = 3500, className }
           {events.map((ev, idx) => {
             const isSelected = idx === selected;
             return (
-              <div
+              <motion.div
                 key={`${ev.title}-${idx}`}
                 className={`flex-none px-4 transition-transform duration-700 ease-in-out ${
                   isSelected ? "scale-105" : "scale-95 opacity-80"
                 } ${
+                animate={{
+                  scale: isSelected ? 1.05 : 0.95,
+                  opacity: isSelected ? 1 : 0.8,
+                }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+                className={`flex-none px-4 ${
                   isSelected
                     ? "w-[80%] sm:w-[60%] md:w-[30%] lg:w-[30%]"
                     : "w-[50%] sm:w-[40%] md:w-[30%] lg:w-[30%]"
@@ -119,7 +130,7 @@ const EventCarousel: React.FC<Props> = ({ events, autoplayMs = 3500, className }
                   disabled={!ev.isOpen}
                   description={ev.desc}
                 />
-              </div>
+              </motion.div>
             );
           })}
         </div>

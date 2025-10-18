@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import Index from "./pages/Index";
 import Registrations from "./pages/Registrations";
 import Home from "./pages/Home";
@@ -18,26 +19,46 @@ const Footer = () => {
 
   if (isHome) {
     return (
-      <footer className="fixed bottom-4 right-4 z-50">
-        <div className="bg-card/80 border border-border rounded-lg px-4 py-2 text-xs text-muted-foreground shadow-md backdrop-blur flex items-center gap-2">
+      <motion.footer
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.5 }}
+        className="fixed bottom-4 right-4 z-50"
+      >
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="bg-card/80 border border-border rounded-lg px-4 py-2 text-xs text-muted-foreground shadow-md backdrop-blur flex items-center gap-2"
+        >
           Follow us
-          <a
+          <motion.a
             href="https://www.instagram.com/kristujayanti_fineartsclub/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
             className="text-primary hover:text-primary-hover"
+            whileHover={{ scale: 1.2, rotate: 5 }}
+            whileTap={{ scale: 0.9 }}
           >
             <Instagram className="inline h-5 w-5 align-text-bottom" />
-          </a>
-        </div>
-      </footer>
+          </motion.a>
+        </motion.div>
+      </motion.footer>
     );
   }
 
   return (
-    <footer className="fixed bottom-4 right-4 z-50">
-      <div className="bg-card/80 border border-border rounded-lg px-4 py-2 text-xs text-muted-foreground shadow-md backdrop-blur">
+    <motion.footer
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.5 }}
+      className="fixed bottom-4 right-4 z-50"
+    >
+      <motion.div
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        className="bg-card/80 border border-border rounded-lg px-4 py-2 text-xs text-muted-foreground shadow-md backdrop-blur"
+      >
         Built by{" "}
         <a
           href="https://thecma.xyz"
@@ -47,8 +68,8 @@ const Footer = () => {
         >
           CMA
         </a>
-      </div>
-    </footer>
+      </motion.div>
+    </motion.footer>
   );
 };
 
@@ -57,12 +78,14 @@ const RouterContent = () => {
 
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Index />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/registrations" element={<Registrations />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<Index />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/registrations" element={<Registrations />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </AnimatePresence>
 
       <Footer />
     </>
