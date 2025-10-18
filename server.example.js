@@ -4,6 +4,15 @@
  * This server allows you to test Vercel Serverless Functions locally
  * during development without deploying to Vercel.
  * 
+ * ⚠️ IMPORTANT: This is for LOCAL DEVELOPMENT ONLY!
+ * DO NOT use this server in production. Use Vercel's serverless functions instead.
+ * 
+ * Production Considerations:
+ * - Vercel serverless functions have built-in rate limiting and DDoS protection
+ * - If you must deploy this to production, add rate limiting middleware (e.g., express-rate-limit)
+ * - Implement proper authentication and authorization
+ * - Use a production-grade web server (nginx, Apache) as a reverse proxy
+ * 
  * Usage:
  *   1. Build the frontend: npm run build
  *   2. Copy this file: cp server.example.js server.js

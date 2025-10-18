@@ -253,13 +253,16 @@ app.listen(PORT, () => {
 });
 ```
 
-Run the server:
+Or use the provided template:
 
 ```bash
+cp server.example.js server.js
 node server.js
 ```
 
-**Note**: You'll need to build the frontend first with `npm run build` before running the custom server.
+**Note**: 
+- You'll need to build the frontend first with `npm run build` before running the custom server.
+- This is for **local development only**. For production, deploy to Vercel where serverless functions have built-in rate limiting, DDoS protection, and scalability.
 
 #### Endpoint Documentation
 
