@@ -106,7 +106,7 @@ const Index = () => {
             backgroundPosition: "center",
           }}
         >
-          <div className="p-4 md:p-6">
+          <div className="p-3 md:p-4">
             <h2 className="font-pirata text-[#9f694a]/80 text-5xl md:text-6xl mb-3">
               Trio Events
             </h2>
