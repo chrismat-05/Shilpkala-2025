@@ -9,7 +9,6 @@ import Registrations from "./pages/Registrations";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import { Instagram } from "lucide-react";
-import ShilpkalaLoader from "./components/ShilpkalaLoader";
 
 const queryClient = new QueryClient();
 
@@ -55,50 +54,9 @@ const Footer = () => {
 
 const RouterContent = () => {
   const location = useLocation();
-  const [routeLoading, setRouteLoading] = React.useState(false);
-  const [loaderLoops, setLoaderLoops] = React.useState<number>(1);
-  const indexShownRef = React.useRef(false);
-
-  React.useEffect(() => {
-    const isIndex = location.pathname === "/";
-    const shownKey = "shilpkala_loader_shown_index";
-
-    if (isIndex) {
-      if (indexShownRef.current) return;
-      if (typeof window !== "undefined" && sessionStorage.getItem(shownKey)) {
-        indexShownRef.current = true;
-        return;
-      }
-    }
-
-    const loops = isIndex ? 1 : Math.floor(Math.random() * 4) + 1;
-    indexShownRef.current = indexShownRef.current || isIndex;
-    setLoaderLoops(loops);
-    setRouteLoading(true);
-
-    const perLoopMs = 1500;
-    const timeout = setTimeout(() => {
-      setRouteLoading(false);
-      if (isIndex && typeof window !== "undefined") {
-        try {
-          sessionStorage.setItem(shownKey, "1");
-        } catch {
-          // ignore errors
-        }
-      }
-    }, loops * perLoopMs + 300);
-
-    return () => clearTimeout(timeout);
-  }, [location.pathname]);
 
   return (
     <>
-      {routeLoading && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-bg">
-          <ShilpkalaLoader loops={loaderLoops} />
-        </div>
-      )}
-
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/home" element={<Home />} />

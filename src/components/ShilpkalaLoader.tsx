@@ -3,15 +3,22 @@ import React from "react";
 type ShilpkalaLoaderProps = {
   loops?: number;
   loopMs?: number;
+  overlay?: "transparent" | "dim" | "dark";
 };
 
-const ShilpkalaLoader: React.FC<ShilpkalaLoaderProps> = ({ loops, loopMs = 1500 }) => {
+const ShilpkalaLoader: React.FC<ShilpkalaLoaderProps> = ({ loops, loopMs = 1500, overlay = "dark" }) => {
   const loopCountRef = React.useRef<number>(loops && loops > 0 ? loops : Math.floor(Math.random() * 2) + 1);
-
   const iter = loopCountRef.current;
 
+  const overlayClass =
+    overlay === "transparent"
+      ? "bg-transparent"
+      : overlay === "dim"
+      ? "bg-black/35 backdrop-blur-[1px]"
+      : "bg-black/70 backdrop-blur-sm";
+
   return (
-    <div className="fixed inset-0 z-50 bg-transparent flex items-center justify-center">
+    <div className={`fixed inset-0 z-50 ${overlayClass} flex items-center justify-center`}>
       <svg
         width="420"
         height="100"

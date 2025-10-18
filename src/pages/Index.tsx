@@ -3,6 +3,7 @@ import EventCard from "@/components/EventCard";
 import BrochureCard from "@/components/BrochureCard";
 import EventCarousel from "@/components/EventCarousel";
 import React from "react";
+import ShilpkalaLoader from "@/components/ShilpkalaLoader";
 
 import eventsData from "@/data/events.json";
 import { resolveImage } from "@/lib/images";
@@ -16,6 +17,14 @@ const participantsIncludes = (evt: any, kind: string) => {
 };
 
 const Index = () => {
+  const INTRO_LOOPS = 1;
+  const INTRO_LOOP_MS = 1500;
+  const [showIntro, setShowIntro] = React.useState(true);
+  React.useEffect(() => {
+    const t = setTimeout(() => setShowIntro(false), INTRO_LOOPS * INTRO_LOOP_MS + 200);
+    return () => clearTimeout(t);
+  }, []);
+
   const brochure = eventsData.find((e) => e.type === "brochure");
   const events = eventsData.filter((e) => e.type === "event");
 
@@ -27,7 +36,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen py-12 px-6 bg-transparent">
-      <div className="max-w-6xl mx-auto">
+      {showIntro && <ShilpkalaLoader loops={INTRO_LOOPS} loopMs={INTRO_LOOP_MS} overlay="dark" />}
+      <div
+        className={`max-w-6xl mx-auto transition-opacity duration-300 ${showIntro ? "opacity-0 pointer-events-none select-none" : "opacity-100"}`}
+        aria-busy={showIntro}
+      >
         <div className="flex items-center gap-2 mb-6">
           <h1 className="font-pirata text-5xl md:text-5xl font-bold tracking-tight flex-1 leading-none">
             Shilpkala 2025

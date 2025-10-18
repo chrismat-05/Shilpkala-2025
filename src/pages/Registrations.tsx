@@ -3,7 +3,8 @@ import { resolveImage } from "@/lib/images";
 import axios from "axios";
 import { useAutoRefresh } from "@/hooks/useAutoRefresh";
 import React from "react";
-import ShilpkalaLoader from "../components/ShilpkalaLoader";
+import { useIsFetching } from "@tanstack/react-query";
+import ShilpkalaLoader from "@/components/ShilpkalaLoader";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, BarChart2, GraduationCap, Sparkles, User2 } from "lucide-react";
 import { getRegistrationStats } from "@/lib/utils";
@@ -37,7 +38,7 @@ const Registrations: React.FC = () => {
 
   const navigate = useNavigate();
 
-  if (isLoading) return <ShilpkalaLoader />;
+  if (isLoading) return <ShilpkalaLoader overlay="dim" />;
   if (isError) return <div className="min-h-screen flex items-center justify-center bg-gradient-bg text-destructive">Failed to fetch registration data</div>;
 
   const stats = getRegistrationStats(counts as Record<string, { firstYear: number; secondYear: number; thirdYear: number; total: number }>);
