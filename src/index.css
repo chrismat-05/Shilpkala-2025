@@ -106,21 +106,14 @@
   html,body,#root,body *{font-family:"Tilt Neon",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
   html, body { height: 100%; }
 
-  /* move bg to a fixed ::before layer so it always shows */
   body{
     background-color: #000;
     color: hsl(var(--foreground));
+    position: relative; /* create stacking context above bg layer */
   }
-  body::before{
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    background:
-      linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
-      url("/bg.png") center/cover no-repeat;
-    will-change: transform;
-    pointer-events: none;
+  #root{
+    position: relative;
+    z-index: 1; /* ensure app sits above #page-bg */
   }
 
   button,
@@ -140,14 +133,12 @@
     line-height: 1.45;
   }
 
-  /* Headings that reveal the page background inside the text */
-  .heading-cutout { color: #9f694a; } /* fallback color */
+  .heading-cutout { color: #9f694a; }
   @supports ((-webkit-background-clip: text) or (background-clip: text)) {
     .heading-cutout {
       color: transparent;
       -webkit-background-clip: text;
       background-clip: text;
-      /* match body background (gradient + image) and keep it fixed to viewport */
       background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url("/bg.png");
       background-size: cover;
       background-position: center;
@@ -155,3 +146,18 @@
     }
   }
 }
+/* fixed page background layer */
+#page-bg{
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+    url("/bg.png") center/cover no-repeat;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ensure only the top app shell is transparent so bg shows through */
+#root > div.bg-background { background-color: transparent !important; }
+#root > div { background-color: transparent; }

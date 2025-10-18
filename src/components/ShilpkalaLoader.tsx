@@ -6,12 +6,12 @@ type ShilpkalaLoaderProps = {
 };
 
 const ShilpkalaLoader: React.FC<ShilpkalaLoaderProps> = ({ loops, loopMs = 1500 }) => {
-  const loopCountRef = React.useRef<number>(loops && loops > 0 ? loops : Math.floor(Math.random() * 4) + 1);
+  const loopCountRef = React.useRef<number>(loops && loops > 0 ? loops : Math.floor(Math.random() * 2) + 1);
 
   const iter = loopCountRef.current;
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-black/30 backdrop-blur-sm">
+    <div className="fixed inset-0 z-50 bg-transparent flex items-center justify-center">
       <svg
         width="420"
         height="100"
