@@ -103,15 +103,17 @@
 .font-freckle{font-family:"FreckleFace",serif;letter-spacing:0.06em;font-size:1.06em;line-height:1.05;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 
 @layer base{
-  html,body,#root,body *{font-family:"TiltNeon",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+  html,body,#root,body *{font-family:"Tilt Neon",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+  html, body { height: 100%; }
+
   body{
-    background-image: linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)), url('/bg.png'), var(--gradient-bg);
-    background-size: cover,cover,cover;
-    background-position: center center,center center,center center;
-    background-repeat: no-repeat,no-repeat,no-repeat;
-    background-attachment: fixed,fixed,fixed;
+    background-color: #000;
     color: hsl(var(--foreground));
-    @apply text-foreground;
+    position: relative; /* create stacking context above bg layer */
+  }
+  #root{
+    position: relative;
+    z-index: 1; /* ensure app sits above #page-bg */
   }
 
   button,
@@ -126,14 +128,36 @@
     line-height: 1.1;
   }
 
-  p,
-  li,
-  blockquote,
-  .prose p,
-  .lead,
-  .text-base,
-  .text-sm {
-    font-family: "TiltNeon", "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  p, li, blockquote, .prose p, .lead, .text-base, .text-sm {
+    font-family: "TiltNeon","Poppins",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
     line-height: 1.45;
   }
+
+  .heading-cutout { color: #9f694a; }
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .heading-cutout {
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url("/bg.png");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+  }
 }
+/* fixed page background layer */
+#page-bg{
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+    url("/bg.png") center/cover no-repeat;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ensure only the top app shell is transparent so bg shows through */
+#root > div.bg-background { background-color: transparent !important; }
+#root > div { background-color: transparent; }
