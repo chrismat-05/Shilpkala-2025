@@ -33,7 +33,6 @@ async function fetchRemote() {
 }
 
 export default async function handler(req, res) {
-  // Never cache at CDN/browser
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
   res.setHeader('Pragma', 'no-cache');
   res.setHeader('Expires', '0');
@@ -53,7 +52,7 @@ export default async function handler(req, res) {
 
   try {
     if (!cache.data || expired || force) {
-      const data = await fetchRemote(); // fetch fresh synchronously
+      const data = await fetchRemote();
       return res.status(200).json({ data, cached: false, lastUpdated: cache.ts });
     }
     return res.status(200).json({ data: cache.data, cached: true, lastUpdated: cache.ts });

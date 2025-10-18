@@ -24,6 +24,7 @@ const EventCarousel: React.FC<Props> = ({ events, autoplayMs = 3500, className }
     align: "center",
     loop: true,
     inViewThreshold: 0.6,
+    containScroll: "trimSnaps",
   });
   const [selected, setSelected] = React.useState(0);
   const timerRef = React.useRef<number | null>(null);
@@ -33,38 +34,52 @@ const EventCarousel: React.FC<Props> = ({ events, autoplayMs = 3500, className }
     const onSelect = () => setSelected(emblaApi.selectedScrollSnap());
     emblaApi.on("select", onSelect);
     onSelect();
-    return () => emblaApi.off("select", onSelect);
+    return () => {
+      emblaApi.off("select", onSelect);
+    };
   }, [emblaApi]);
 
   React.useEffect(() => {
     if (!emblaApi) return;
     const start = () => {
-      if (timerRef.current) clearInterval(timerRef.current);
+      if (timerRef.current) window.clearInterval(timerRef.current);
       timerRef.current = window.setInterval(() => emblaApi.scrollNext(), autoplayMs);
     };
     const stop = () => {
       if (timerRef.current) {
-        clearInterval(timerRef.current);
+        window.clearInterval(timerRef.current);
         timerRef.current = null;
       }
     };
-    start();
+    const raf = window.requestAnimationFrame(start);
     const onVis = () => (document.hidden ? stop() : start());
     document.addEventListener("visibilitychange", onVis);
     return () => {
+      window.cancelAnimationFrame(raf);
       stop();
       document.removeEventListener("visibilitychange", onVis);
     };
   }, [emblaApi, autoplayMs]);
 
-  const handlePrev = () => emblaApi?.scrollPrev();
-  const handleNext = () => emblaApi?.scrollNext();
+  const restartAutoplay = React.useCallback(() => {
+    if (!emblaApi) return;
+    if (timerRef.current) window.clearInterval(timerRef.current);
+    timerRef.current = window.setInterval(() => emblaApi.scrollNext(), autoplayMs);
+  }, [emblaApi, autoplayMs]);
+
+  const handlePrev = () => {
+    emblaApi?.scrollPrev();
+    restartAutoplay();
+  };
+  const handleNext = () => {
+    emblaApi?.scrollNext();
+    restartAutoplay();
+  };
 
   if (!events || events.length === 0) return null;
 
   return (
     <section className={`relative ${className ?? ""}`}>
-      {/* overlayed arrow controls (no extra vertical space) */}
       <div className="absolute top-2 right-3 z-10 flex gap-2">
         <motion.button
           onClick={handlePrev}
@@ -86,48 +101,23 @@ const EventCarousel: React.FC<Props> = ({ events, autoplayMs = 3500, className }
         </motion.button>
       </div>
 
-      {/* embla viewport */}
-      <div
-        ref={emblaRef}
-        className="overflow-hidden pt-2 pb-3"
-        onMouseEnter={() => {
-          if (timerRef.current) {
-            clearInterval(timerRef.current);
-            timerRef.current = null;
-          }
-        }}
-        onMouseLeave={() => {
-          if (emblaApi && !timerRef.current) {
-            timerRef.current = window.setInterval(() => emblaApi.scrollNext(), autoplayMs);
-          }
-        }}
-      >
-        {/* embla container */}
+      <div ref={emblaRef} className="overflow-hidden pt-2 pb-3">
         <div className="flex touch-pan-x -ml-4 pl-4">
           {events.map((ev, idx) => {
             const isSelected = idx === selected;
             return (
               <motion.div
                 key={`${ev.title}-${idx}`}
-                animate={{
-                  scale: isSelected ? 1.05 : 0.95,
-                  opacity: isSelected ? 1 : 0.8,
-                }}
+                className="shrink-0 px-4 basis-[92%] sm:basis-[76%] md:basis-[48%] lg:basis-[44%]"
+                animate={{ scale: isSelected ? 1.05 : 0.95, opacity: isSelected ? 1 : 0.8 }}
                 transition={{ duration: 0.5, ease: "easeInOut" }}
-                className={`flex-none px-4 ${
-                  // Wider on small screens for the highlighted slide
-                  isSelected
-                    ? "w-[80%] sm:w-[60%] md:w-[30%] lg:w-[30%]"
-                    : "w-[50%] sm:w-[40%] md:w-[30%] lg:w-[30%]"
-                }`}
                 aria-hidden={!isSelected}
               >
-                {/* let the card define its own height; no fixed h-[] to avoid extra space */}
                 <EventCard
                   title={ev.title}
                   imageUrl={ev.image ? resolveImage(ev.image) : undefined}
                   buttonText={ev.isOpen ? "Register Now" : "Registration closed"}
-                  link={ev.link}
+                  link={ev.link || "#"}
                   delay={0}
                   disabled={!ev.isOpen}
                   description={ev.desc}
