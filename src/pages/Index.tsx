@@ -34,26 +34,53 @@ const Index = () => {
 
   const bgCoverUrl = resolveImage("bgcover.png");
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut",
+      },
+    },
+  };
+
   return (
-    <div className="min-h-screen py-12 px-6 bg-transparent">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      className="min-h-screen py-12 px-6 bg-transparent"
+    >
       {showIntro && <ShilpkalaLoader loops={INTRO_LOOPS} loopMs={INTRO_LOOP_MS} overlay="dark" />}
-      <div
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate={showIntro ? "hidden" : "visible"}
         className={`max-w-6xl mx-auto transition-opacity duration-300 ${showIntro ? "opacity-0 pointer-events-none select-none" : "opacity-100"}`}
         aria-busy={showIntro}
       >
-        <div className="flex items-center gap-2 mb-6">
+        <motion.div variants={itemVariants} className="flex items-center gap-2 mb-6">
           <h1 className="font-pirata text-5xl md:text-5xl font-bold tracking-tight flex-1 leading-none">
             Shilpkala 2025
           </h1>
-        </div>
+        </motion.div>
 
         {brochure && (
-          <motion.section
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.05 }}
-            className="mb-8"
-          >
+          <motion.section variants={itemVariants} className="mb-8">
             <div
               className="rounded-lg overflow-hidden shadow-lg"
               style={{
@@ -77,7 +104,8 @@ const Index = () => {
         )}
 
         {/* Solo events group */}
-        <div
+        <motion.div
+          variants={itemVariants}
           className="mb-8 rounded-lg overflow-hidden shadow-card"
           style={{
             backgroundImage: `url('${bgCoverUrl}')`,
@@ -91,10 +119,11 @@ const Index = () => {
             </h2>
             <EventCarousel events={soloEvents} autoplayMs={4000} />
           </div>
-        </div>
+        </motion.div>
 
         {/* Duo events group */}
-        <div
+        <motion.div
+          variants={itemVariants}
           className="mb-8 rounded-lg overflow-hidden shadow-card"
           style={{
             backgroundImage: `url('${bgCoverUrl}')`,
@@ -108,10 +137,11 @@ const Index = () => {
             </h2>
             <EventCarousel events={duoEvents} autoplayMs={4200} />
           </div>
-        </div>
+        </motion.div>
 
         {/* Trio events group */}
-        <div
+        <motion.div
+          variants={itemVariants}
           className="mb-8 rounded-lg overflow-hidden shadow-card"
           style={{
             backgroundImage: `url('${bgCoverUrl}')`,
@@ -140,9 +170,9 @@ const Index = () => {
               <EventCarousel events={trioEvents} autoplayMs={4400} />
             )}
           </div>
-        </div>
-      </div>
-    </div>
+        </motion.div>
+      </motion.div>
+    </motion.div>
   );
 };
 
