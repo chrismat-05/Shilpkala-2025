@@ -17,6 +17,24 @@ const ShilpkalaLoader: React.FC<ShilpkalaLoaderProps> = ({ loops, loopMs = 1500,
       ? "bg-black/35 backdrop-blur-[1px]"
       : "bg-black/70 backdrop-blur-sm";
 
+  const [fontReady, setFontReady] = React.useState(false);
+  React.useEffect(() => {
+    let cancelled = false;
+    async function ensureFont() {
+      try {
+        // wait for PirataOne (Regular) to be available
+        if ((document as any).fonts?.load) {
+          await (document as any).fonts.load("400 48px PirataOne");
+        }
+      } catch {}
+      if (!cancelled) setFontReady(true);
+    }
+    ensureFont();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   return (
     <div className={`fixed inset-0 z-50 ${overlayClass} flex items-center justify-center`}>
       <svg
@@ -26,15 +44,15 @@ const ShilpkalaLoader: React.FC<ShilpkalaLoaderProps> = ({ loops, loopMs = 1500,
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className="mb-4"
-        style={{ maxWidth: "90vw" }}
+        style={{ maxWidth: "90vw", visibility: fontReady ? "visible" : "hidden" }}
       >
         <text
           x="50%"
           y="60%"
           textAnchor="middle"
           dominantBaseline="middle"
-          fontFamily="'Montserrat', 'Segoe UI', Arial, sans-serif"
-          fontWeight="bold"
+          fontFamily="PirataOne, serif"
+          fontWeight="400"
           fontSize="48"
           stroke="hsl(0,0%,95%)"
           strokeWidth="2.5"
@@ -53,8 +71,8 @@ const ShilpkalaLoader: React.FC<ShilpkalaLoaderProps> = ({ loops, loopMs = 1500,
           y="60%"
           textAnchor="middle"
           dominantBaseline="middle"
-          fontFamily="'Montserrat', 'Segoe UI', Arial, sans-serif"
-          fontWeight="bold"
+          fontFamily="PirataOne, serif"
+          fontWeight="400"
           fontSize="48"
           fill="hsl(0,0%,20%)"
           opacity="0.15"
@@ -70,9 +88,7 @@ const ShilpkalaLoader: React.FC<ShilpkalaLoaderProps> = ({ loops, loopMs = 1500,
           animation-fill-mode: forwards;
         }
         @keyframes outline-draw {
-          to {
-            stroke-dashoffset: 0;
-          }
+          to { stroke-dashoffset: 0; }
         }
       `}</style>
     </div>
