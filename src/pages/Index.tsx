@@ -73,7 +73,7 @@ const Index = () => {
           }}
         >
           <div className="p-3 md:p-4">
-            <h2 className="font-pirata text-[#9f694a]/80 text-5xl md:text-6xl mb-3">
+            <h2 className="font-pirata heading-cutout text-5xl md:text-6xl mb-3">
               Solo Events
             </h2>
             <EventCarousel events={soloEvents} autoplayMs={4000} />
@@ -90,7 +90,7 @@ const Index = () => {
           }}
         >
           <div className="p-3 md:p-4">
-            <h2 className="font-pirata text-[#9f694a]/80 text-5xl md:text-6xl mb-3">
+            <h2 className="font-pirata heading-cutout text-5xl md:text-6xl mb-3">
               Duo Events
             </h2>
             <EventCarousel events={duoEvents} autoplayMs={4200} />
@@ -107,7 +107,7 @@ const Index = () => {
           }}
         >
           <div className="p-3 md:p-4">
-            <h2 className="font-pirata text-[#9f694a]/80 text-5xl md:text-6xl mb-3">
+            <h2 className="font-pirata heading-cutout text-5xl md:text-6xl mb-3">
               Trio Events
             </h2>
             {trioEvents.length === 1 ? (

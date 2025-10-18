@@ -139,4 +139,19 @@
     font-family: "TiltNeon","Poppins",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
     line-height: 1.45;
   }
+
+  /* Headings that reveal the page background inside the text */
+  .heading-cutout { color: #9f694a; } /* fallback color */
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .heading-cutout {
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      /* match body background (gradient + image) and keep it fixed to viewport */
+      background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url("/bg.png");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+  }
 }
