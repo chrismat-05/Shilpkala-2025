@@ -449,5 +449,3 @@ This project is proprietary software created for Shilpkala 2025. All rights rese
 - **For**: Kristu Jayanti College Fine Arts Club
 - **Event**: Shilpkala 2025
 - **Instagram**: [@kristujayanti_fineartsclub](https://www.instagram.com/kristujayanti_fineartsclub/)
-
-**Built with ❤️ for Shilpkala 2025**
