@@ -119,7 +119,7 @@ const Index = () => {
             <h2 className="font-pirata heading-cutout text-5xl md:text-6xl mb-3">
               Solo Events
             </h2>
-            <EventCarousel events={soloEvents} autoplayMs={4000} />
+            <EventCarousel events={soloEvents} autoplayMs={2500} />
           </div>
         </motion.div>
 
@@ -137,7 +137,7 @@ const Index = () => {
             <h2 className="font-pirata heading-cutout text-5xl md:text-6xl mb-3">
               Duo Events
             </h2>
-            <EventCarousel events={duoEvents} autoplayMs={4200} />
+            <EventCarousel events={duoEvents} autoplayMs={2500} />
           </div>
         </motion.div>
 
@@ -169,7 +169,7 @@ const Index = () => {
                 </div>
               </div>
             ) : (
-              <EventCarousel events={trioEvents} autoplayMs={4400} />
+              <EventCarousel events={trioEvents} autoplayMs={2500} />
             )}
           </div>
         </motion.div>
