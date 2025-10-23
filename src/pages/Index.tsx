@@ -8,7 +8,7 @@ import ShilpkalaLoader from "@/components/ShilpkalaLoader";
 import eventsData from "@/data/events.json";
 import { resolveImage } from "@/lib/images";
 
-const EASE: [number, number, number, number] = [0.4, 0, 0.2, 1]; // easeOut
+const EASE: [number, number, number, number] = [0.4, 0, 0.2, 1];
 
 const participantsIncludes = (evt: any, kind: string) => {
   if (!evt?.participants) return false;
@@ -119,7 +119,6 @@ const Index = () => {
             <h2 className="font-pirata heading-cutout text-5xl md:text-6xl mb-3">
               Solo Events
             </h2>
-            {/* replaced carousel with a grid of cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
               {soloEvents.map((e) => (
                 <EventCard
@@ -150,7 +149,6 @@ const Index = () => {
             <h2 className="font-pirata heading-cutout text-5xl md:text-6xl mb-3">
               Duo Events
             </h2>
-            {/* replaced carousel with a grid of cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
               {duoEvents.map((e) => (
                 <EventCard
