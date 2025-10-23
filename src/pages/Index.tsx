@@ -1,14 +1,13 @@
 import { motion } from "framer-motion";
 import EventCard from "@/components/EventCard";
 import BrochureCard from "@/components/BrochureCard";
-import EventCarousel from "@/components/EventCarousel";
 import React from "react";
 import ShilpkalaLoader from "@/components/ShilpkalaLoader";
 
 import eventsData from "@/data/events.json";
 import { resolveImage } from "@/lib/images";
 
-const EASE: [number, number, number, number] = [0.4, 0, 0.2, 1]; // easeOut
+const EASE: [number, number, number, number] = [0.4, 0, 0.2, 1];
 
 const participantsIncludes = (evt: any, kind: string) => {
   if (!evt?.participants) return false;
@@ -72,7 +71,7 @@ const Index = () => {
         variants={containerVariants}
         initial="hidden"
         animate={showIntro ? "hidden" : "visible"}
-        className={`max-w-6xl mx-auto transition-opacity duration-300 ${showIntro ? "opacity-0 pointer-events-none select-none" : "opacity-100"}`}
+        className={`max-w-7xl mx-auto transition-opacity duration-300 ${showIntro ? "opacity-0 pointer-events-none select-none" : "opacity-100"}`}
         aria-busy={showIntro}
       >
         <motion.div variants={itemVariants} className="flex items-center gap-2 mb-6">
@@ -119,7 +118,19 @@ const Index = () => {
             <h2 className="font-pirata heading-cutout text-5xl md:text-6xl mb-3">
               Solo Events
             </h2>
-            <EventCarousel events={soloEvents} autoplayMs={2500} />
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+              {soloEvents.map((e) => (
+                <EventCard
+                  key={e.title}
+                  title={e.title}
+                  imageUrl={resolveImage(e.image)}
+                  description={e.desc}
+                  buttonText={e.isOpen ? "Register Now" : "Registration closed"}
+                  link={e.link}
+                  disabled={!e.isOpen}
+                />
+              ))}
+            </div>
           </div>
         </motion.div>
 
@@ -137,7 +148,19 @@ const Index = () => {
             <h2 className="font-pirata heading-cutout text-5xl md:text-6xl mb-3">
               Duo Events
             </h2>
-            <EventCarousel events={duoEvents} autoplayMs={2500} />
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+              {duoEvents.map((e) => (
+                <EventCard
+                  key={e.title}
+                  title={e.title}
+                  imageUrl={resolveImage(e.image)}
+                  description={e.desc}
+                  buttonText={e.isOpen ? "Register Now" : "Registration closed"}
+                  link={e.link}
+                  disabled={!e.isOpen}
+                />
+              ))}
+            </div>
           </div>
         </motion.div>
 
@@ -155,22 +178,20 @@ const Index = () => {
             <h2 className="font-pirata heading-cutout text-5xl md:text-6xl mb-3">
               Trio Events
             </h2>
-            {trioEvents.length === 1 ? (
-              <div className="flex justify-center">
-                <div className="w-[92%] sm:w-[76%] md:w-[48%] lg:w-[44%] px-4 scale-105 transition-transform duration-700 ease-in-out">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+              {trioEvents.map((e) => (
+                <div key={e.title}>
                   <EventCard
-                    title={trioEvents[0].title}
-                    imageUrl={resolveImage(trioEvents[0].image)}
-                    description={trioEvents[0].desc}
-                    buttonText={trioEvents[0].isOpen ? "Register Now" : "Registration closed"}
-                    link={trioEvents[0].link}
-                    disabled={!trioEvents[0].isOpen}
+                    title={e.title}
+                    imageUrl={resolveImage(e.image)}
+                    description={e.desc}
+                    buttonText={e.isOpen ? "Register Now" : "Registration closed"}
+                    link={e.link}
+                    disabled={!e.isOpen}
                   />
                 </div>
-              </div>
-            ) : (
-              <EventCarousel events={trioEvents} autoplayMs={2500} />
-            )}
+              ))}
+            </div>
           </div>
         </motion.div>
       </motion.div>
