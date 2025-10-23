@@ -178,17 +178,18 @@ const Index = () => {
             <h2 className="font-pirata heading-cutout text-5xl md:text-6xl mb-3">
               Trio Events
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+            <div className="flex flex-wrap justify-center gap-3 md:gap-4">
               {trioEvents.map((e) => (
-                <EventCard
-                  key={e.title}
-                  title={e.title}
-                  imageUrl={resolveImage(e.image)}
-                  description={e.desc}
-                  buttonText={e.isOpen ? "Register Now" : "Registration closed"}
-                  link={e.link}
-                  disabled={!e.isOpen}
-                />
+                <div key={e.title} className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+                  <EventCard
+                    title={e.title}
+                    imageUrl={resolveImage(e.image)}
+                    description={e.desc}
+                    buttonText={e.isOpen ? "Register Now" : "Registration closed"}
+                    link={e.link}
+                    disabled={!e.isOpen}
+                  />
+                </div>
               ))}
             </div>
           </div>
