@@ -119,7 +119,20 @@ const Index = () => {
             <h2 className="font-pirata heading-cutout text-5xl md:text-6xl mb-3">
               Solo Events
             </h2>
-            <EventCarousel events={soloEvents} autoplayMs={2500} />
+            {/* replaced carousel with a grid of cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+              {soloEvents.map((e) => (
+                <EventCard
+                  key={e.title}
+                  title={e.title}
+                  imageUrl={resolveImage(e.image)}
+                  description={e.desc}
+                  buttonText={e.isOpen ? "Register Now" : "Registration closed"}
+                  link={e.link}
+                  disabled={!e.isOpen}
+                />
+              ))}
+            </div>
           </div>
         </motion.div>
 
@@ -137,7 +150,20 @@ const Index = () => {
             <h2 className="font-pirata heading-cutout text-5xl md:text-6xl mb-3">
               Duo Events
             </h2>
-            <EventCarousel events={duoEvents} autoplayMs={2500} />
+            {/* replaced carousel with a grid of cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+              {duoEvents.map((e) => (
+                <EventCard
+                  key={e.title}
+                  title={e.title}
+                  imageUrl={resolveImage(e.image)}
+                  description={e.desc}
+                  buttonText={e.isOpen ? "Register Now" : "Registration closed"}
+                  link={e.link}
+                  disabled={!e.isOpen}
+                />
+              ))}
+            </div>
           </div>
         </motion.div>
 
