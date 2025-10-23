@@ -64,9 +64,9 @@ const EventCard: React.FC<EventCardProps> = ({
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: delay + 0.1 }}
-          className="text-sm sm:text-base font-freckle font-semibold text-[#9f694a] mb-2 sm:mb-4"
+          className="text-sm sm:text-base font-semibold text-[#9f694a] mb-2 sm:mb-4"
         >
-          {title}
+          <span className="font-freckle leading-tight">{title}</span>
         </motion.h3>
 
         {description && (
