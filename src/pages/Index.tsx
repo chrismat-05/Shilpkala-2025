@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import EventCard from "@/components/EventCard";
 import BrochureCard from "@/components/BrochureCard";
-import EventCarousel from "@/components/EventCarousel";
 import React from "react";
 import ShilpkalaLoader from "@/components/ShilpkalaLoader";
 
@@ -179,22 +178,19 @@ const Index = () => {
             <h2 className="font-pirata heading-cutout text-5xl md:text-6xl mb-3">
               Trio Events
             </h2>
-            {trioEvents.length === 1 ? (
-              <div className="flex justify-center">
-                <div className="w-[92%] sm:w-[76%] md:w-[48%] lg:w-[44%] px-4 scale-105 transition-transform duration-700 ease-in-out">
-                  <EventCard
-                    title={trioEvents[0].title}
-                    imageUrl={resolveImage(trioEvents[0].image)}
-                    description={trioEvents[0].desc}
-                    buttonText={trioEvents[0].isOpen ? "Register Now" : "Registration closed"}
-                    link={trioEvents[0].link}
-                    disabled={!trioEvents[0].isOpen}
-                  />
-                </div>
-              </div>
-            ) : (
-              <EventCarousel events={trioEvents} autoplayMs={2500} />
-            )}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+              {trioEvents.map((e) => (
+                <EventCard
+                  key={e.title}
+                  title={e.title}
+                  imageUrl={resolveImage(e.image)}
+                  description={e.desc}
+                  buttonText={e.isOpen ? "Register Now" : "Registration closed"}
+                  link={e.link}
+                  disabled={!e.isOpen}
+                />
+              ))}
+            </div>
           </div>
         </motion.div>
       </motion.div>
