@@ -59,12 +59,12 @@ const EventCard: React.FC<EventCardProps> = ({
         </motion.div>
       )}
 
-      <div className="p-4 sm:p-6 flex flex-col items-center">
+      <div className="p-3 sm:p-4 flex flex-col items-center">
         <motion.h3
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: delay + 0.1 }}
-          className="text-base sm:text-lg font-freckle font-semibold text-[#9f694a] mb-2 sm:mb-4"
+          className="text-sm sm:text-base font-freckle font-semibold text-[#9f694a] mb-2 sm:mb-4"
         >
           {title}
         </motion.h3>
@@ -74,7 +74,7 @@ const EventCard: React.FC<EventCardProps> = ({
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: delay + 0.2 }}
-            className="text-sm text-muted-foreground mb-2 text-center w-full font-titl"
+            className="text-xs sm:text-sm text-muted-foreground mb-2 text-center w-full font-titl"
           >
             {description}
           </motion.div>
@@ -85,7 +85,7 @@ const EventCard: React.FC<EventCardProps> = ({
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: delay + 0.3 }}
-            className="w-full px-4 py-2 rounded bg-muted text-muted-foreground font-semibold cursor-not-allowed opacity-80 mt-2 text-center select-none font-titl"
+            className="w-full px-3 py-2 rounded bg-muted text-muted-foreground font-semibold cursor-not-allowed opacity-80 mt-2 text-center select-none font-titl"
           >
             {buttonText}
           </motion.div>
@@ -99,7 +99,7 @@ const EventCard: React.FC<EventCardProps> = ({
             whileHover={{ scale: 1.05, y: -2, transition: { type: "spring", stiffness: 400, damping: 10 } }}
             whileTap={{ scale: 0.95, transition: { type: "spring", stiffness: 400, damping: 10 } }}
             transition={{ duration: 0.3, delay: delay + 0.3 }}
-            className="w-full px-4 py-2 rounded bg-primary font-semibold shadow hover:bg-primary/90 mt-2 text-center block font-tilt text-[#9f694a]/90"
+            className="w-full px-3 py-2 rounded bg-primary font-semibold shadow hover:bg-primary/90 mt-2 text-center block font-tilt text-[#9f694a]/90"
             tabIndex={0}
           >
             {buttonText}
