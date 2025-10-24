@@ -27,6 +27,10 @@ const fetchCounts = async (): Promise<CountsMap> => {
 
 const EASE: [number, number, number, number] = [0.4, 0, 0.2, 1];
 
+const TITLE_ALIASES: Record<string, string> = {
+  "Echoes Of Pencil": "Echoes of Pencil",
+};
+
 const Registrations: React.FC = () => {
   const [open, setOpen] = React.useState<{ [event: string]: boolean }>({});
   const [lastRefresh, setLastRefresh] = React.useState<Date>(new Date());
@@ -175,7 +179,8 @@ const Registrations: React.FC = () => {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
         >
           {eventsData.filter(e => e.type === "event").map((event) => {
-            const reg = counts[event.title] || { firstYear: 0, secondYear: 0, thirdYear: 0, total: 0 };
+            const key = TITLE_ALIASES[event.title] ?? event.title;
+            const reg = counts[key] || { firstYear: 0, secondYear: 0, thirdYear: 0, total: 0 };
             return (
               <motion.div
                 key={event.title}
