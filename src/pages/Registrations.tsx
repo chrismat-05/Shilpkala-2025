@@ -27,9 +27,7 @@ const fetchCounts = async (): Promise<CountsMap> => {
 
 const EASE: [number, number, number, number] = [0.4, 0, 0.2, 1];
 
-// Map UI titles to API keys when they differ in casing/spelling
 const TITLE_ALIASES: Record<string, string> = {
-  // UI shows "Echoes Of Pencil" but API returns "Echoes of Pencil"
   "Echoes Of Pencil": "Echoes of Pencil",
 };
 
