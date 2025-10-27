@@ -46,7 +46,7 @@ const Home: React.FC = () => {
           Backdrops
         </motion.button>
         <motion.button
-          onClick={() => navigate("/volunteers")}
+          onClick={() => window.location.href = "/volunteers"}
           whileHover={{ scale: 1.05, y: -2 }}
           whileTap={{ scale: 0.95 }}
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
