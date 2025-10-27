@@ -49,8 +49,24 @@ const EventCard: React.FC<EventCardProps> = ({
     if (!start || !end) return "";
     const s = new Date(start);
     const e = new Date(end);
-    const fmt = new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit" });
-    return `${fmt.format(s)} – ${fmt.format(e)}`;
+    
+    // Format date as "27 Sept"
+    const dateFormatter = new Intl.DateTimeFormat('en-US', { 
+      day: 'numeric', 
+      month: 'short' 
+    });
+    const dateStr = dateFormatter.format(s);
+    
+    // Format times as "10 AM - 11 AM"
+    const timeFormatter = new Intl.DateTimeFormat('en-US', { 
+      hour: 'numeric', 
+      minute: '2-digit',
+      hour12: true
+    });
+    const startTime = timeFormatter.format(s);
+    const endTime = timeFormatter.format(e);
+    
+    return `${dateStr}, ${startTime} - ${endTime}`;
   };
 
   return (
