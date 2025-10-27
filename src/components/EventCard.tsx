@@ -1,5 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Clock3, MapPin } from "lucide-react";
+import { getEventStatus, isRegistrationOpen, type EventSchedule, cn } from "@/lib/utils";
 
 type EventCardProps = {
   title: string;
@@ -9,6 +11,9 @@ type EventCardProps = {
   delay?: number;
   disabled?: boolean;
   description?: string;
+  startAt?: string;
+  endAt?: string;
+  venue?: string;
 };
 
 const EventCard: React.FC<EventCardProps> = ({
@@ -19,10 +24,33 @@ const EventCard: React.FC<EventCardProps> = ({
   delay = 0,
   disabled = false,
   description,
+  startAt,
+  endAt,
+  venue,
 }) => {
   const hoverVariants = {
     enabled: { scale: 1.03, y: -5 },
     disabled: {},
+  };
+
+  const schedule: EventSchedule = { startAt, endAt };
+  const [now, setNow] = React.useState<Date>(new Date());
+  React.useEffect(() => {
+    const t = window.setInterval(() => setNow(new Date()), 30000);
+    return () => window.clearInterval(t);
+  }, []);
+
+  const { isHappeningNow, isStartingSoon, isOver } = getEventStatus(schedule, now);
+  const computedDisabled = disabled ?? false;
+  const autoDisabled = !isRegistrationOpen(!computedDisabled, schedule, now);
+  const finalDisabled = computedDisabled || autoDisabled;
+
+  const formatTimeRange = (start?: string, end?: string) => {
+    if (!start || !end) return "";
+    const s = new Date(start);
+    const e = new Date(end);
+    const fmt = new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit" });
+    return `${fmt.format(s)} – ${fmt.format(e)}`;
   };
 
   return (
@@ -34,14 +62,16 @@ const EventCard: React.FC<EventCardProps> = ({
       className={`bg-[#ebebe1] border border-border rounded-lg overflow-hidden shadow-card group ${disabled ? "opacity-60 grayscale" : "hover:shadow-card-hover"}`}
       style={{ position: "relative" }}
     >
-      {disabled && (
+      {(finalDisabled || isHappeningNow || isStartingSoon) && (
         <motion.span
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3, delay: delay + 0.2 }}
-          className="absolute top-2 right-2 z-10 bg-destructive text-destructive-foreground text-xs font-semibold px-2 py-0.5 rounded shadow select-none"
+          className={`absolute top-2 right-2 z-10 text-[10px] sm:text-xs font-semibold px-2 py-0.5 rounded shadow select-none ${
+            finalDisabled ? "bg-destructive text-destructive-foreground" : isHappeningNow ? "bg-green-600 text-white" : "bg-amber-500 text-black"
+          }`}
         >
-          Registration closed
+          {finalDisabled ? (isOver ? "Event over" : "Registration closed") : isHappeningNow ? "Happening now" : "Starting soon"}
         </motion.span>
       )}
 
@@ -69,6 +99,33 @@ const EventCard: React.FC<EventCardProps> = ({
           <span className="font-freckle leading-tight">{title}</span>
         </motion.h3>
 
+        {(venue || (startAt && endAt)) && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: delay + 0.15 }}
+            className="w-full mb-1"
+          >
+            <div
+              className={cn(
+                "w-full flex flex-col sm:flex-row items-start sm:items-center text-xs sm:text-sm gap-1 sm:gap-2 px-1 py-0.5 font-semibold text-[#9f694a]",
+                venue ? "sm:justify-between" : "justify-start"
+              )}
+            >
+              <span className="flex items-center gap-1 text-left">
+                <Clock3 className="w-4 h-4" aria-hidden="true" />
+                <span>{formatTimeRange(startAt, endAt)}</span>
+              </span>
+              {venue ? (
+                <span className="flex items-center gap-1 text-left sm:text-right sm:ml-3 truncate w-full sm:w-auto" title={venue}>
+                  <MapPin className="w-4 h-4" aria-hidden="true" />
+                  <span className="truncate">{venue}</span>
+                </span>
+              ) : null}
+            </div>
+          </motion.div>
+        )}
+
         {description && (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -80,14 +137,14 @@ const EventCard: React.FC<EventCardProps> = ({
           </motion.div>
         )}
 
-        {disabled ? (
+        {finalDisabled ? (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: delay + 0.3 }}
             className="w-full px-3 py-2 rounded bg-muted text-muted-foreground font-semibold cursor-not-allowed opacity-80 mt-2 text-center select-none font-titl"
           >
-            {buttonText}
+            {isOver ? "Event over" : buttonText}
           </motion.div>
         ) : (
           <motion.a

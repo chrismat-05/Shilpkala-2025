@@ -2,59 +2,21 @@ import React from "react";
 import { motion, type Variants } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, ExternalLink } from "lucide-react";
+import eventsData from "@/data/events.json";
+import { getEventStatus } from "@/lib/utils";
 
 const EASE: [number, number, number, number] = [0.4, 0, 0.2, 1];
 
-interface TechEvent {
-  title: string;
-  link: string;
-}
-
-const techEvents: TechEvent[] = [
-  {
-    title: "Scrapbook Project",
-    link: "https://www.canva.com/design/DAG29IaXEJA/Ci52D-zh04jPq-YaSuzGWQ/view?utm_content=DAG29IaXEJA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h4cd8c2e176"
-  },
-  {
-    title: "Echoes of Pencil",
-    link: "https://www.canva.com/design/DAG29KuJ_8o/asj-KDp1rq5TJHXQmW7OTQ/view?utm_content=DAG29KuJ_8o&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h018f2ec069"
-  },
-  {
-    title: "Doodle Dash",
-    link: "https://www.canva.com/design/DAG29Y6wttA/1HNqg7_WjETPj7pWEFZYNA/view?utm_content=DAG29Y6wttA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h6fa9401409"
-  },
-  {
-    title: "Paper Palette",
-    link: "https://www.canva.com/design/DAG29cTzGhs/4d8KYAC5gJQqeIwwBJ5HNg/view?utm_content=DAG29cTzGhs&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=he54a8b5743"
-  },
-  {
-    title: "Face Splash Attack",
-    link: "https://www.canva.com/design/DAG29c7cWQM/COWnZVshu3Dhqn63VSzEDA/view?utm_content=DAG29c7cWQM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h065997599f"
-  },
-  {
-    title: "Toon Town",
-    link: "https://www.canva.com/design/DAG29VIMxpc/0sniG4yI2bRb03k0NdyQQw/view?utm_content=DAG29VIMxpc&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h8b4505e0e4"
-  },
-  {
-    title: "Mosaic of Moment",
-    link: "https://www.canva.com/design/DAG29tHfYF0/qd3gdkNw2CNEoLfghXxerw/view?utm_content=DAG29tHfYF0&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h0cdac62686"
-  },
-  {
-    title: "Chain Reaction",
-    link: "https://www.canva.com/design/DAG29q0QZjY/8zP-h4-v4Dbk7-7qIxEWTw/view?utm_content=DAG29q0QZjY&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=he8008b9bf5"
-  },
-  {
-    title: "Henna Tales",
-    link: "https://www.canva.com/design/DAG29reqRWk/mqy_FHV6gaySkvt3Q4DWnA/view?utm_content=DAG29reqRWk&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h01b9d4c51b"
-  },
-  {
-    title: "Shilpkala Showcase",
-    link: "https://www.canva.com/design/DAG29gNAbS8/REkWL_wgYyjRavgQPUqbew/view?utm_content=DAG29gNAbS8&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h12dff7d74d"
-  }
-];
+type DataEvent = { type: string; title: string; backdropLink?: string; startAt?: string; endAt?: string; venue?: string };
+const techEvents: DataEvent[] = (eventsData as DataEvent[]).filter((e) => e.type === "event" && !!e.backdropLink);
 
 const Tech: React.FC = () => {
   const navigate = useNavigate();
+  const [tick, setTick] = React.useState(0);
+  React.useEffect(() => {
+    const t = window.setInterval(() => setTick((v) => v + 1), 30000);
+    return () => window.clearInterval(t);
+  }, []);
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -106,19 +68,45 @@ const Tech: React.FC = () => {
           animate="visible"
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
         >
-          {techEvents.map((event, index) => (
+          {techEvents.map((event, index) => {
+            const { isHappeningNow, isStartingSoon, isOver } = getEventStatus({ startAt: event.startAt, endAt: event.endAt });
+            const fmtRange = (s?: string, e?: string) => {
+              if (!s || !e) return "";
+              const ds = new Date(s), de = new Date(e);
+              const fmt = new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit" });
+              return `${fmt.format(ds)} – ${fmt.format(de)}`;
+            };
+            return (
             <motion.div
               key={event.title}
               variants={itemVariants}
               whileHover={{ scale: 1.03, y: -4 }}
-              className="bg-card/80 border border-border rounded-lg shadow-card overflow-hidden flex flex-col"
+              className="bg-card/80 border border-border rounded-lg shadow-card overflow-hidden flex flex-col relative"
             >
+              {(isHappeningNow || isStartingSoon || isOver) && (
+                <motion.span
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3 }}
+                  className={`absolute top-2 right-2 z-10 text-[10px] sm:text-xs font-semibold px-2 py-0.5 rounded shadow select-none ${
+                    isOver ? "bg-destructive text-destructive-foreground" : isHappeningNow ? "bg-green-600 text-white" : "bg-amber-500 text-black"
+                  }`}
+                >
+                  {isOver ? "Event over" : isHappeningNow ? "Happening now" : "Starting soon"}
+                </motion.span>
+              )}
               <div className="p-6 flex flex-col gap-4 flex-1">
                 <h3 className="font-freckle font-semibold text-foreground text-lg">
                   {event.title}
                 </h3>
+                {(event?.startAt && event?.endAt) || event?.venue ? (
+                  <div className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-start sm:justify-between text-white text-xs sm:text-sm gap-1 sm:gap-2 px-1 py-0.5 font-medium">
+                    <span className="text-left">{fmtRange(event?.startAt, event?.endAt)}</span>
+                    <span className="text-left sm:text-right sm:ml-3 truncate w-full sm:w-auto" title={event?.venue}>{event?.venue}</span>
+                  </div>
+                ) : null}
                 <motion.a
-                  href={event.link}
+                  href={(event as any).backdropLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.05 }}
@@ -130,7 +118,7 @@ const Tech: React.FC = () => {
                 </motion.a>
               </div>
             </motion.div>
-          ))}
+          )})}
         </motion.div>
       </div>
     </motion.div>

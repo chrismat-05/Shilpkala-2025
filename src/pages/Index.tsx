@@ -9,7 +9,7 @@ import { resolveImage } from "@/lib/images";
 
 const EASE: [number, number, number, number] = [0.4, 0, 0.2, 1];
 
-const participantsIncludes = (evt: any, kind: string) => {
+const participantsIncludes = (evt: { participants?: string } | undefined, kind: string) => {
   if (!evt?.participants) return false;
   return evt.participants
     .split(",")
@@ -128,6 +128,9 @@ const Index = () => {
                   buttonText={e.isOpen ? "Register Now" : "Registration closed"}
                   link={e.link}
                   disabled={!e.isOpen}
+                  startAt={e.startAt}
+                  endAt={e.endAt}
+                  venue={e.venue}
                 />
               ))}
             </div>
@@ -158,6 +161,9 @@ const Index = () => {
                   buttonText={e.isOpen ? "Register Now" : "Registration closed"}
                   link={e.link}
                   disabled={!e.isOpen}
+                  startAt={e.startAt}
+                  endAt={e.endAt}
+                  venue={e.venue}
                 />
               ))}
             </div>
@@ -188,6 +194,9 @@ const Index = () => {
                     buttonText={e.isOpen ? "Register Now" : "Registration closed"}
                     link={e.link}
                     disabled={!e.isOpen}
+                    startAt={e.startAt}
+                    endAt={e.endAt}
+                    venue={e.venue}
                   />
                 </div>
               ))}

@@ -8,7 +8,7 @@ import { motion, AnimatePresence, type Variants } from "framer-motion";
 import ShilpkalaLoader from "@/components/ShilpkalaLoader";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, BarChart2, GraduationCap, Sparkles, User2 } from "lucide-react";
-import { getRegistrationStats } from "@/lib/utils";
+import { getRegistrationStats, getEventStatus } from "@/lib/utils";
 
 type CountsMap = Record<string, {
   firstYear: number;
@@ -34,6 +34,11 @@ const TITLE_ALIASES: Record<string, string> = {
 const Registrations: React.FC = () => {
   const [open, setOpen] = React.useState<{ [event: string]: boolean }>({});
   const [lastRefresh, setLastRefresh] = React.useState<Date>(new Date());
+  const [tick, setTick] = React.useState(0);
+  React.useEffect(() => {
+    const t = window.setInterval(() => setTick((v) => v + 1), 30000);
+    return () => window.clearInterval(t);
+  }, []);
   const { data: counts = {} as CountsMap, isLoading, isError, refetch, isFetching } = useAutoRefresh<CountsMap>(
     ["reg-counts"],
     async () => {
@@ -181,13 +186,26 @@ const Registrations: React.FC = () => {
           {eventsData.filter(e => e.type === "event").map((event) => {
             const key = TITLE_ALIASES[event.title] ?? event.title;
             const reg = counts[key] || { firstYear: 0, secondYear: 0, thirdYear: 0, total: 0 };
+            const { isHappeningNow, isStartingSoon, isOver } = getEventStatus({ startAt: (event as { startAt?: string })?.startAt, endAt: (event as { endAt?: string })?.endAt });
             return (
               <motion.div
                 key={event.title}
                 variants={itemVariants}
                 whileHover={{ scale: 1.03, y: -4 }}
-                className="bg-card/80 border border-border rounded-lg shadow-card overflow-hidden flex flex-col"
+                className="bg-card/80 border border-border rounded-lg shadow-card overflow-hidden flex flex-col relative"
               >
+                {(isHappeningNow || isStartingSoon || isOver) && (
+                  <motion.span
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3 }}
+                    className={`absolute top-2 right-2 z-10 text-[10px] sm:text-xs font-semibold px-2 py-0.5 rounded shadow select-none ${
+                      isOver ? "bg-destructive text-destructive-foreground" : isHappeningNow ? "bg-green-600 text-white" : "bg-amber-500 text-black"
+                    }`}
+                  >
+                    {isOver ? "Event over" : isHappeningNow ? "Happening now" : "Starting soon"}
+                  </motion.span>
+                )}
                 {event.image && (
                   <motion.div
                     className="aspect-video w-full overflow-hidden"
