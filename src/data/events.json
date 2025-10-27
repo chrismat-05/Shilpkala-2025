@@ -13,7 +13,9 @@
     "link": "https://forms.gle/4GyCon15eS8PoTPk9",
     "image": "../assets/media/showcase.png",
     "participants":"solo",
-    "isOpen": true
+    "isOpen": true,
+    "startAt": "2025-10-31T10:00:00+05:30",
+    "endAt": "2025-10-31T15:30:00+05:30"
   },
   {
     "type": "event",
@@ -21,7 +23,9 @@
     "link": "https://forms.gle/bEyBY7GqZ39Byeuo7",
     "image": "../assets/media/chain.png",
     "participants":"trio",
-    "isOpen": true
+    "isOpen": true,
+    "startAt": "2025-10-30T10:00:00+05:30",
+    "endAt": "2025-10-30T11:00:00+05:30"
   },
   {
     "type": "event",
@@ -29,7 +33,9 @@
     "link": "https://forms.gle/b4bvR4HuPKAMuCWDA",
     "image": "../assets/media/doodle.png",
     "participants":"solo",
-    "isOpen": true
+    "isOpen": true,
+    "startAt": "2025-10-27T16:00:00+05:30",
+    "endAt": "2025-10-27T17:00:00+05:30"
   },
   {
     "type": "event",
@@ -37,7 +43,9 @@
     "link": "https://forms.gle/kVGXhGTik7XCpaj7A",
     "image": "../assets/media/echoes.png",
     "participants":"solo",
-    "isOpen": false
+    "isOpen": true,
+    "startAt": "2025-10-27T10:00:00+05:30",
+    "endAt": "2025-10-27T11:00:00+05:30"
   },
   {
     "type": "event",
@@ -45,8 +53,9 @@
     "link": "https://forms.gle/aonM9WUatWbzeDpF9",
     "image": "../assets/media/facesplash.png",
     "participants":"solo, duo",
-
-    "isOpen": true
+    "isOpen": true,
+    "startAt": "2025-10-28T11:30:00+05:30",
+    "endAt": "2025-10-28T12:30:00+05:30"
   },
   {
     "type": "event",
@@ -54,7 +63,9 @@
     "link": "https://forms.gle/cpgM9RbbdgnU8JmK6",
     "image": "../assets/media/flames.png",
     "participants":"solo, duo",
-    "isOpen": true
+    "isOpen": true,
+    "startAt": "2025-10-29T10:00:00+05:30",
+    "endAt": "2025-10-29T11:00:00+05:30"
   },
   {
     "type": "event",
@@ -62,7 +73,9 @@
     "link": "https://forms.gle/f5cTW3t1HFzDy4xp8",
     "image": "../assets/media/henna.png",
     "participants":"duo",
-    "isOpen": true
+    "isOpen": true,
+    "startAt": "2025-10-30T11:30:00+05:30",
+    "endAt": "2025-10-30T12:30:00+05:30"
   },
   {
     "type": "event",
@@ -70,7 +83,9 @@
     "link": "https://forms.gle/CVsKLnak3J1bdycx5",
     "image": "../assets/media/mosaic.png",
     "participants":"solo",
-    "isOpen": true
+    "isOpen": true,
+    "startAt": "2025-10-29T11:30:00+05:30",
+    "endAt": "2025-10-29T12:30:00+05:30"
   },
   {
     "type": "event",
@@ -78,7 +93,9 @@
     "link": "https://forms.gle/nrtcmvaU435pPFGP6",
     "image": "../assets/media/paper.png",
     "participants":"solo",
-    "isOpen": true
+    "isOpen": true,
+    "startAt": "2025-10-28T10:00:00+05:30",
+    "endAt": "2025-10-28T11:00:00+05:30"
   },
   {
     "type": "event",
@@ -86,7 +103,9 @@
     "link": "https://forms.gle/iVCgyc1stJoSkPGY8",
     "image": "../assets/media/scrapbook.png",
     "participants":"solo",
-    "isOpen": true
+    "isOpen": true,
+    "startAt": "2025-10-27T11:30:00+05:30",
+    "endAt": "2025-10-27T12:30:00+05:30"
   },
   {
     "type": "event",
@@ -94,7 +113,9 @@
     "link": "https://forms.gle/r7z9nSp4DCB2M6PR8",
     "image": "../assets/media/toon.png",
     "participants":"solo",
-    "isOpen": true
+    "isOpen": true,
+    "startAt": "2025-10-29T10:00:00+05:30",
+    "endAt": "2025-10-29T11:00:00+05:30"
   },
   {
     "type": "event",
@@ -102,6 +123,8 @@
     "link": "https://forms.gle/f9yoXe884KF6AkPV9",
     "image": "../assets/media/veil.png",
     "participants":"solo, duo",
-    "isOpen": true
+    "isOpen": true,
+    "startAt": "2025-10-28T10:00:00+05:30",
+    "endAt": "2025-10-28T11:00:00+05:30"
   }
 ]
