@@ -128,6 +128,8 @@ const Index = () => {
                   buttonText={e.isOpen ? "Register Now" : "Registration closed"}
                   link={e.link}
                   disabled={!e.isOpen}
+                  startAt={e.startAt}
+                  endAt={e.endAt}
                 />
               ))}
             </div>
@@ -158,6 +160,8 @@ const Index = () => {
                   buttonText={e.isOpen ? "Register Now" : "Registration closed"}
                   link={e.link}
                   disabled={!e.isOpen}
+                  startAt={e.startAt}
+                  endAt={e.endAt}
                 />
               ))}
             </div>
@@ -188,6 +192,8 @@ const Index = () => {
                     buttonText={e.isOpen ? "Register Now" : "Registration closed"}
                     link={e.link}
                     disabled={!e.isOpen}
+                    startAt={e.startAt}
+                    endAt={e.endAt}
                   />
                 </div>
               ))}

@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { getEventStatus, isRegistrationOpen, type EventSchedule } from "@/lib/utils";
 
 type EventCardProps = {
   title: string;
@@ -9,6 +10,8 @@ type EventCardProps = {
   delay?: number;
   disabled?: boolean;
   description?: string;
+  startAt?: string;
+  endAt?: string;
 };
 
 const EventCard: React.FC<EventCardProps> = ({
@@ -19,11 +22,25 @@ const EventCard: React.FC<EventCardProps> = ({
   delay = 0,
   disabled = false,
   description,
+  startAt,
+  endAt,
 }) => {
   const hoverVariants = {
     enabled: { scale: 1.03, y: -5 },
     disabled: {},
   };
+
+  const schedule: EventSchedule = { startAt, endAt };
+  const [now, setNow] = React.useState<Date>(new Date());
+  React.useEffect(() => {
+    const t = window.setInterval(() => setNow(new Date()), 30000); // refresh every 30s
+    return () => window.clearInterval(t);
+  }, []);
+
+  const { isHappeningNow, isStartingSoon, isOver } = getEventStatus(schedule, now);
+  const computedDisabled = disabled ?? false;
+  const autoDisabled = !isRegistrationOpen(!computedDisabled, schedule, now);
+  const finalDisabled = computedDisabled || autoDisabled;
 
   return (
     <motion.div
@@ -34,14 +51,16 @@ const EventCard: React.FC<EventCardProps> = ({
       className={`bg-[#ebebe1] border border-border rounded-lg overflow-hidden shadow-card group ${disabled ? "opacity-60 grayscale" : "hover:shadow-card-hover"}`}
       style={{ position: "relative" }}
     >
-      {disabled && (
+      {(finalDisabled || isHappeningNow || isStartingSoon) && (
         <motion.span
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3, delay: delay + 0.2 }}
-          className="absolute top-2 right-2 z-10 bg-destructive text-destructive-foreground text-xs font-semibold px-2 py-0.5 rounded shadow select-none"
+          className={`absolute top-2 right-2 z-10 text-xs font-semibold px-2 py-0.5 rounded shadow select-none ${
+            finalDisabled ? "bg-destructive text-destructive-foreground" : isHappeningNow ? "bg-green-600 text-white" : "bg-amber-500 text-black"
+          }`}
         >
-          Registration closed
+          {finalDisabled ? (isOver ? "Event over" : "Registration closed") : isHappeningNow ? "Happening now" : "Starting soon"}
         </motion.span>
       )}
 
@@ -80,14 +99,14 @@ const EventCard: React.FC<EventCardProps> = ({
           </motion.div>
         )}
 
-        {disabled ? (
+        {finalDisabled ? (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: delay + 0.3 }}
             className="w-full px-3 py-2 rounded bg-muted text-muted-foreground font-semibold cursor-not-allowed opacity-80 mt-2 text-center select-none font-titl"
           >
-            {buttonText}
+            {isOver ? "Event over" : buttonText}
           </motion.div>
         ) : (
           <motion.a

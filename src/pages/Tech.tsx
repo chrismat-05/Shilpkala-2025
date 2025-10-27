@@ -2,6 +2,8 @@ import React from "react";
 import { motion, type Variants } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, ExternalLink } from "lucide-react";
+import eventsData from "@/data/events.json";
+import { getEventStatus, TITLE_ALIASES } from "@/lib/utils";
 
 const EASE: [number, number, number, number] = [0.4, 0, 0.2, 1];
 
@@ -106,13 +108,29 @@ const Tech: React.FC = () => {
           animate="visible"
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
         >
-          {techEvents.map((event, index) => (
+          {techEvents.map((event, index) => {
+            const lookupTitle = TITLE_ALIASES[event.title] ?? event.title;
+            const meta = eventsData.find((e: any) => e.type === "event" && e.title === lookupTitle) as any | undefined;
+            const { isHappeningNow, isStartingSoon } = getEventStatus({ startAt: meta?.startAt, endAt: meta?.endAt });
+            return (
             <motion.div
               key={event.title}
               variants={itemVariants}
               whileHover={{ scale: 1.03, y: -4 }}
-              className="bg-card/80 border border-border rounded-lg shadow-card overflow-hidden flex flex-col"
+              className="bg-card/80 border border-border rounded-lg shadow-card overflow-hidden flex flex-col relative"
             >
+              {(isHappeningNow || isStartingSoon) && (
+                <motion.span
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3 }}
+                  className={`absolute top-2 right-2 z-10 text-xs font-semibold px-2 py-0.5 rounded shadow select-none ${
+                    isHappeningNow ? "bg-green-600 text-white" : "bg-amber-500 text-black"
+                  }`}
+                >
+                  {isHappeningNow ? "Happening now" : "Starting soon"}
+                </motion.span>
+              )}
               <div className="p-6 flex flex-col gap-4 flex-1">
                 <h3 className="font-freckle font-semibold text-foreground text-lg">
                   {event.title}
@@ -130,7 +148,7 @@ const Tech: React.FC = () => {
                 </motion.a>
               </div>
             </motion.div>
-          ))}
+          )})}
         </motion.div>
       </div>
     </motion.div>

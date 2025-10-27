@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import EventCard from "@/components/EventCard";
 import { resolveImage } from "@/lib/images";
 
-type EventItem = { title: string; image?: string; link?: string; isOpen?: boolean; desc?: string; };
+type EventItem = { title: string; image?: string; link?: string; isOpen?: boolean; desc?: string; startAt?: string; endAt?: string };
 type Props = { events: EventItem[]; autoplayMs?: number; className?: string; };
 
 const EventCarousel: React.FC<Props> = ({ events, autoplayMs = 3500, className }) => {
@@ -131,6 +131,8 @@ const EventCarousel: React.FC<Props> = ({ events, autoplayMs = 3500, className }
                   delay={0}
                   disabled={!ev.isOpen}
                   description={ev.desc}
+                  startAt={ev.startAt}
+                  endAt={ev.endAt}
                 />
               </div>
             );
