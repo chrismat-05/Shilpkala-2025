@@ -18,7 +18,7 @@ const techEvents: TechEvent[] = [
     link: "https://www.canva.com/design/DAG29IaXEJA/Ci52D-zh04jPq-YaSuzGWQ/view?utm_content=DAG29IaXEJA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h4cd8c2e176"
   },
   {
-    title: "Echoes of Pencil",
+    title: "Echoes Of Pencil",
     link: "https://www.canva.com/design/DAG29KuJ_8o/asj-KDp1rq5TJHXQmW7OTQ/view?utm_content=DAG29KuJ_8o&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h018f2ec069"
   },
   {
