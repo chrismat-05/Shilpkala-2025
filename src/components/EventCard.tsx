@@ -128,7 +128,7 @@ const EventCard: React.FC<EventCardProps> = ({
                 venue ? "sm:justify-between" : "justify-start"
               )}
             >
-              <span className="flex items-center gap-1 text-left flex-shrink-0">
+              <span className="flex items-center gap-1 text-left">
                 <Clock3 className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
                 <span>{formatTimeRange(startAt, endAt)}</span>
               </span>
