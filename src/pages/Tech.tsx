@@ -97,7 +97,7 @@ const Tech: React.FC = () => {
           >
             <ArrowLeft className="w-6 h-6 text-foreground" />
           </motion.button>
-          <h1 className="text-2xl font-bold tracking-tight text-foreground">Technical Details</h1>
+          <h1 className="text-2xl font-bold tracking-tight text-foreground">Event Backdrops</h1>
         </motion.div>
 
         <motion.div
@@ -125,7 +125,7 @@ const Tech: React.FC = () => {
                   whileTap={{ scale: 0.95 }}
                   className="mt-auto flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover text-primary-foreground font-semibold py-3 px-4 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                 >
-                  <span>View Details</span>
+                  <span>Backdrop Links</span>
                   <ExternalLink className="w-4 h-4" />
                 </motion.a>
               </div>
