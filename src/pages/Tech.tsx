@@ -3,57 +3,12 @@ import { motion, type Variants } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import eventsData from "@/data/events.json";
-import { getEventStatus, TITLE_ALIASES } from "@/lib/utils";
+import { getEventStatus } from "@/lib/utils";
 
 const EASE: [number, number, number, number] = [0.4, 0, 0.2, 1];
 
-interface TechEvent {
-  title: string;
-  link: string;
-}
-
-const techEvents: TechEvent[] = [
-  {
-    title: "Scrapbook Project",
-    link: "https://www.canva.com/design/DAG29IaXEJA/Ci52D-zh04jPq-YaSuzGWQ/view?utm_content=DAG29IaXEJA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h4cd8c2e176"
-  },
-  {
-    title: "Echoes Of Pencil",
-    link: "https://www.canva.com/design/DAG29KuJ_8o/asj-KDp1rq5TJHXQmW7OTQ/view?utm_content=DAG29KuJ_8o&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h018f2ec069"
-  },
-  {
-    title: "Doodle Dash",
-    link: "https://www.canva.com/design/DAG29Y6wttA/1HNqg7_WjETPj7pWEFZYNA/view?utm_content=DAG29Y6wttA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h6fa9401409"
-  },
-  {
-    title: "Paper Palette",
-    link: "https://www.canva.com/design/DAG29cTzGhs/4d8KYAC5gJQqeIwwBJ5HNg/view?utm_content=DAG29cTzGhs&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=he54a8b5743"
-  },
-  {
-    title: "Face Splash Attack",
-    link: "https://www.canva.com/design/DAG29c7cWQM/COWnZVshu3Dhqn63VSzEDA/view?utm_content=DAG29c7cWQM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h065997599f"
-  },
-  {
-    title: "Toon Town",
-    link: "https://www.canva.com/design/DAG29VIMxpc/0sniG4yI2bRb03k0NdyQQw/view?utm_content=DAG29VIMxpc&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h8b4505e0e4"
-  },
-  {
-    title: "Mosaic of Moment",
-    link: "https://www.canva.com/design/DAG29tHfYF0/qd3gdkNw2CNEoLfghXxerw/view?utm_content=DAG29tHfYF0&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h0cdac62686"
-  },
-  {
-    title: "Chain Reaction",
-    link: "https://www.canva.com/design/DAG29q0QZjY/8zP-h4-v4Dbk7-7qIxEWTw/view?utm_content=DAG29q0QZjY&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=he8008b9bf5"
-  },
-  {
-    title: "Henna Tales",
-    link: "https://www.canva.com/design/DAG29reqRWk/mqy_FHV6gaySkvt3Q4DWnA/view?utm_content=DAG29reqRWk&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h01b9d4c51b"
-  },
-  {
-    title: "Shilpkala Showcase",
-    link: "https://www.canva.com/design/DAG29gNAbS8/REkWL_wgYyjRavgQPUqbew/view?utm_content=DAG29gNAbS8&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h12dff7d74d"
-  }
-];
+type DataEvent = { type: string; title: string; backdropLink?: string; startAt?: string; endAt?: string; venue?: string };
+const techEvents: DataEvent[] = (eventsData as DataEvent[]).filter((e) => e.type === "event" && !!e.backdropLink);
 
 const Tech: React.FC = () => {
   const navigate = useNavigate();
@@ -114,9 +69,7 @@ const Tech: React.FC = () => {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
         >
           {techEvents.map((event, index) => {
-            const lookupTitle = TITLE_ALIASES[event.title] ?? event.title;
-            const meta = eventsData.find((e) => e.type === "event" && e.title === lookupTitle) as { startAt?: string; endAt?: string; venue?: string } | undefined;
-            const { isHappeningNow, isStartingSoon, isOver } = getEventStatus({ startAt: meta?.startAt, endAt: meta?.endAt });
+            const { isHappeningNow, isStartingSoon, isOver } = getEventStatus({ startAt: event.startAt, endAt: event.endAt });
             const fmtRange = (s?: string, e?: string) => {
               if (!s || !e) return "";
               const ds = new Date(s), de = new Date(e);
@@ -146,14 +99,14 @@ const Tech: React.FC = () => {
                 <h3 className="font-freckle font-semibold text-foreground text-lg">
                   {event.title}
                 </h3>
-                {(meta?.startAt && meta?.endAt) || meta?.venue ? (
+                {(event?.startAt && event?.endAt) || event?.venue ? (
                   <div className="w-full flex items-center justify-between text-white text-sm sm:text-base px-1 py-0.5 font-medium">
-                    <span className="text-left">{fmtRange(meta?.startAt, meta?.endAt)}</span>
-                    <span className="text-right ml-3 truncate" title={meta?.venue}>{meta?.venue}</span>
+                    <span className="text-left">{fmtRange(event?.startAt, event?.endAt)}</span>
+                    <span className="text-right ml-3 truncate" title={event?.venue}>{event?.venue}</span>
                   </div>
                 ) : null}
                 <motion.a
-                  href={event.link}
+                  href={(event as any).backdropLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.05 }}

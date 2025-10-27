@@ -105,7 +105,7 @@ const EventCard: React.FC<EventCardProps> = ({
             transition={{ duration: 0.3, delay: delay + 0.15 }}
             className="w-full mb-1"
           >
-            <div className="w-full flex items-center justify-between bg-black/40 text-white text-sm sm:text-base rounded px-3 py-1 font-medium">
+            <div className="w-full flex items-center justify-between text-white text-sm sm:text-base px-1 py-0.5 font-medium">
               <span className="text-left">{formatTimeRange(startAt, endAt)}</span>
               <span className="text-right ml-3 truncate" title={venue}>{venue}</span>
             </div>
