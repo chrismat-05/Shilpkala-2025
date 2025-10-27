@@ -1,14 +1,15 @@
 import { motion } from "framer-motion";
 import EventCard from "@/components/EventCard";
 import BrochureCard from "@/components/BrochureCard";
-import EventCarousel from "@/components/EventCarousel";
 import React from "react";
 import ShilpkalaLoader from "@/components/ShilpkalaLoader";
 
 import eventsData from "@/data/events.json";
 import { resolveImage } from "@/lib/images";
 
-const participantsIncludes = (evt: any, kind: string) => {
+const EASE: [number, number, number, number] = [0.4, 0, 0.2, 1];
+
+const participantsIncludes = (evt: { participants?: string } | undefined, kind: string) => {
   if (!evt?.participants) return false;
   return evt.participants
     .split(",")
@@ -34,26 +35,53 @@ const Index = () => {
 
   const bgCoverUrl = resolveImage("bgcover.png");
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: EASE,
+      },
+    },
+  };
+
   return (
-    <div className="min-h-screen py-12 px-6 bg-transparent">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3, ease: EASE }}
+      className="min-h-screen py-12 px-6 bg-transparent"
+    >
       {showIntro && <ShilpkalaLoader loops={INTRO_LOOPS} loopMs={INTRO_LOOP_MS} overlay="dark" />}
-      <div
-        className={`max-w-6xl mx-auto transition-opacity duration-300 ${showIntro ? "opacity-0 pointer-events-none select-none" : "opacity-100"}`}
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate={showIntro ? "hidden" : "visible"}
+        className={`max-w-7xl mx-auto transition-opacity duration-300 ${showIntro ? "opacity-0 pointer-events-none select-none" : "opacity-100"}`}
         aria-busy={showIntro}
       >
-        <div className="flex items-center gap-2 mb-6">
+        <motion.div variants={itemVariants} className="flex items-center gap-2 mb-6">
           <h1 className="font-pirata text-5xl md:text-5xl font-bold tracking-tight flex-1 leading-none">
             Shilpkala 2025
           </h1>
-        </div>
+        </motion.div>
 
         {brochure && (
-          <motion.section
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.05 }}
-            className="mb-8"
-          >
+          <motion.section variants={itemVariants} className="mb-8">
             <div
               className="rounded-lg overflow-hidden shadow-lg"
               style={{
@@ -77,7 +105,8 @@ const Index = () => {
         )}
 
         {/* Solo events group */}
-        <div
+        <motion.div
+          variants={itemVariants}
           className="mb-8 rounded-lg overflow-hidden shadow-card"
           style={{
             backgroundImage: `url('${bgCoverUrl}')`,
@@ -89,12 +118,28 @@ const Index = () => {
             <h2 className="font-pirata heading-cutout text-5xl md:text-6xl mb-3">
               Solo Events
             </h2>
-            <EventCarousel events={soloEvents} autoplayMs={4000} />
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+              {soloEvents.map((e) => (
+                <EventCard
+                  key={e.title}
+                  title={e.title}
+                  imageUrl={resolveImage(e.image)}
+                  description={e.desc}
+                  buttonText={e.isOpen ? "Register Now" : "Registration closed"}
+                  link={e.link}
+                  disabled={!e.isOpen}
+                  startAt={e.startAt}
+                  endAt={e.endAt}
+                  venue={e.venue}
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Duo events group */}
-        <div
+        <motion.div
+          variants={itemVariants}
           className="mb-8 rounded-lg overflow-hidden shadow-card"
           style={{
             backgroundImage: `url('${bgCoverUrl}')`,
@@ -106,12 +151,28 @@ const Index = () => {
             <h2 className="font-pirata heading-cutout text-5xl md:text-6xl mb-3">
               Duo Events
             </h2>
-            <EventCarousel events={duoEvents} autoplayMs={4200} />
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+              {duoEvents.map((e) => (
+                <EventCard
+                  key={e.title}
+                  title={e.title}
+                  imageUrl={resolveImage(e.image)}
+                  description={e.desc}
+                  buttonText={e.isOpen ? "Register Now" : "Registration closed"}
+                  link={e.link}
+                  disabled={!e.isOpen}
+                  startAt={e.startAt}
+                  endAt={e.endAt}
+                  venue={e.venue}
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Trio events group */}
-        <div
+        <motion.div
+          variants={itemVariants}
           className="mb-8 rounded-lg overflow-hidden shadow-card"
           style={{
             backgroundImage: `url('${bgCoverUrl}')`,
@@ -123,26 +184,27 @@ const Index = () => {
             <h2 className="font-pirata heading-cutout text-5xl md:text-6xl mb-3">
               Trio Events
             </h2>
-            {trioEvents.length === 1 ? (
-              <div className="flex justify-center">
-                <div className="w-full sm:w-3/4 md:w-2/3 lg:w-1/2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+              {trioEvents.map((e) => (
+                <div key={e.title}>
                   <EventCard
-                    title={trioEvents[0].title}
-                    imageUrl={resolveImage(trioEvents[0].image)}
-                    description={trioEvents[0].desc}
-                    buttonText={trioEvents[0].isOpen ? "Register Now" : "Registration closed"}
-                    link={trioEvents[0].link}
-                    disabled={!trioEvents[0].isOpen}
+                    title={e.title}
+                    imageUrl={resolveImage(e.image)}
+                    description={e.desc}
+                    buttonText={e.isOpen ? "Register Now" : "Registration closed"}
+                    link={e.link}
+                    disabled={!e.isOpen}
+                    startAt={e.startAt}
+                    endAt={e.endAt}
+                    venue={e.venue}
                   />
                 </div>
-              </div>
-            ) : (
-              <EventCarousel events={trioEvents} autoplayMs={4400} />
-            )}
+              ))}
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
+        </motion.div>
+      </motion.div>
+    </motion.div>
   );
 };
 

@@ -1,13 +1,19 @@
 import React from "react";
 
 type ShilpkalaLoaderProps = {
-  loops?: number;
+  loops?: number | "infinite";
   loopMs?: number;
   overlay?: "transparent" | "dim" | "dark";
 };
 
 const ShilpkalaLoader: React.FC<ShilpkalaLoaderProps> = ({ loops, loopMs = 1500, overlay = "dark" }) => {
-  const loopCountRef = React.useRef<number>(loops && loops > 0 ? loops : Math.floor(Math.random() * 2) + 1);
+  const loopCountRef = React.useRef<number | "infinite">(
+    typeof loops === "number" && loops > 0
+      ? loops
+      : loops === "infinite"
+      ? "infinite"
+      : Math.floor(Math.random() * 2) + 1
+  );
   const iter = loopCountRef.current;
 
   const overlayClass =
@@ -22,7 +28,6 @@ const ShilpkalaLoader: React.FC<ShilpkalaLoaderProps> = ({ loops, loopMs = 1500,
     let cancelled = false;
     async function ensureFont() {
       try {
-        // wait for PirataOne (Regular) to be available
         if ((document as any).fonts?.load) {
           await (document as any).fonts.load("400 48px PirataOne");
         }
