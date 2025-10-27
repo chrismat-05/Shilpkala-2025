@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Volunteers page redirects to Google Forms
+# https://forms.gle/V3FAgGurvS3hogLn9
+Disallow: /volunteers

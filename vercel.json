@@ -1,4 +1,7 @@
 {
+  "redirects": [
+    { "source": "/volunteers", "destination": "https://forms.gle/V3FAgGurvS3hogLn9", "permanent": false }
+  ],
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" },
     { "source": "/(.*)", "destination": "/" }
