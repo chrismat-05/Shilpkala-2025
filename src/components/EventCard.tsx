@@ -35,7 +35,7 @@ const EventCard: React.FC<EventCardProps> = ({
   const schedule: EventSchedule = { startAt, endAt };
   const [now, setNow] = React.useState<Date>(new Date());
   React.useEffect(() => {
-    const t = window.setInterval(() => setNow(new Date()), 30000); // refresh every 30s
+    const t = window.setInterval(() => setNow(new Date()), 30000);
     return () => window.clearInterval(t);
   }, []);
 
@@ -43,6 +43,14 @@ const EventCard: React.FC<EventCardProps> = ({
   const computedDisabled = disabled ?? false;
   const autoDisabled = !isRegistrationOpen(!computedDisabled, schedule, now);
   const finalDisabled = computedDisabled || autoDisabled;
+
+  const formatTimeRange = (start?: string, end?: string) => {
+    if (!start || !end) return "";
+    const s = new Date(start);
+    const e = new Date(end);
+    const fmt = new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit" });
+    return `${fmt.format(s)} – ${fmt.format(e)}`;
+  };
 
   return (
     <motion.div
@@ -90,15 +98,17 @@ const EventCard: React.FC<EventCardProps> = ({
           <span className="font-freckle leading-tight">{title}</span>
         </motion.h3>
 
-        {venue && (
+        {(venue || (startAt && endAt)) && (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: delay + 0.15 }}
-            className="text-[11px] sm:text-xs text-muted-foreground mb-1 text-center w-full font-titl"
-            aria-label={`Venue: ${venue}`}
+            className="w-full mb-1"
           >
-            Venue: {venue}
+            <div className="w-full flex items-center justify-between bg-black/40 text-white text-sm sm:text-base rounded px-3 py-1 font-medium">
+              <span className="text-left">{formatTimeRange(startAt, endAt)}</span>
+              <span className="text-right ml-3 truncate" title={venue}>{venue}</span>
+            </div>
           </motion.div>
         )}
 

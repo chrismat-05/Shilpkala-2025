@@ -115,8 +115,14 @@ const Tech: React.FC = () => {
         >
           {techEvents.map((event, index) => {
             const lookupTitle = TITLE_ALIASES[event.title] ?? event.title;
-            const meta = eventsData.find((e) => e.type === "event" && e.title === lookupTitle) as { startAt?: string; endAt?: string } | undefined;
+            const meta = eventsData.find((e) => e.type === "event" && e.title === lookupTitle) as { startAt?: string; endAt?: string; venue?: string } | undefined;
             const { isHappeningNow, isStartingSoon, isOver } = getEventStatus({ startAt: meta?.startAt, endAt: meta?.endAt });
+            const fmtRange = (s?: string, e?: string) => {
+              if (!s || !e) return "";
+              const ds = new Date(s), de = new Date(e);
+              const fmt = new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit" });
+              return `${fmt.format(ds)} – ${fmt.format(de)}`;
+            };
             return (
             <motion.div
               key={event.title}
@@ -140,6 +146,12 @@ const Tech: React.FC = () => {
                 <h3 className="font-freckle font-semibold text-foreground text-lg">
                   {event.title}
                 </h3>
+                {(meta?.startAt && meta?.endAt) || meta?.venue ? (
+                  <div className="w-full flex items-center justify-between bg-black/40 text-white text-sm sm:text-base rounded px-3 py-1 font-medium">
+                    <span className="text-left">{fmtRange(meta?.startAt, meta?.endAt)}</span>
+                    <span className="text-right ml-3 truncate" title={meta?.venue}>{meta?.venue}</span>
+                  </div>
+                ) : null}
                 <motion.a
                   href={event.link}
                   target="_blank"

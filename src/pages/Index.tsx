@@ -130,7 +130,7 @@ const Index = () => {
                   disabled={!e.isOpen}
                   startAt={e.startAt}
                   endAt={e.endAt}
-                  venue={e.venue as any}
+                  venue={e.venue}
                 />
               ))}
             </div>
@@ -163,7 +163,7 @@ const Index = () => {
                   disabled={!e.isOpen}
                   startAt={e.startAt}
                   endAt={e.endAt}
-                  venue={e.venue as any}
+                  venue={e.venue}
                 />
               ))}
             </div>
@@ -196,7 +196,7 @@ const Index = () => {
                     disabled={!e.isOpen}
                     startAt={e.startAt}
                     endAt={e.endAt}
-                    venue={e.venue as any}
+                    venue={e.venue}
                   />
                 </div>
               ))}
