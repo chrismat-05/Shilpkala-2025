@@ -124,18 +124,18 @@ const EventCard: React.FC<EventCardProps> = ({
           >
             <div
               className={cn(
-                "w-full flex flex-col sm:flex-row items-start sm:items-center text-xs sm:text-sm gap-1 sm:gap-2 px-1 py-0.5 font-semibold text-[#9f694a]",
+                "w-full flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center text-xs sm:text-sm gap-1 sm:gap-2 px-1 py-0.5 font-semibold text-[#9f694a]",
                 venue ? "sm:justify-between" : "justify-start"
               )}
             >
-              <span className="flex items-center gap-1 text-left">
-                <Clock3 className="w-4 h-4" aria-hidden="true" />
+              <span className="flex items-center gap-1 text-left flex-shrink-0">
+                <Clock3 className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
                 <span>{formatTimeRange(startAt, endAt)}</span>
               </span>
               {venue ? (
-                <span className="flex items-center gap-1 text-left sm:text-right sm:ml-3 truncate w-full sm:w-auto" title={venue}>
-                  <MapPin className="w-4 h-4" aria-hidden="true" />
-                  <span className="truncate">{venue}</span>
+                <span className="flex items-center gap-1 text-left sm:text-right sm:ml-3 w-full sm:w-auto" title={venue}>
+                  <MapPin className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
+                  <span>{venue}</span>
                 </span>
               ) : null}
             </div>
