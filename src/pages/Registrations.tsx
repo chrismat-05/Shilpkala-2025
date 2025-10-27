@@ -181,7 +181,7 @@ const Registrations: React.FC = () => {
           {eventsData.filter(e => e.type === "event").map((event) => {
             const key = TITLE_ALIASES[event.title] ?? event.title;
             const reg = counts[key] || { firstYear: 0, secondYear: 0, thirdYear: 0, total: 0 };
-            const { isHappeningNow, isStartingSoon } = getEventStatus({ startAt: (event as any).startAt, endAt: (event as any).endAt });
+            const { isHappeningNow, isStartingSoon } = getEventStatus({ startAt: (event as { startAt?: string })?.startAt, endAt: (event as { endAt?: string })?.endAt });
             return (
               <motion.div
                 key={event.title}

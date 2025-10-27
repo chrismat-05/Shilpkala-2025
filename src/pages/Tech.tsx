@@ -110,7 +110,7 @@ const Tech: React.FC = () => {
         >
           {techEvents.map((event, index) => {
             const lookupTitle = TITLE_ALIASES[event.title] ?? event.title;
-            const meta = eventsData.find((e: any) => e.type === "event" && e.title === lookupTitle) as any | undefined;
+            const meta = eventsData.find((e) => e.type === "event" && e.title === lookupTitle) as { startAt?: string; endAt?: string } | undefined;
             const { isHappeningNow, isStartingSoon } = getEventStatus({ startAt: meta?.startAt, endAt: meta?.endAt });
             return (
             <motion.div
