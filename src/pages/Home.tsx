@@ -52,7 +52,7 @@ const Home: React.FC = () => {
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
           className="flex-1 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-semibold text-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 border border-border"
         >
-          Volunteers OD Forms
+          Volunteer's OD Form
         </motion.button>
         <motion.button
           onClick={() => navigate("/registrations")}
