@@ -67,7 +67,7 @@ const EventCard: React.FC<EventCardProps> = ({
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3, delay: delay + 0.2 }}
-          className={`absolute top-2 right-2 z-10 text-xs font-semibold px-2 py-0.5 rounded shadow select-none ${
+          className={`absolute top-2 right-2 z-10 text-[10px] sm:text-xs font-semibold px-2 py-0.5 rounded shadow select-none ${
             finalDisabled ? "bg-destructive text-destructive-foreground" : isHappeningNow ? "bg-green-600 text-white" : "bg-amber-500 text-black"
           }`}
         >
@@ -106,16 +106,18 @@ const EventCard: React.FC<EventCardProps> = ({
             transition={{ duration: 0.3, delay: delay + 0.15 }}
             className="w-full mb-1"
           >
-            <div className={cn(
-              "w-full flex items-center text-sm sm:text-base px-1 py-0.5 font-semibold text-[#9f694a]",
-              venue ? "justify-between" : "justify-start"
-            )}>
+            <div
+              className={cn(
+                "w-full flex flex-col sm:flex-row items-start sm:items-center text-xs sm:text-sm gap-1 sm:gap-2 px-1 py-0.5 font-semibold text-[#9f694a]",
+                venue ? "sm:justify-between" : "justify-start"
+              )}
+            >
               <span className="flex items-center gap-1 text-left">
                 <Clock3 className="w-4 h-4" aria-hidden="true" />
                 <span>{formatTimeRange(startAt, endAt)}</span>
               </span>
               {venue ? (
-                <span className="flex items-center gap-1 text-right ml-3 truncate" title={venue}>
+                <span className="flex items-center gap-1 text-left sm:text-right sm:ml-3 truncate w-full sm:w-auto" title={venue}>
                   <MapPin className="w-4 h-4" aria-hidden="true" />
                   <span className="truncate">{venue}</span>
                 </span>

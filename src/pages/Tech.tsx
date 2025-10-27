@@ -88,7 +88,7 @@ const Tech: React.FC = () => {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.3 }}
-                  className={`absolute top-2 right-2 z-10 text-xs font-semibold px-2 py-0.5 rounded shadow select-none ${
+                  className={`absolute top-2 right-2 z-10 text-[10px] sm:text-xs font-semibold px-2 py-0.5 rounded shadow select-none ${
                     isOver ? "bg-destructive text-destructive-foreground" : isHappeningNow ? "bg-green-600 text-white" : "bg-amber-500 text-black"
                   }`}
                 >
@@ -100,9 +100,9 @@ const Tech: React.FC = () => {
                   {event.title}
                 </h3>
                 {(event?.startAt && event?.endAt) || event?.venue ? (
-                  <div className="w-full flex items-center justify-between text-white text-sm sm:text-base px-1 py-0.5 font-medium">
+                  <div className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-start sm:justify-between text-white text-xs sm:text-sm gap-1 sm:gap-2 px-1 py-0.5 font-medium">
                     <span className="text-left">{fmtRange(event?.startAt, event?.endAt)}</span>
-                    <span className="text-right ml-3 truncate" title={event?.venue}>{event?.venue}</span>
+                    <span className="text-left sm:text-right sm:ml-3 truncate w-full sm:w-auto" title={event?.venue}>{event?.venue}</span>
                   </div>
                 ) : null}
                 <motion.a

@@ -199,7 +199,7 @@ const Registrations: React.FC = () => {
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.3 }}
-                    className={`absolute top-2 right-2 z-10 text-xs font-semibold px-2 py-0.5 rounded shadow select-none ${
+                    className={`absolute top-2 right-2 z-10 text-[10px] sm:text-xs font-semibold px-2 py-0.5 rounded shadow select-none ${
                       isOver ? "bg-destructive text-destructive-foreground" : isHappeningNow ? "bg-green-600 text-white" : "bg-amber-500 text-black"
                     }`}
                   >
