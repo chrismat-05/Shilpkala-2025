@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { getEventStatus, isRegistrationOpen, type EventSchedule } from "@/lib/utils";
+import { Clock3, MapPin } from "lucide-react";
+import { getEventStatus, isRegistrationOpen, type EventSchedule, cn } from "@/lib/utils";
 
 type EventCardProps = {
   title: string;
@@ -105,9 +106,20 @@ const EventCard: React.FC<EventCardProps> = ({
             transition={{ duration: 0.3, delay: delay + 0.15 }}
             className="w-full mb-1"
           >
-            <div className="w-full flex items-center justify-between text-white text-sm sm:text-base px-1 py-0.5 font-medium">
-              <span className="text-left">{formatTimeRange(startAt, endAt)}</span>
-              <span className="text-right ml-3 truncate" title={venue}>{venue}</span>
+            <div className={cn(
+              "w-full flex items-center text-sm sm:text-base px-1 py-0.5 font-semibold text-[#9f694a]",
+              venue ? "justify-between" : "justify-start"
+            )}>
+              <span className="flex items-center gap-1 text-left">
+                <Clock3 className="w-4 h-4" aria-hidden="true" />
+                <span>{formatTimeRange(startAt, endAt)}</span>
+              </span>
+              {venue ? (
+                <span className="flex items-center gap-1 text-right ml-3 truncate" title={venue}>
+                  <MapPin className="w-4 h-4" aria-hidden="true" />
+                  <span className="truncate">{venue}</span>
+                </span>
+              ) : null}
             </div>
           </motion.div>
         )}
