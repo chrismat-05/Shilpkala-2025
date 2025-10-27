@@ -50,14 +50,14 @@ const EventCard: React.FC<EventCardProps> = ({
     const s = new Date(start);
     const e = new Date(end);
     
-    // Format date as "27 Sept"
+    // Format date as "Oct 27"
     const dateFormatter = new Intl.DateTimeFormat('en-US', { 
       day: 'numeric', 
       month: 'short' 
     });
     const dateStr = dateFormatter.format(s);
     
-    // Format times as "10 AM - 11 AM"
+    // Format times as "10:30 AM - 11:30 AM"
     const timeFormatter = new Intl.DateTimeFormat('en-US', { 
       hour: 'numeric', 
       minute: '2-digit',
