@@ -138,10 +138,11 @@ export default async function handler(req, res) {
   </p>
   <p>
     For updates and highlights, follow the Fine Arts Club on Instagram:<br>
-    <a href="https://www.instagram.com/kristujayanti_fineartsclub/">https://www.instagram.com/kristujayanti_fineartsclub/</a>
+    <a href="https://www.instagram.com/kristujayanti_fineartsclub/">KJU Fine Arts Club on Instagram/</a><br>
+    <a href="https://shilpkala2k25.vercel.app">Shilpkala 2025</a>
   </p>
   <p>We look forward to your presence at the Shilpkala Showcase!</p>
-  <p>Warm regards,<br>Shilpkala 2025 Team</p>
+  <p>Warm regards,<br>Team Shilpkala</p>
 </div>
 `;
 
