@@ -37,7 +37,7 @@
     "link": "https://forms.gle/kVGXhGTik7XCpaj7A",
     "image": "../assets/media/echoes.png",
     "participants":"solo",
-    "isOpen": true
+    "isOpen": false
   },
   {
     "type": "event",
