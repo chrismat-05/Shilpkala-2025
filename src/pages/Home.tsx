@@ -37,7 +37,7 @@ const Home: React.FC = () => {
           Linktree
         </motion.button>
         <motion.button
-          onClick={() => navigate("/tech")}
+          onClick={() => navigate("/backdrop")}
           whileHover={{ scale: 1.05, y: -2 }}
           whileTap={{ scale: 0.95 }}
           transition={{ type: "spring", stiffness: 400, damping: 10 }}

@@ -8,11 +8,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import Index from "./pages/Index";
 import Registrations from "./pages/Registrations";
 import Home from "./pages/Home";
-import Tech from "./pages/Tech";
+import Backdrop from "./pages/Backdrop";
 import NotFound from "./pages/NotFound";
 import { Instagram } from "lucide-react";
-import { SpeedInsights } from "@vercel/speed-insights/react"; // React entrypoint for non-Next apps
-import { Analytics } from "@vercel/analytics/react"; // React entrypoint for non-Next apps
+import { SpeedInsights } from "@vercel/speed-insights/react"; 
+import { Analytics } from "@vercel/analytics/react";
 
 const queryClient = new QueryClient();
 
@@ -86,7 +86,7 @@ const RouterContent = () => {
           <Route path="/" element={<Index />} />
           <Route path="/home" element={<Home />} />
           <Route path="/registrations" element={<Registrations />} />
-          <Route path="/tech" element={<Tech />} />
+          <Route path="/backdrop" element={<Backdrop />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </AnimatePresence>

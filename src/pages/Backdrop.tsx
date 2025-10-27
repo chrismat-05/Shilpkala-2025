@@ -8,9 +8,9 @@ import { getEventStatus } from "@/lib/utils";
 const EASE: [number, number, number, number] = [0.4, 0, 0.2, 1];
 
 type DataEvent = { type: string; title: string; backdropLink?: string; startAt?: string; endAt?: string; venue?: string };
-const techEvents: DataEvent[] = (eventsData as DataEvent[]).filter((e) => e.type === "event" && !!e.backdropLink);
+const backdropEvents: DataEvent[] = (eventsData as DataEvent[]).filter((e) => e.type === "event" && !!e.backdropLink);
 
-const Tech: React.FC = () => {
+const backdrop: React.FC = () => {
   const navigate = useNavigate();
   const [tick, setTick] = React.useState(0);
   React.useEffect(() => {
@@ -68,7 +68,7 @@ const Tech: React.FC = () => {
           animate="visible"
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
         >
-          {techEvents.map((event, index) => {
+          {backdropEvents.map((event, index) => {
             const { isHappeningNow, isStartingSoon, isOver } = getEventStatus({ startAt: event.startAt, endAt: event.endAt });
             const fmtRange = (s?: string, e?: string) => {
               if (!s || !e) return "";
@@ -122,7 +122,7 @@ const Tech: React.FC = () => {
                   whileTap={{ scale: 0.95 }}
                   className="mt-auto flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover text-primary-foreground font-semibold py-3 px-4 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                 >
-                  <span>Backdrop Links</span>
+                  <span>Backdrop Link</span>
                   <ExternalLink className="w-4 h-4" />
                 </motion.a>
               </div>
@@ -134,4 +134,4 @@ const Tech: React.FC = () => {
   );
 };
 
-export default Tech;
+export default backdrop;
