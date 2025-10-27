@@ -105,9 +105,13 @@ const Tech: React.FC = () => {
                   {event.title}
                 </h3>
                 {(event?.startAt && event?.endAt) || event?.venue ? (
-                  <div className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-start sm:justify-between text-white text-xs sm:text-sm gap-1 sm:gap-2 px-1 py-0.5 font-medium">
-                    <span className="text-left">{fmtRange(event?.startAt, event?.endAt)}</span>
-                    <span className="text-left sm:text-right sm:ml-3 truncate w-full sm:w-auto" title={event?.venue}>{event?.venue}</span>
+                  <div className="w-full flex flex-col items-center justify-center text-white text-xs sm:text-sm gap-1 px-1 py-0.5 font-medium text-center">
+                    {(event?.startAt && event?.endAt) ? (
+                      <span className="leading-tight">{fmtRange(event?.startAt, event?.endAt)}</span>
+                    ) : null}
+                    {event?.venue ? (
+                      <span className="leading-tight break-words" title={event?.venue}>{event?.venue}</span>
+                    ) : null}
                   </div>
                 ) : null}
                 <motion.a
