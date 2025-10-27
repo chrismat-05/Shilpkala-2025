@@ -14,7 +14,8 @@
     "image": "../assets/media/showcase.png",
     "participants":"solo",
     "isOpen": true,
-    "startAt": "2025-10-31T10:00:00+05:30",
+    "venue": "M2 Audi",
+    "startAt": "2025-10-27T14:30:00+05:30",
     "endAt": "2025-10-31T15:30:00+05:30"
   },
   {
@@ -24,6 +25,7 @@
     "image": "../assets/media/chain.png",
     "participants":"trio",
     "isOpen": true,
+    "venue": "A1 Audi",
     "startAt": "2025-10-30T10:00:00+05:30",
     "endAt": "2025-10-30T11:00:00+05:30"
   },
@@ -34,6 +36,7 @@
     "image": "../assets/media/doodle.png",
     "participants":"solo",
     "isOpen": true,
+    "venue": "A1 Audi",
     "startAt": "2025-10-27T16:00:00+05:30",
     "endAt": "2025-10-27T17:00:00+05:30"
   },
@@ -44,6 +47,7 @@
     "image": "../assets/media/echoes.png",
     "participants":"solo",
     "isOpen": true,
+    "venue": "M2 Audi",
     "startAt": "2025-10-27T10:00:00+05:30",
     "endAt": "2025-10-27T11:00:00+05:30"
   },
@@ -54,6 +58,7 @@
     "image": "../assets/media/facesplash.png",
     "participants":"solo, duo",
     "isOpen": true,
+    "venue": "M2 Audi",
     "startAt": "2025-10-28T11:30:00+05:30",
     "endAt": "2025-10-28T12:30:00+05:30"
   },
@@ -64,6 +69,7 @@
     "image": "../assets/media/flames.png",
     "participants":"solo, duo",
     "isOpen": true,
+    "venue": "Stalls Area",
     "startAt": "2025-10-29T10:00:00+05:30",
     "endAt": "2025-10-29T11:00:00+05:30"
   },
@@ -74,6 +80,7 @@
     "image": "../assets/media/henna.png",
     "participants":"duo",
     "isOpen": true,
+    "venue": "A1 Audi",
     "startAt": "2025-10-30T11:30:00+05:30",
     "endAt": "2025-10-30T12:30:00+05:30"
   },
@@ -84,6 +91,7 @@
     "image": "../assets/media/mosaic.png",
     "participants":"solo",
     "isOpen": true,
+    "venue": "M2 Audi",
     "startAt": "2025-10-29T11:30:00+05:30",
     "endAt": "2025-10-29T12:30:00+05:30"
   },
@@ -94,6 +102,7 @@
     "image": "../assets/media/paper.png",
     "participants":"solo",
     "isOpen": true,
+    "venue": "M2 Audi",
     "startAt": "2025-10-28T10:00:00+05:30",
     "endAt": "2025-10-28T11:00:00+05:30"
   },
@@ -104,6 +113,7 @@
     "image": "../assets/media/scrapbook.png",
     "participants":"solo",
     "isOpen": true,
+    "venue": "M2 Audi",
     "startAt": "2025-10-27T11:30:00+05:30",
     "endAt": "2025-10-27T12:30:00+05:30"
   },
@@ -114,6 +124,7 @@
     "image": "../assets/media/toon.png",
     "participants":"solo",
     "isOpen": true,
+    "venue": "M2 Audi",
     "startAt": "2025-10-29T10:00:00+05:30",
     "endAt": "2025-10-29T11:00:00+05:30"
   },
@@ -124,6 +135,7 @@
     "image": "../assets/media/veil.png",
     "participants":"solo, duo",
     "isOpen": true,
+    "venue": "Chavara Square",
     "startAt": "2025-10-28T10:00:00+05:30",
     "endAt": "2025-10-28T11:00:00+05:30"
   }

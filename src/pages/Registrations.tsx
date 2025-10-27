@@ -186,7 +186,7 @@ const Registrations: React.FC = () => {
           {eventsData.filter(e => e.type === "event").map((event) => {
             const key = TITLE_ALIASES[event.title] ?? event.title;
             const reg = counts[key] || { firstYear: 0, secondYear: 0, thirdYear: 0, total: 0 };
-            const { isHappeningNow, isStartingSoon } = getEventStatus({ startAt: (event as { startAt?: string })?.startAt, endAt: (event as { endAt?: string })?.endAt });
+            const { isHappeningNow, isStartingSoon, isOver } = getEventStatus({ startAt: (event as { startAt?: string })?.startAt, endAt: (event as { endAt?: string })?.endAt });
             return (
               <motion.div
                 key={event.title}
@@ -194,16 +194,16 @@ const Registrations: React.FC = () => {
                 whileHover={{ scale: 1.03, y: -4 }}
                 className="bg-card/80 border border-border rounded-lg shadow-card overflow-hidden flex flex-col relative"
               >
-                {(isHappeningNow || isStartingSoon) && (
+                {(isHappeningNow || isStartingSoon || isOver) && (
                   <motion.span
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.3 }}
                     className={`absolute top-2 right-2 z-10 text-xs font-semibold px-2 py-0.5 rounded shadow select-none ${
-                      isHappeningNow ? "bg-green-600 text-white" : "bg-amber-500 text-black"
+                      isOver ? "bg-destructive text-destructive-foreground" : isHappeningNow ? "bg-green-600 text-white" : "bg-amber-500 text-black"
                     }`}
                   >
-                    {isHappeningNow ? "Happening now" : "Starting soon"}
+                    {isOver ? "Event over" : isHappeningNow ? "Happening now" : "Starting soon"}
                   </motion.span>
                 )}
                 {event.image && (

@@ -116,7 +116,7 @@ const Tech: React.FC = () => {
           {techEvents.map((event, index) => {
             const lookupTitle = TITLE_ALIASES[event.title] ?? event.title;
             const meta = eventsData.find((e) => e.type === "event" && e.title === lookupTitle) as { startAt?: string; endAt?: string } | undefined;
-            const { isHappeningNow, isStartingSoon } = getEventStatus({ startAt: meta?.startAt, endAt: meta?.endAt });
+            const { isHappeningNow, isStartingSoon, isOver } = getEventStatus({ startAt: meta?.startAt, endAt: meta?.endAt });
             return (
             <motion.div
               key={event.title}
@@ -124,16 +124,16 @@ const Tech: React.FC = () => {
               whileHover={{ scale: 1.03, y: -4 }}
               className="bg-card/80 border border-border rounded-lg shadow-card overflow-hidden flex flex-col relative"
             >
-              {(isHappeningNow || isStartingSoon) && (
+              {(isHappeningNow || isStartingSoon || isOver) && (
                 <motion.span
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.3 }}
                   className={`absolute top-2 right-2 z-10 text-xs font-semibold px-2 py-0.5 rounded shadow select-none ${
-                    isHappeningNow ? "bg-green-600 text-white" : "bg-amber-500 text-black"
+                    isOver ? "bg-destructive text-destructive-foreground" : isHappeningNow ? "bg-green-600 text-white" : "bg-amber-500 text-black"
                   }`}
                 >
-                  {isHappeningNow ? "Happening now" : "Starting soon"}
+                  {isOver ? "Event over" : isHappeningNow ? "Happening now" : "Starting soon"}
                 </motion.span>
               )}
               <div className="p-6 flex flex-col gap-4 flex-1">

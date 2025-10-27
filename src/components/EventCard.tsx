@@ -12,6 +12,7 @@ type EventCardProps = {
   description?: string;
   startAt?: string;
   endAt?: string;
+  venue?: string;
 };
 
 const EventCard: React.FC<EventCardProps> = ({
@@ -24,6 +25,7 @@ const EventCard: React.FC<EventCardProps> = ({
   description,
   startAt,
   endAt,
+  venue,
 }) => {
   const hoverVariants = {
     enabled: { scale: 1.03, y: -5 },
@@ -87,6 +89,18 @@ const EventCard: React.FC<EventCardProps> = ({
         >
           <span className="font-freckle leading-tight">{title}</span>
         </motion.h3>
+
+        {venue && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: delay + 0.15 }}
+            className="text-[11px] sm:text-xs text-muted-foreground mb-1 text-center w-full font-titl"
+            aria-label={`Venue: ${venue}`}
+          >
+            Venue: {venue}
+          </motion.div>
+        )}
 
         {description && (
           <motion.div
