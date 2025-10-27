@@ -147,7 +147,7 @@ const Tech: React.FC = () => {
                   {event.title}
                 </h3>
                 {(meta?.startAt && meta?.endAt) || meta?.venue ? (
-                  <div className="w-full flex items-center justify-between bg-black/40 text-white text-sm sm:text-base rounded px-3 py-1 font-medium">
+                  <div className="w-full flex items-center justify-between text-white text-sm sm:text-base px-1 py-0.5 font-medium">
                     <span className="text-left">{fmtRange(meta?.startAt, meta?.endAt)}</span>
                     <span className="text-right ml-3 truncate" title={meta?.venue}>{meta?.venue}</span>
                   </div>
