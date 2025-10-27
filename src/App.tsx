@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Index from "./pages/Index";
 import Registrations from "./pages/Registrations";
 import Home from "./pages/Home";
+import Tech from "./pages/Tech";
 import NotFound from "./pages/NotFound";
 import { Instagram } from "lucide-react";
 import { SpeedInsights } from "@vercel/speed-insights/react"; // React entrypoint for non-Next apps
@@ -85,6 +86,7 @@ const RouterContent = () => {
           <Route path="/" element={<Index />} />
           <Route path="/home" element={<Home />} />
           <Route path="/registrations" element={<Registrations />} />
+          <Route path="/tech" element={<Tech />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </AnimatePresence>
