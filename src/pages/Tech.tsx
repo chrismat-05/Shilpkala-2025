@@ -73,8 +73,13 @@ const Tech: React.FC = () => {
             const fmtRange = (s?: string, e?: string) => {
               if (!s || !e) return "";
               const ds = new Date(s), de = new Date(e);
-              const fmt = new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit" });
-              return `${fmt.format(ds)} – ${fmt.format(de)}`;
+              const dateFmt = new Intl.DateTimeFormat(undefined, { month: "short", day: "numeric" });
+              const timeFmt = new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit" });
+              const sameDay = ds.toDateString() === de.toDateString();
+              if (sameDay) {
+                return `${dateFmt.format(ds)}, ${timeFmt.format(ds)} – ${timeFmt.format(de)}`;
+              }
+              return `${dateFmt.format(ds)}, ${timeFmt.format(ds)} – ${dateFmt.format(de)}, ${timeFmt.format(de)}`;
             };
             return (
             <motion.div
