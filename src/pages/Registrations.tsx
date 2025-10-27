@@ -34,6 +34,11 @@ const TITLE_ALIASES: Record<string, string> = {
 const Registrations: React.FC = () => {
   const [open, setOpen] = React.useState<{ [event: string]: boolean }>({});
   const [lastRefresh, setLastRefresh] = React.useState<Date>(new Date());
+  const [tick, setTick] = React.useState(0);
+  React.useEffect(() => {
+    const t = window.setInterval(() => setTick((v) => v + 1), 30000);
+    return () => window.clearInterval(t);
+  }, []);
   const { data: counts = {} as CountsMap, isLoading, isError, refetch, isFetching } = useAutoRefresh<CountsMap>(
     ["reg-counts"],
     async () => {

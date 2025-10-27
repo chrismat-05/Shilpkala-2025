@@ -57,6 +57,11 @@ const techEvents: TechEvent[] = [
 
 const Tech: React.FC = () => {
   const navigate = useNavigate();
+  const [tick, setTick] = React.useState(0);
+  React.useEffect(() => {
+    const t = window.setInterval(() => setTick((v) => v + 1), 30000);
+    return () => window.clearInterval(t);
+  }, []);
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
