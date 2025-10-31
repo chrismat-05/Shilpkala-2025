@@ -1,6 +1,7 @@
 {
   "redirects": [
     { "source": "/volunteers", "destination": "https://forms.gle/V3FAgGurvS3hogLn9", "permanent": true },
+     { "source": "/feedback", "destination": "https://forms.gle/8b2jX91Z5JYufs2YA", "permanent": true }
     { "source": "/participants", "destination": "https://forms.gle/RVaFcoVQbdudpYAL9", "permanent": true }
   ],
   "rewrites": [
