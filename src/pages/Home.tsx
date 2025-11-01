@@ -55,6 +55,24 @@ const Home: React.FC = () => {
           Volunteer's OD Form
         </motion.button>
         <motion.button
+          onClick={() => window.location.href = "/participants"}
+          whileHover={{ scale: 1.05, y: -2 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          className="flex-1 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-semibold text-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 border border-border"
+        >
+          Participants OD Form
+        </motion.button>
+        <motion.button
+          onClick={() => window.location.href = "/feedback"}
+          whileHover={{ scale: 1.05, y: -2 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          className="flex-1 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-semibold text-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 border border-border"
+        >
+          Feedback
+        </motion.button>
+        <motion.button
           onClick={() => navigate("/registrations")}
           whileHover={{ scale: 1.05, y: -2 }}
           whileTap={{ scale: 0.95 }}
